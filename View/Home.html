@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trang Web Xem Phim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Home.css">
+    <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+            <img src="image/Covencinema.png" alt="Spooky Movie" class="logo">
+        </a>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Phim lẻ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Phim bộ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Thể loại</a>
+                </li>
+            </ul>
+
+            <!-- Nút login/signup -->
+            <div class="d-flex">
+                <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body justify-content-center align-items-center d-flex  ">
+                <form class="form">
+                    <span class="input-span">
+                        <label for="email" class="label">Email</label>
+                        <input type="email" name="email" id="emailLogin"/></span>
+                    <span class="input-span">
+                        <label for="passwordLogin" class="label">Password</label>
+                        <input type="password" name="password" id="passwordLogin"/>
+                    </span>
+                    <br>
+                    <span class="span"><a href="#">Forgot password?</a></span>
+                    <input class="submit" type="submit" value="Log in" />
+                    <span class="span">Don't have an account?
+                        <a href="" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign up</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sign Up -->
+<div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body justify-content-center align-items-center d-flex  ">
+                <form class="form">
+                    <span class="input-span">
+                        <label for="email" class="label">Email</label>
+                        <input type="email" name="email" id="email" /></span>
+                    <span class="input-span">
+                        <label for="password1" class="label">Password</label>
+                        <input type="password" name="password" id="password1"/>
+                    </span>
+                    <span class="input-span">
+                        <label for="password2" class="label">Confirm Password</label>
+                        <input type="password" name="password" id="password2"/>
+                    </span>
+                    <br>
+                    <input class="submit" type="submit" value="Sign Up Now" />
+                    <span class="span">You already have an account!
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Nội dung trang -->
+<div class="container mt-4 main">
+    <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+        <div class="carousel-item active" href="Home.html">
+            <a href="Home.html">
+                <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="d-block w-100 carousel-img" alt="Phim 1">
+            </a>
+            <div class="carousel-caption custom-caption">
+                <img src="https://cdn.marvel.com/content/1x/avengersendgame_lob_log_01_1.png" class="title-movie">
+                <br>
+                <br>
+                <div class="justify-content-center d-flex gap-2">
+                    <p>2000</p>
+                    <p>&bull;</p>
+                    <p>T16</p>
+                    <p>&bull;</p>
+                    <p>1 giờ 50 phút</p>
+                    <p>&bull;</p>
+                    <p>American</p>
+                </div>
+                <div class="d-flex justify-content-center gap-3 ">
+                    <button class="button-watch-now">
+                        Watch Now
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+
+                    <button class="button-bookmark">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item" href="Home.html">
+            <a href="Home.html">
+                <img src="https://image.tmdb.org/t/p/original/b3JtLWrdiJFCN8r9zuftgty8ddD.jpg" class="d-block w-100 carousel-img" alt="Phim 2">
+            </a>
+            <div class="carousel-caption custom-caption ">
+                <img src="https://image.tmdb.org/t/p/original/bxp4NhUZ1GxjdrGF8szOlsL4g0d.png" class="title-movie">
+                <br>
+                <br>
+                <div class="justify-content-center d-flex gap-2">
+                    <p>2000</p>
+                    <p>&bull;</p>
+                    <p>T16</p>
+                    <p>&bull;</p>
+                    <p>1 giờ 50 phút</p>
+                    <p>&bull;</p>
+                    <p>American</p>
+                </div>
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="button-watch-now">
+                        Watch Now
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                    <button class="button-bookmark">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item" href="Home.html">
+            <a href="Home.html">
+                <img src="https://image.tmdb.org/t/p/original/cgEhsQWCq16yxeoHP15Ay9VdU0s.jpg" class="d-block w-100 carousel-img" alt="Phim 3">
+            </a>
+            <div class="carousel-caption custom-caption">
+                <img src="image/spider-man_no_way_home_lob_log_def_08.png" class="title-movie">
+                <br>
+                <br>
+                <div class="justify-content-center d-flex gap-3">
+                    <p>2000</p>
+                    <p>&bull;</p>
+                    <p>T16</p>
+                    <p>&bull;</p>
+                    <p>1 giờ 50 phút</p>
+                    <p>&bull;</p>
+                    <p>American</p>
+                </div>
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="button-watch-now">
+                        Watch Now
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                    <button class="button-bookmark">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item" href="Home.html">
+            <a href="Home.html">
+                <img src="https://image.tmdb.org/t/p/original/yOCRqvrRrxbs5FYq2pX1KtLJwmR.jpg" class="d-block w-100 carousel-img" alt="Phim 3">
+            </a>
+            <div class="carousel-caption custom-caption">
+                <img src="https://image.tmdb.org/t/p/original/8TsSMAK89DiOOg3vP9baQEt1DNi.png" class="title-movie">
+                <br>
+                <br>
+                <div class="justify-content-center d-flex gap-2">
+                    <p>2000</p>
+                    <p>&bull;</p>
+                    <p>T16</p>
+                    <p>&bull;</p>
+                    <p>1 giờ 50 phút</p>
+                    <p>&bull;</p>
+                    <p>American</p>
+                </div>
+                <div class="d-flex justify-content-center gap-2">
+                    <button class="button-watch-now">
+                        Watch Now
+                        <div class="arrow-wrapper">
+                            <div class="arrow"></div>
+                        </div>
+                    </button>
+                    <button class="button-bookmark">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Nút điều hướng -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+    </div>
+</div>
+<br>
+<div class="container-fluid bg-black text-white py-4">
+    <h2 class="mb-4 fw-bold ps-5">Hiện đang thịnh hành</h2>
+
+    <div id="trendingCarousel" class="carousel slide" data-bs-interval="false">
+        <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center gap-5">
+                    <div class="position-relative">
+                        <span class="number-overlay">1</span>
+                        <img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="rounded">
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">2</span>
+                        <img src="https://image.tmdb.org/t/p/original/75HkQnA9wVjfycm24aX90lY9ogg.jpg" class="rounded" >
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">3</span>
+                        <img src="https://image.tmdb.org/t/p/original/izJXYuMXrvRTHv6uX73aHuvRAW0.jpg" class="rounded" >
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">4</span>
+                        <img src="https://image.tmdb.org/t/p/original/ckQzKpQJO4ZQDCN5evdpKcfm7Ys.jpg" class="rounded" >
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">5</span>
+                        <img src="https://image.tmdb.org/t/p/original/wPLysNDLffQLOVebZQCbXJEv6E6.jpg" class="rounded" >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center gap-5">
+                    <div class="position-relative">
+                        <span class="number-overlay">6</span>
+                        <img src="https://image.tmdb.org/t/p/original/qX7y0GJH2JFxh95wu0kaoFCCM6h.jpg" class="rounded">
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">7</span>
+                        <img src="https://image.tmdb.org/t/p/original/3Tf8vXykYhzHdT0BtsYTp570JGQ.jpg" class="rounded">
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">8</span>
+                        <img src="https://image.tmdb.org/t/p/original/wNB551TsEb7KFU3an5LwOrgvUpn.jpg" class="rounded">
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">9</span>
+                        <img src="https://image.tmdb.org/t/p/original/xQPgyZOBhaz1GdCQIPf5A5VeFzO.jpg" class="rounded">
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">10</span>
+                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" >
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Nút điều hướng -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#trendingCarousel" data-bs-slide="prev" id="prevBtn">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#trendingCarousel" data-bs-slide="next" id="nextBtn">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>
+
+<br>
+<div class="container-fluid bg-black text-white py-4">
+    <h2 class="mb-4 fw-bold ps-5">Thể loại phim</h2>
+
+    <div id="genreCarousel" class="carousel slide" data-bs-interval="false">
+        <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center gap-5">
+                    <div class="position-relative">
+                        <span class="number-overlay">1</span>
+                        <img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="rounded">
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">2</span>
+                        <img src="https://image.tmdb.org/t/p/original/75HkQnA9wVjfycm24aX90lY9ogg.jpg" class="rounded" >
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">3</span>
+                        <img src="https://image.tmdb.org/t/p/original/izJXYuMXrvRTHv6uX73aHuvRAW0.jpg" class="rounded" >
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">4</span>
+                        <img src="https://image.tmdb.org/t/p/original/ckQzKpQJO4ZQDCN5evdpKcfm7Ys.jpg" class="rounded" >
+                    </div>
+                    <div class="position-relative">
+                        <span class="number-overlay">5</span>
+                        <img src="https://image.tmdb.org/t/p/original/wPLysNDLffQLOVebZQCbXJEv6E6.jpg" class="rounded" >
+                    </div>
+                </div>
+            </div>
+
+
+
+        <!-- Nút điều hướng -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#trendingCarousel" data-bs-slide="prev" id="prevBtn">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#trendingCarousel" data-bs-slide="next" id="nextBtn">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>
+
+
+<footer class="bg-black text-white pt-5 pb-3">
+    <div class="container border-top border-secondary pt-3 mt-3">
+        <div class="row">
+            <!-- Logo và chứng nhận -->
+            <div class="col-md-3 mb-4">
+                <img src="image/Covencinema.png" alt="Spooky Movie" width="300">
+            </div>
+
+            <!-- Cột: Về Coven Cinema -->
+            <div class="col-md-2 mb-4">
+                <h6>Về Coven Cinema</h6>
+                <ul class="list-unstyled small">
+                    <li>Giới thiệu</li>
+                    <li>Các gói dịch vụ</li>
+                    <li>Liên hệ</li>
+                    <li>Trung tâm hỗ trợ</li>
+                    <li>Thông tin</li>
+                </ul>
+            </div>
+
+            <!-- Cột: Dịch vụ -->
+            <div class="col-md-2 mb-4">
+                <h6>Dịch vụ</h6>
+                <ul class="list-unstyled small">
+                    <li>Gói xem phim</li>
+                    <li>Quảng cáo</li>
+                    <li>Mua gói</li>
+                    <li>Bảo hành</li>
+                </ul>
+            </div>
+
+            <!-- Cột: Quy định -->
+            <div class="col-md-2 mb-4">
+                <h6>Quy định</h6>
+                <ul class="list-unstyled small">
+                    <li>Điều khoản sử dụng</li>
+                    <li>Chính sách thanh toán</li>
+                    <li>Chính sách bảo mật</li>
+                    <li>Cam kết của Coven Cinema</li>
+                </ul>
+            </div>
+
+            <!-- Cột: Liên hệ -->
+            <div class="col-md-3 mb-4">
+                <h6>Liên hệ</h6>
+                <p class="small mb-1"><i class="bi bi-telephone"></i> 0999999999</p>
+                <p class="small mb-1"><i class="bi bi-envelope"></i> covencinema@hotro.com</p>
+                <p class="small mb-1">Theo dõi chúng tôi:</p>
+                <a href="#"><i class="fa-brands fa-facebook text-white me-3"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube text-white me-3"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram text-white me-3"></i></a>
+            </div>
+        </div>
+
+        <!-- Thông tin pháp lý -->
+        <div class="border-top border-secondary pt-3 mt-3 small text-secondary">
+            <p>
+                Công ty Cổ phần Viễn Thông Coven Cinema – Người đại diện: Ông Văn Đức Duy. Trụ sở: Tầng 2, Tòa nhà FPT Cầu Giấy, Số 17 Phố Duy Tân, Phường Dịch Vọng Hậu, Quận Cầu Giấy, TP. Hà Nội <br>
+                Địa chỉ liên lạc: Tầng 9, Block A, tòa nhà FPT Cầu Giấy, số 10 Phạm Văn Bạch, quận Cầu Giấy, TP. Hà Nội <br>
+                Số điện thoại liên hệ: 024 7300 2222. Thư điện tử: hotrokhachhang@fpt.com hoặc hotrofptplay@fpt.com
+            </p>
+            <p>
+                Giấy chứng nhận đăng ký doanh nghiệp số 0101778163 do Sở KHĐT TP Hà Nội cấp lần đầu ngày 28/7/2005, cấp đổi lần thứ 32 vào ngày 21/12/2023.<br>
+                Giấy phép cung cấp dịch vụ phát thanh, truyền hình số: 637/GP-BTTTT cấp sửa đổi bổ sung lần 1 ngày 10/10/2023.
+            </p>
+        </div>
+    </div>
+
+    <!-- Nút cuộn lên đầu -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="btn btn-warning rounded-circle position-fixed bottom-0 end-0 m-4 scroll-top-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</footer>
+
+
+</body>
+</html>
+
+
