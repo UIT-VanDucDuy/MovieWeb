@@ -1,0 +1,96 @@
+.iframe-movie{
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+
+.overflow-auto::-webkit-scrollbar {
+    display: none;
+}
+.same-movie{
+    padding-top:2% ;
+}
+.bg-dark {
+    background-color: #494848;
+}
+.avtar{
+    font-size: 3rem;
+}
+
+
+.video{
+    max-width: 100%;
+    min-height: 80vh;
+}
+
+
+.rating-star {
+    display: inline-block;
+}
+
+.rating-star input {
+    display: none;
+}
+
+.rating-star label {
+    float: right;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.rating-star label:before {
+    content: "\2605";
+    font-size: 30px;
+}
+
+.rating-star input:checked ~ label,
+.rating-star label:hover,
+.rating-star label:hover ~ label {
+    color: #ffd700;
+    transition: color 0.3s;
+}
+.rating-comment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.rating{
+    display: flex;
+    flex-direction: column;
+}
+
+.rating-comment .submit {
+    --bg-light: #efefef;
+    --bg-dark: #707070;
+    --clr: #DAA520;
+    --clr-alpha: #9c9c9c60;
+    padding: 1rem 0.75rem;
+    width: 10rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 3rem;
+    background-color: var(--bg-dark);
+    color: var(--bg-light);
+    border: none;
+    cursor: pointer;
+    transition: all 300ms;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 5%;
+}
+
+.rating-comment .submit:hover {
+    background-color: var(--clr);
+    color: var(--bg-dark);
+}
+
+.rating-comment .feedback-area{
+    width: 20rem;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    resize: vertical;
+    min-height: 6rem;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+}

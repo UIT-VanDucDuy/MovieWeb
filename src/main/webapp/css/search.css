@@ -1,0 +1,68 @@
+.content{
+    padding: 0 3%;
+}
+
+.card{
+    padding: 0 0;
+    background-color: #111111;
+}
+.card-img-top{
+    width: 100%;
+}
+.search-list{
+    padding-left: 2%;
+    flex-wrap: wrap;
+}
+
+.card-title{
+    font-size: 1em;
+    font-weight: bold;
+    color: #DAA520;
+}
+.pagination{
+    padding-top: 3%;
+
+}
+.page-link {
+    background-color: #111111;
+    color: #DAA520;
+        font-size: 20px;
+}
+.page-link:hover {
+    color: black;
+}
+
+.list-group{
+    margin-bottom:5% ;
+}
+@media (max-width: 740px){
+    .card{
+        width: 17vh;
+    }
+    .search-list{
+        padding: 0 5%;
+        justify-content: space-between;
+    }
+
+}
+@media (min-width: 741px) and (max-width: 1240px){
+    .card{
+        width: 13rem;
+    }
+    .search-list{
+        gap:30px;
+
+    }
+
+}
+
+@media (min-width: 1241px){
+    .card{
+        width: 26vh;
+    }
+    .search-list{
+        gap: 30px;
+
+    }
+
+}
