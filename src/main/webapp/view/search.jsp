@@ -179,115 +179,39 @@
         </div>
         <div class="col-lg-9">
             <div class="search-list  d-flex">
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                <c:forEach var="movie" items="${movieList}" varStatus="status">
+                    <div class="card">
+                        <a href="movie.jsp">
+                            <img src="${movie.getPosterPath()}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">${movie.getName()}</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card" >
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card" >
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card" >
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
-                <div class="card">
-                    <a href="movie.jsp">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                    </div>
-                </div>
+                </c:forEach>
 
             </div>
             <div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link">Prev</a>
+                        <!-- Nút Prev -->
+                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                            <a class="page-link"
+                               href="?name=${param.name}&page=${currentPage - 1}">Prev</a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
+
+                        <!-- Danh sách số trang -->
+                        <c:forEach begin="1" end="${totalPages}" var="i">
+                            <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                <a class="page-link"
+                                   href="?name=${param.name}&page=${i}">${i}</a>
+                            </li>
+                        </c:forEach>
+
+                        <!-- Nút Next -->
+                        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                            <a class="page-link"
+                               href="?name=${param.name}&page=${currentPage + 1}">Next</a>
                         </li>
                     </ul>
                 </nav>
