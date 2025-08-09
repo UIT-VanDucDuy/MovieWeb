@@ -67,19 +67,19 @@
     <div class="row">
         <div class="col-lg-3" >
             <ul class="list-group" id="menu">
-                <li class="list-group-item active" data-table="table1">An item</li>
-                <li class="list-group-item" data-table="table2">A second item</li>
-                <li class="list-group-item" data-table="table3">A third item</li>
+                <li class="list-group-item active" data-table="table1">User</li>
+                <li class="list-group-item" data-table="table2">Account</li>
+                <li class="list-group-item" data-table="table3">Movie</li>
             </ul>
         </div>
         <div class="col-lg-9">
             <table id="table1" class="table  table-striped table-dark">
                 <thead>
                 <tr>
-                    <th scope="col">Table 1</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Note</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -106,7 +106,7 @@
             <table id="table2" class="table table-striped table-dark d-none">
                 <thead>
                 <tr>
-                    <th scope="col">Table 2</th>
+                    <th scope="col">Account</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
                     <th scope="col">Handle</th>
@@ -136,7 +136,7 @@
             <table id="table3" class="table table-striped table-dark d-none">
                 <thead>
                 <tr>
-                    <th scope="col">Table 3</th>
+                    <th scope="col">Movie</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
                     <th scope="col">Handle</th>
