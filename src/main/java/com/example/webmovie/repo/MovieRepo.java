@@ -24,6 +24,11 @@ public class MovieRepo implements IMovieRepo {
     }
 
     @Override
+    public int countAll() {
+        return movieList.size();
+    }
+
+    @Override
     public List<Movie> getAll() {
         return movieList;
     }
@@ -40,12 +45,14 @@ public class MovieRepo implements IMovieRepo {
     }
 
     @Override
+    public int countByTitle(String title) {
+        return movieList.size();
+    }
+
+    @Override
     public List<Movie> getByTitle(String title, int page,int pageSize) {
         return movieList;
     }
 
-    @Override
-    public List<Movie> getByGenre(String genre, int page) {
-        return movieList;
-    }
+
 }

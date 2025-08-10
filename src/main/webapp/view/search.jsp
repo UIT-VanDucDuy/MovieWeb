@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trang Web Xem Phim</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/home.css">
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="jvs/Home.js"></script>
-    <link rel="stylesheet" href="css/search.css">
+    <script src="jvs/home.js"></script>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/search.css">
 </head>
 <body>
 <c:import url="/layout/navbar.jsp"></c:import>
@@ -181,7 +181,7 @@
             <div class="search-list  d-flex">
                 <c:forEach var="movie" items="${movieList}" varStatus="status">
                     <div class="card">
-                        <a href="movie.jsp">
+                        <a href="/Movie">
                             <img src="${movie.getPosterPath()}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -196,15 +196,13 @@
                     <ul class="pagination justify-content-center">
                         <!-- Nút Prev -->
                         <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                            <a class="page-link"
-                               href="?name=${param.name}&page=${currentPage - 1}">Prev</a>
+                            <a class="page-link"  href="?name=${param.name}&page=${currentPage - 1}">Prev</a>
                         </li>
 
                         <!-- Danh sách số trang -->
                         <c:forEach begin="1" end="${totalPages}" var="i">
                             <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                <a class="page-link"
-                                   href="?name=${param.name}&page=${i}">${i}</a>
+                                <a class="page-link" href="?name=${param.name}&page=${i}">${i}</a>
                             </li>
                         </c:forEach>
 

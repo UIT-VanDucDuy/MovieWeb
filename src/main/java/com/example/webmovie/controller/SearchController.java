@@ -1,6 +1,7 @@
 package com.example.webmovie.controller;
 
 import com.example.webmovie.entity.Movie;
+import com.example.webmovie.entity.MoviePage;
 import com.example.webmovie.service.IMovieService;
 import com.example.webmovie.service.MovieService;
 
@@ -23,34 +24,16 @@ public class SearchController extends HttpServlet {
                 page = Integer.parseInt(request.getParameter("page"));
             }
         } catch (NumberFormatException e) {
-            page = 1; // Nếu page không phải số thì quay về trang 1
+            page = 1;
         }
 
         int pageSize = 12;
-        int totalMovies = movieService.getAll().size();
-        int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
+        MoviePage moviePage = movieService.getMovies(null,null,page, pageSize);
 
-        // Nếu không có phim thì set totalPages = 1 để tránh chia cho 0
-        if (totalPages == 0) {
-            totalPages = 1;
-        }
+        request.setAttribute("movieList", moviePage.getMovies());
+        request.setAttribute("currentPage", moviePage.getCurrentPage());
+        request.setAttribute("totalPages", moviePage.getTotalPages());
 
-        // Giới hạn giá trị page
-        if (page < 1) {
-            page = 1;
-        } else if (page > totalPages) {
-            page = totalPages;
-        }
-
-        // Lấy danh sách phim theo trang
-        List<Movie> movieList = movieService.getAll(page, pageSize);
-
-        // Gửi dữ liệu sang JSP
-        request.setAttribute("movieList", movieList);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("totalPages", totalPages);
-
-        // Forward tới JSP
         request.getRequestDispatcher("view/search.jsp").forward(request, response);
     }
 
@@ -61,34 +44,16 @@ public class SearchController extends HttpServlet {
                 page = Integer.parseInt(request.getParameter("page"));
             }
         } catch (NumberFormatException e) {
-            page = 1; // Nếu page không phải số thì quay về trang 1
+            page = 1;
         }
 
         int pageSize = 12;
-        int totalMovies = movieService.getAll().size();
-        int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
+        MoviePage moviePage = movieService.getMovies(null,null,page, pageSize);
 
-        // Nếu không có phim thì set totalPages = 1 để tránh chia cho 0
-        if (totalPages == 0) {
-            totalPages = 1;
-        }
+        request.setAttribute("movieList", moviePage.getMovies());
+        request.setAttribute("currentPage", moviePage.getCurrentPage());
+        request.setAttribute("totalPages", moviePage.getTotalPages());
 
-        // Giới hạn giá trị page
-        if (page < 1) {
-            page = 1;
-        } else if (page > totalPages) {
-            page = totalPages;
-        }
-
-        // Lấy danh sách phim theo trang
-        List<Movie> movieList = movieService.getAll(page, pageSize);
-
-        // Gửi dữ liệu sang JSP
-        request.setAttribute("movieList", movieList);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("totalPages", totalPages);
-
-        // Forward tới JSP
         request.getRequestDispatcher("view/search.jsp").forward(request, response);
     }
 }
