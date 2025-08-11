@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trang Web Xem Phim</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/home.css">
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="jvs/Home.js"></script>
+    <link rel="stylesheet" href="../css/home.css">
+    <script src="jvs/home.js"></script>
 </head>
 <body>
 <c:import url="/layout/navbar.jsp"></c:import>
@@ -245,55 +245,55 @@
         <div class="slider-container position-relative" style="overflow-x: auto;">
             <div id="genre" class="slider-track d-flex transition">
                 <div class="genre-div slider-item position-relative" >
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">Action</span>
                 </div>
                 <div class=" genre-div slider-item position-relative  ">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">Romance</span>
                 </div>
                 <div class="genre-div slider-item position-relative">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">3</span>
                 </div>
                 <div class="genre-div slider-item position-relative">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">3</span>
                 </div>
                 <div class="genre-div slider-item position-relative">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">3</span>
                 </div>
                 <div class="genre-div slider-item position-relative">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">3</span>
                 </div>
                 <div class="genre-div slider-item position-relative">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">3</span>
                 </div>
                 <div class="genre-div slider-item position-relative">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">3</span>
                 </div>
                 <div class="genre-div slider-item position-relative">
-                    <a href="/search">
+                    <a href="/Search">
                         <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
                     </a>
                     <span class="genre-name">3</span>
