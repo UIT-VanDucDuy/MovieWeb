@@ -17,13 +17,13 @@ public class MovieService implements IMovieService {
         if(title == null && genre == null){
             movieList= movieRepo.getAll(page, pageSize);
         } else if (genre == null) {
-            movieList= movieRepo.getByTitle(genre,page, pageSize);
+            movieList= movieRepo.getByTitle(title,page, pageSize);
         }else if(title == null){
-            movieList= movieRepo.getByGenre(title,page, pageSize);
+            movieList= movieRepo.getByGenre(genre,page, pageSize);
         }else {
             movieList= movieRepo.getByTitleAndGenre(title,genre,page, pageSize);
         }
-        int totalMovies = movieList.size();
+        int totalMovies = movieRepo.countAll();
         int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
         if (totalPages == 0) totalPages = 1;
 

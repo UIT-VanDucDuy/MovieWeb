@@ -24,6 +24,26 @@ public class MovieRepo implements IMovieRepo {
     }
 
     @Override
+    public int countAll() {
+        return movieList.size();
+    }
+
+    @Override
+    public int countByTitle(String title) {
+        return movieList.size();
+    }
+
+    @Override
+    public int countByGenre(String genre) {
+        return movieList.size();
+    }
+
+    @Override
+    public int countByTitleAndGenre(String title, String genre) {
+        return movieList.size();
+    }
+
+    @Override
     public List<Movie> getAll(int page,int pageSize) {
         int startIndex = (page - 1) * pageSize;
         if (startIndex >= movieList.size()) {

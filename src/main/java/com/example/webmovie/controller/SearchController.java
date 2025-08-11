@@ -15,6 +15,7 @@ import java.util.List;
 
 @WebServlet(name="searchController",value = "/Search")
 public class SearchController extends HttpServlet {
+    //hello
     private IMovieService movieService= new MovieService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +49,8 @@ public class SearchController extends HttpServlet {
         }
 
         int pageSize = 12;
-        MoviePage moviePage = movieService.getMovies(null,null,page, pageSize);
+        MoviePage moviePage = movieService.getMovies(
+                request.getParameter("title"),request.getParameter("genre"),page, pageSize);
 
         request.setAttribute("movieList", moviePage.getMovies());
         request.setAttribute("currentPage", moviePage.getCurrentPage());
