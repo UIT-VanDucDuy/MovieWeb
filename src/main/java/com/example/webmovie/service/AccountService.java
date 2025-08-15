@@ -10,4 +10,10 @@ public class AccountService implements IAccountService {
     public boolean login(String username, String password) {
         return accountRepo.login(username,password);
     }
+
+    @Override
+    public Account getAccount(String username) {
+        return accountRepo.getAccount(username);
+    }
+
 }
