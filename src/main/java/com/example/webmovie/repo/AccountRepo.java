@@ -10,83 +10,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountRepo implements IAccountRepo {
-    private final String SELECT_ONE = "select * from products where username = ?;";
-    private final String INSERT_INTO = "insert into products(username,password) values(?,?,?,?);";
-    private static List<Account> accountList = new ArrayList<>();
-    static {
-        accountList.add(new Account(1,"admin@gmail.com","admin1",0));
-        accountList.add(new Account(2,"alice","alice1",1));
-        accountList.add(new Account(3,"bob","bob1",1));
-    }
-
+    private static final String LOGIN_SQL = "SELECT * FROM Account WHERE Username = ? AND Password = ?";
+    private final String SIGN_UP_SQL = "insert into products(Username,Password,MemberTypeId) values(?,?,?);";
     @Override
-    public Boolean login(String username, String password) {
-        for (Account account : accountList) {
-            if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
-                return true;
+    public Account login(String username, String password) {
+        Account account = null;
+        try (Connection connection = BaseRepository.getConnectDB()) {
+            PreparedStatement ps = connection.prepareStatement(LOGIN_SQL);
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                account = new Account(resultSet.getString("Username"),
+                        resultSet.getString("Password"),resultSet.getInt("MemberTypeId"));
             }
+
+        } catch (SQLException e) {
+            System.out.println("lỗi querry");
         }
-        return false;
+        return account;
     }
 
     @Override
-    public Account getAccount(String username) {
-        for (Account account : accountList) {
-            if (account.getUsername().equals(username)) {
-                return account;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Boolean addAccount(Account account) {
-        try(Connection connection = BaseRepository.getConnectDB();) {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO);
+    public Boolean signUp(Account account) {
+        try( Connection connection = BaseRepository.getConnectDB();) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SIGN_UP_SQL);
             preparedStatement.setString(1,account.getUsername());
             preparedStatement.setString(2,account.getPassword());
             preparedStatement.setInt(3,account.getMemberTypeId());
             int effectRow = preparedStatement.executeUpdate();
             return effectRow==1;
         } catch (SQLException e) {
-            System.out.println("lỗi query");
+            e.printStackTrace();
             return false;
         }
-
     }
 
+    @Override
+    public Boolean subcribe(Account account, int memberType) {
+        return false;
+    }
 
-//    public List<Account> findAccount() {
-//        // keets nối DB
-//
-//        try(Connection connection = BaseRepository.getConnectDB();) {
-//            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()){
-//                int id = resultSet.getInt("id");
-//                String name = resultSet.getString("name");
-//                int price = resultSet.getInt("price");
-//                String description = resultSet.getString("description");
-//                String manufacturer = resultSet.getString("manufacturer");
-//                Account account = new Account();
-//                accountList.add(account);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Username không tồn tại");
-//        }
-//        return accountList;
-//    }
-//    @Override
-//    public boolean delete(int id) {
-//        try( Connection connection = BaseRepository.getConnectDB();) {
-//            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
-//            preparedStatement.setInt(1,id);
-//            int effectRow = preparedStatement.executeUpdate();
-//            return effectRow==1;
-//        } catch (SQLException e) {
-//            System.out.println("lỗi query");
-//            return false;
-//        }
-//    }
+    @Override
+    public Boolean existsByUsername(String username) {
+        boolean exists = false;
+        String sql = "SELECT 1 FROM Account WHERE Username = ? LIMIT 1";
+        try (Connection connection = BaseRepository.getConnectDB()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                exists = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("lỗi querry");
+        }
+        return exists;
+    }
 
 }

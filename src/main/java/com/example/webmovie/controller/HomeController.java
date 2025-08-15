@@ -27,19 +27,45 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        boolean isValid = accountService.login(username, password);
-        if (isValid) {
-            HttpSession session = request.getSession(true);
-            Account account = accountService.getAccount(username);
-            session.setAttribute("account", account);
-
-            response.sendRedirect(request.getContextPath() + "/Home");
-        } else {
-            request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu sai!");
-            request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
         }
+        switch (action) {
+            case "login":
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                if (accountService.login(username, password)!=null) {
+                    HttpSession session = request.getSession(true);
+                    Account account = accountService.login(username, password);
+                    session.setAttribute("account", account);
+                    response.sendRedirect(request.getContextPath() + "/Home");
+                } else {
+                    request.setAttribute("errorLogin", "Tên đăng nhập hoặc mật khẩu sai!");
+                    request.getRequestDispatcher("view/home.jsp").forward(request, response);
+                }
+                break;
+            case "signUp":
+                String usernameSignUp = request.getParameter("username");
+                String passwordSignUp1 = request.getParameter("password1");
+                String passwordSignUp2 = request.getParameter("password2");
+
+                boolean success = accountService.signUp(usernameSignUp,
+                        passwordSignUp1, passwordSignUp2, request);
+                if (success) {
+                    request.setAttribute("success", "Đăng ký thành công");
+                    response.sendRedirect(request.getContextPath() + "view/home.jsp");
+                } else {
+                    request.getRequestDispatcher("view/home.jsp").forward(request, response);
+                }
+
+                break;
+            case "subscribe":
+                break;
+            default:
+
+        }
+
+
     }
 }

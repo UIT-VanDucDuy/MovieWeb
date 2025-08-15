@@ -92,6 +92,7 @@
     </div>
 </nav>
 
+
 <!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
@@ -102,7 +103,7 @@
                         aria-label="Close"></button>
             </div>
             <div class="modal-body justify-content-center align-items-center d-flex  ">
-                <form class="form" method="post">
+                <form action="/Home?action=login" class="form" method="post">
                    <span class="input-span">
                         <label for="usernameLogin" class="label">Username</label>
                         <input type="text" name="username" id="usernameLogin"/>
@@ -110,6 +111,7 @@
                         <input type="password" name="password" id="passwordLogin"/>
                     </span>
                     <br>
+                    <p id="loginMessage"></p>
                     <span class="span"><a href="#">Forgot password?</a></span>
                     <input class="submit" type="submit" value="Log in"/>
                     <span class="span">Don't have an account?
@@ -130,15 +132,16 @@
                         aria-label="Close"></button>
             </div>
             <div class="modal-body justify-content-center align-items-center d-flex  ">
-                <form class="form">
+                <form action="/Home?action=signUp" class="form" method="post" >
                     <span class="input-span">
                         <label for="usernameSignUp" class="label">Email</label>
                         <input type="text" name="username" id="usernameSignUp"/>
                         <label for="password1" class="label">Password</label>
-                        <input type="password" name="password" id="password1"/>
+                        <input type="password" name="password1" id="password1"/>
                         <label for="password2" class="label">Confirm Password</label>
-                        <input type="password" name="password" id="password2"/>
+                        <input type="password" name="password2" id="password2"/>
                     </span>
+                    <p id="signupMessage"></p>
                     <br>
                     <input class="submit" type="submit" value="Sign Up Now"/>
                     <span class="span">You already have an account!
@@ -158,7 +161,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body justify-content-center align-items-center d-flex  ">
-                <form class="form" method="post">
+                <form action="/Home?action=subscribe" class="form" method="post">
                     <img src="image/momo-qr.jpg" class="qr"/>
                     <div class="radio-input">
                         <label class="label">
@@ -176,5 +179,31 @@
         </div>
     </div>
 </div>
+
+<c:if test="${not empty errorSignup}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("signupMessage").innerText = "${errorSignup}";
+            new bootstrap.Modal(document.getElementById('signUpModal')).show();
+        });
+    </script>
+</c:if>
+<c:if test="${not empty errorLogin}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("loginMessage").innerText = "${errorLogin}";
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        });
+    </script>
+</c:if>
+
+<c:if test="${not empty success}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("loginMessage").innerText = "${success}";
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        });
+    </script>
+</c:if>
 
 

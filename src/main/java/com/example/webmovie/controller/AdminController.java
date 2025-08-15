@@ -15,7 +15,6 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         Account account = (session != null) ? (Account) session.getAttribute("account") : null;
-
         request.getRequestDispatcher("view/admin.jsp").forward(request, response);
     }
 }
