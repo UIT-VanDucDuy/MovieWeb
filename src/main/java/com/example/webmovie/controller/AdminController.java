@@ -1,5 +1,6 @@
 package com.example.webmovie.controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +10,11 @@ import java.io.IOException;
 
 @WebServlet(name = "AdminController", value = "/Admin")
 public class AdminController extends HttpServlet {
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("view/admin.jsp").forward(request, response);
+        request.setAttribute("subscriberList", );
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/admin.jsp");
+        dispatcher.forward(request, response);
     }
 }
