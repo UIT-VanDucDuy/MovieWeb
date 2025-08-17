@@ -1,5 +1,6 @@
 package com.example.webmovie.controller;
 
+import com.example.webmovie.entity.Account;
 import com.example.webmovie.entity.Movie;
 import com.example.webmovie.entity.MoviePage;
 import com.example.webmovie.service.IMovieService;
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class SearchController extends HttpServlet {
     private IMovieService movieService= new MovieService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Account account = (session != null) ? (Account) session.getAttribute("account") : null;
         int page = 1;
         try {
             if (request.getParameter("page") != null) {
@@ -39,6 +43,9 @@ public class SearchController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Account account = (session != null) ? (Account) session.getAttribute("account") : null;
+
         int page = 1;
         try {
             if (request.getParameter("page") != null) {

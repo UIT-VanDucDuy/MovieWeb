@@ -13,8 +13,14 @@
     <script src="jvs/home.js"></script>
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/search.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+
 </head>
+
 <body>
+<c:if test="${sessionScope.account == null}">
+    <c:redirect url="/Home"></c:redirect>
+</c:if>
 <c:import url="/layout/navbar.jsp"></c:import>
 <!-- Nội dung trang -->
 
@@ -22,7 +28,7 @@
     <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <a href="movie.jsp">
+                <a href="/Movie">
                     <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="d-block w-100 carousel-img" alt="Phim 1">
                 </a>
 
@@ -56,7 +62,7 @@
 
             </div>
             <div class="carousel-item">
-                <a href="movie.jsp">
+                <a href="/Movie">
                     <img src="https://image.tmdb.org/t/p/original/b3JtLWrdiJFCN8r9zuftgty8ddD.jpg" class="d-block w-100 carousel-img" alt="Phim 1">
                 </a>
 
@@ -89,7 +95,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <a href="movie.jsp">
+                <a href="/Movie">
                     <img src="https://image.tmdb.org/t/p/original/cgEhsQWCq16yxeoHP15Ay9VdU0s.jpg" class="d-block w-100 carousel-img" alt="Phim 1">
                 </a>
 
@@ -122,7 +128,7 @@
                 </div>
             </div>
             <div class="carousel-item ">
-                <a href="movie.jsp">
+                <a href="/Movie">
                     <img src="https://image.tmdb.org/t/p/original/yOCRqvrRrxbs5FYq2pX1KtLJwmR.jpg" class="d-block w-100 carousel-img" alt="Phim 1">
                 </a>
 
