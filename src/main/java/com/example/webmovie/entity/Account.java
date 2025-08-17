@@ -13,6 +13,11 @@ public class Account {
         this.password = password;
         this.memberTypeId = memberTypeId;
     }
+    public Account( String username, String password, int memberTypeId) {
+        this.username = username;
+        this.password = password;
+        this.memberTypeId = memberTypeId;
+    }
 
     public String getUsername() {
         return username;
