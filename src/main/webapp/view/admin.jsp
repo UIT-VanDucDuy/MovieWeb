@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,40 +68,41 @@
     <div class="row">
         <div class="col-lg-3" >
             <ul class="list-group" id="menu">
-                <li class="list-group-item active" data-table="table1">User</li>
-                <li class="list-group-item" data-table="table2">Account</li>
-                <li class="list-group-item" data-table="table3">Movie</li>
+                <li class="list-group-item active" data-table="table1">Subscribers</li>
+                <li class="list-group-item" data-table="table2">Accounts</li>
+                <li class="list-group-item" data-table="table3">Movies</li>
+                <li class="list-group-item" data-table="movieTypeTable">Movie Types</li>
             </ul>
         </div>
         <div class="col-lg-9">
             <table id="table1" class="table  table-striped table-dark">
                 <thead>
                 <tr>
-                    <th scope="col">User</th>
+                    <th scope="col">No.</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Note</th>
+                    <th scope="col">Birthday</th>
+                    <th scope="col">Phone number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Action</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>@social</td>
-                </tr>
+                <c: forEach var="subscriber" items="subscriberList" varStatus="loop">
+                    <tr>
+                        <td>${loop.count}</td>
+                        <td>${subscriber.name}</td>
+                        <td>${subscriber.birthday}</td>
+                        <td>${subscriber.phoneNumber}</td>
+                        <td>${subscriber.address}</td>
+                        <td>
+                            <button type="button">Edit</button>
+                        </td>
+                        <td>
+                            <button type="button">Delete</button>
+                        </td>
+                    </tr>
+                </c:>
                 </tbody>
             </table>
             <table id="table2" class="table table-striped table-dark d-none">
@@ -163,7 +165,29 @@
                 </tr>
                 </tbody>
             </table>
+            <table id="movieTypeTable" class="table  table-striped table-dark d-none">
+                <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Movie Types</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Action Film</td>
 
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Adventure</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Comedy</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
