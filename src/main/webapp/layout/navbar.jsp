@@ -31,14 +31,11 @@
                     <a class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Genre
                     </a>
+
                     <div class="dropdown-menu row ">
-                        <a class="dropdown-item nav-link" href="/Search">Link 1</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 2</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 3</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 4</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 5</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 6</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 7</a>
+                        <c:forEach var="genre" items="${GenreList}" varStatus="status">
+                            <a class="dropdown-item nav-link" href="/Search">${genre.getGenreName()}</a>
+                        </c:forEach>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -58,7 +55,7 @@
                 <li class="nav-item search-container">
                     <a class="nav-link search-button" href="#">Search</a>
                     <form action="/Search" method="Post" class="search-form">
-                        <input type="text" name="q" class="search-input" placeholder="Search..."/>
+                        <input type="text" name="search" class="search-input" placeholder="Search..."/>
                     </form>
                 </li>
             </ul>

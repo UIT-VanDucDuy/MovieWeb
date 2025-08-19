@@ -18,9 +18,6 @@
 </head>
 
 <body>
-<c:if test="${sessionScope.account == null}">
-    <c:redirect url="/Home"></c:redirect>
-</c:if>
 <c:import url="/layout/navbar.jsp"></c:import>
 <!-- Nội dung trang -->
 

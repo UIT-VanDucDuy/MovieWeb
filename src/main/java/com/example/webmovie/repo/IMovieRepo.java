@@ -9,8 +9,8 @@ public interface IMovieRepo {
     int countByTitle(String title);
     int countByGenre(String genre);
     int countByTitleAndGenre(String title, String genre);
-    List<Movie> getAll(int page,int pageSize);
-    List<Movie> getByTitle(String title, int page, int pageSize);
-    List<Movie> getByGenre(String genre, int page, int pageSize);
-    List<Movie> getByTitleAndGenre(String title, String genre, int page, int pageSize);
+    List<Movie> getAll(int pageSize,int page);
+    List<Movie> getByTitle(String title, int pageSze, int page);
+    List<Movie> getByGenre(String genre, int pageSze, int page);
+    List<Movie> getByTitleAndGenre(String title, String genre, int pageSize, int page);
 }

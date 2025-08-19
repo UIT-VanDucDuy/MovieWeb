@@ -12,16 +12,16 @@ public class MovieService implements IMovieService {
     private IMovieRepo movieRepo= new MovieRepo();
 
     @Override
-    public MoviePage getMovies(String title, String genre, int page, int pageSize) {
+    public MoviePage getMovies(String title, String genre, int pageSize, int page) {
         List<Movie> movieList;
         if(title == null && genre == null){
-            movieList= movieRepo.getAll(page, pageSize);
+            movieList= movieRepo.getAll(pageSize, page);
         } else if (genre == null) {
-            movieList= movieRepo.getByTitle(title,page, pageSize);
+            movieList= movieRepo.getByTitle(title,pageSize, page);
         }else if(title == null){
-            movieList= movieRepo.getByGenre(genre,page, pageSize);
+            movieList= movieRepo.getByGenre(genre,pageSize, page);
         }else {
-            movieList= movieRepo.getByTitleAndGenre(title,genre,page, pageSize);
+            movieList= movieRepo.getByTitleAndGenre(title,genre,pageSize, page);
         }
         int totalMovies = movieRepo.countAll();
         int totalPages = (int) Math.ceil((double) totalMovies / pageSize);

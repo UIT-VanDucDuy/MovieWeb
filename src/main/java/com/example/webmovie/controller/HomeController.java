@@ -1,8 +1,11 @@
 package com.example.webmovie.controller;
 
 import com.example.webmovie.entity.Account;
+import com.example.webmovie.entity.Genre;
 import com.example.webmovie.service.AccountService;
+import com.example.webmovie.service.GenreService;
 import com.example.webmovie.service.IAccountService;
+import com.example.webmovie.service.IGenreService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,21 +15,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "homeController", value = "/Home")
 public class HomeController extends HttpServlet {
     private IAccountService accountService = new AccountService();
+    private IGenreService genreService = new GenreService();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         Account account = (session != null) ? (Account) session.getAttribute("account") : null;
-
+        List<Genre> genreList = genreService.getAll();
+        request.setAttribute("GenreList",genreList);
         // Không redirect nữa mà forward thẳng
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        List<Genre> genreList = genreService.getAll();
+        request.setAttribute("GenreList",genreList);
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -41,7 +49,7 @@ public class HomeController extends HttpServlet {
                     session.setAttribute("account", account);
                     response.sendRedirect(request.getContextPath() + "/Home");
                 } else {
-                    request.setAttribute("errorLogin", "Tên đăng nhập hoặc mật khẩu sai!");
+                    request.setAttribute("errorLogin", "Incorrect username or password!");
                     request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 }
                 break;
@@ -53,12 +61,11 @@ public class HomeController extends HttpServlet {
                 boolean success = accountService.signUp(usernameSignUp,
                         passwordSignUp1, passwordSignUp2, request);
                 if (success) {
-                    request.setAttribute("success", "Đăng ký thành công");
+                    request.setAttribute("success", "Registration successful");
                     response.sendRedirect(request.getContextPath() + "view/home.jsp");
                 } else {
                     request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 }
-
                 break;
             case "subscribe":
                 break;
