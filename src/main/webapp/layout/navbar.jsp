@@ -34,13 +34,21 @@
 
                     <div class="dropdown-menu row ">
                         <c:forEach var="genre" items="${GenreList}" varStatus="status">
-                            <a class="dropdown-item nav-link" href="/Search">${genre.getGenreName()}</a>
+                            <c:url var="searchUrl" value="/Search">
+                                <c:param name="Genre" value="${genre.genreName}" />
+                            </c:url>
+                            <a class="dropdown-item nav-link" href="${searchUrl}">
+                                    ${genre.genreName}
+                            </a>
                         </c:forEach>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Admin">Admin</a>
-                </li>
+
+                <c:if test="${sessionScope.account.memberTypeId == 0}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin">Admin</a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.account == null}">
                     <li class="nav-item d-sm-none">
                         <a class="nav-link " data-bs-toggle="modal" data-bs-target="#loginModal" >Subcsribe</a>

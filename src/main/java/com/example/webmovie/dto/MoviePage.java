@@ -1,4 +1,6 @@
-package com.example.webmovie.entity;
+package com.example.webmovie.dto;
+
+import com.example.webmovie.entity.Movie;
 
 import java.util.List;
 

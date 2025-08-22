@@ -194,29 +194,32 @@
                 </c:forEach>
 
             </div>
-            <div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <!-- Nút Prev -->
-                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                            <a class="page-link"  href="?name=${param.name}&page=${currentPage - 1}">Prev</a>
-                        </li>
-
-                        <!-- Danh sách số trang -->
-                        <c:forEach begin="1" end="${totalPages}" var="i">
-                            <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                <a class="page-link" href="?name=${param.name}&page=${i}">${i}</a>
+            <c:if test="${totalPages}>1">
+                <div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <!-- Nút Prev -->
+                            <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                <a class="page-link"  href="?name=${param.name}&page=${currentPage - 1}">Prev</a>
                             </li>
-                        </c:forEach>
 
-                        <!-- Nút Next -->
-                        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                            <a class="page-link"
-                               href="?name=${param.name}&page=${currentPage + 1}">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+                            <!-- Danh sách số trang -->
+                            <c:forEach begin="1" end="${totalPages}" var="i">
+                                <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                    <a class="page-link" href="?name=${param.name}&page=${i}">${i}</a>
+                                </li>
+                            </c:forEach>
+
+                            <!-- Nút Next -->
+                            <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                <a class="page-link"
+                                   href="?name=${param.name}&page=${currentPage + 1}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </c:if>
+
         </div>
     </div>
 </div>
