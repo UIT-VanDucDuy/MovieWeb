@@ -31,19 +31,24 @@
                     <a class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Genre
                     </a>
+
                     <div class="dropdown-menu row ">
-                        <a class="dropdown-item nav-link" href="/Search">Link 1</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 2</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 3</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 4</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 5</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 6</a>
-                        <a class="dropdown-item nav-link" href="/Search">Link 7</a>
+                        <c:forEach var="genre" items="${GenreList}" varStatus="status">
+                            <c:url var="searchUrl" value="/Search">
+                                <c:param name="Genre" value="${genre.genreName}" />
+                            </c:url>
+                            <a class="dropdown-item nav-link" href="${searchUrl}">
+                                    ${genre.genreName}
+                            </a>
+                        </c:forEach>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Admin">Admin</a>
-                </li>
+
+                <c:if test="${sessionScope.account.memberTypeId == 0}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin">Admin</a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.account == null}">
                     <li class="nav-item d-sm-none">
                         <a class="nav-link " data-bs-toggle="modal" data-bs-target="#loginModal" >Subcsribe</a>
@@ -58,7 +63,7 @@
                 <li class="nav-item search-container">
                     <a class="nav-link search-button" href="#">Search</a>
                     <form action="/Search" method="Post" class="search-form">
-                        <input type="text" name="q" class="search-input" placeholder="Search..."/>
+                        <input type="text" name="search" class="search-input" placeholder="Search..."/>
                     </form>
                 </li>
             </ul>

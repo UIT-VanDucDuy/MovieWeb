@@ -8,6 +8,7 @@ public class Movie {
     private String description;
     private String releaseDate;
     private boolean isSeries;
+    private int memberTypeId;
     private String posterPath;
     private String bannerPath;
 
@@ -23,10 +24,13 @@ public class Movie {
         this.posterPath = posterPath;
         this.bannerPath = bannerPath;
     }
-    public Movie(int id, String name,String posterPath) {
+    public Movie(int id, String name,int memberTypeId,String posterPath,String bannerPath) {
         this.id = id;
         this.name = name;
+        this.memberTypeId = memberTypeId;
         this.posterPath = posterPath;
+        this.bannerPath = bannerPath;
+
     }
 
     public String getPosterPath() {

@@ -18,6 +18,10 @@
     <script src="../jvs/admin.js"></script>
 </head>
 <body>
+<c:if test="${sessionScope.account.memberTypeId != 0}">
+    <c:redirect url="/Home"></c:redirect>
+</c:if>
+<c:import url="/layout/navbar.jsp"></c:import>
 <div class="main mt-4 ">
     <h1 class="title">Quản lý trang web</h1>
 
