@@ -16,18 +16,18 @@ public class AccountService implements IAccountService {
     @Override
     public boolean signUp(String username, String password1, String password2, HttpServletRequest request) {
         if (!password1.equals(password2)) {
-            request.setAttribute("errorSignup", "Mật khẩu không trùng khớp!");
+            request.setAttribute("errorSignup", "Passwords do not match!");
             return false;
         }
         if (accountRepo.existsByUsername(username)) {
-            request.setAttribute("errorSignup", "Tài khoản đã tồn tại!");
+            request.setAttribute("errorSignup", "This account already exists");
             return false;
         }
 
         Account account = new Account(username, password1, 1);
         boolean success = accountRepo.signUp(account);
         if (!success) {
-            request.setAttribute("errorSignup", "Có lỗi khi đăng ký!");
+            request.setAttribute("errorSignup", "Registration failed!");
         }
         return success;
     }

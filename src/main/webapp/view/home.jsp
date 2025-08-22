@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <script src="jvs/home.js"></script>
-
-
 </head>
 <body>
 <c:import url="/layout/navbar.jsp"></c:import>
@@ -170,64 +168,12 @@
 
         <div class="slider-container position-relative" style="overflow-x: auto;">
             <div id="trending-now" class="slider-track d-flex transition gap-5">
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">1</span>
-                    <a href="/Movie"><img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="rounded" /> </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">2</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">3</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">4</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">5</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">6</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">7</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">8</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">9</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
-                <div class="slider-item position-relative">
-                    <span class="number-overlay">10</span>
-                    <a href="/Movie">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                    </a>
-                </div>
+                <c:forEach var="trendingMovie" items="${trendingMovieList}" varStatus="status">
+                    <div class="slider-item position-relative">
+                        <span class="number-overlay">${status.count}</span>
+                        <a href="/Movie"><img src="${trendingMovie.getPosterPath()}" class="rounded" /> </a>
+                    </div>
+                </c:forEach>
 
             </div>
             <!-- Nút điều hướng -->
@@ -247,60 +193,17 @@
 
         <div class="slider-container position-relative" style="overflow-x: auto;">
             <div id="genre" class="slider-track d-flex transition">
-                <div class="genre-div slider-item position-relative" >
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">Action</span>
-                </div>
-                <div class=" genre-div slider-item position-relative  ">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">Romance</span>
-                </div>
-                <div class="genre-div slider-item position-relative">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">3</span>
-                </div>
-                <div class="genre-div slider-item position-relative">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">3</span>
-                </div>
-                <div class="genre-div slider-item position-relative">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">3</span>
-                </div>
-                <div class="genre-div slider-item position-relative">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">3</span>
-                </div>
-                <div class="genre-div slider-item position-relative">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">3</span>
-                </div>
-                <div class="genre-div slider-item position-relative">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">3</span>
-                </div>
-                <div class="genre-div slider-item position-relative">
-                    <a href="/Search">
-                        <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="genre-img" />
-                    </a>
-                    <span class="genre-name">3</span>
-                </div>
+                <c:forEach var="genre" items="${GenreList}" varStatus="status">
+                    <c:url var="searchUrl" value="/Search">
+                        <c:param name="Genre" value="${genre.genreName}" />
+                    </c:url>
+                    <div class="genre-div slider-item position-relative" >
+                        <a href="${searchUrl}">
+                            <img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="genre-img" />
+                        </a>
+                        <span class="genre-name">${genre.genreName}</span>
+                    </div>
+                </c:forEach>
 
             </div>
             <!-- Nút điều hướng -->
@@ -318,37 +221,11 @@
 
         <div class="slider-container position-relative" style="overflow-x: auto;">
             <div id="romance-movie" class="slider-track d-flex transition gap-3">
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-
+                <c:forEach var="romanceMovie" items="${RomanceMovieList}" varStatus="status">
+                    <div class="slider-item position-relative">
+                        <img src="${romanceMovie.getPosterPath()}" class="rounded" />
+                    </div>
+                </c:forEach>
             </div>
             <!-- Nút điều hướng -->
             <button class="carousel-control-prev scroll-prev" type="button"  data-target="romance-movie">
@@ -367,37 +244,34 @@
 
         <div class="slider-container position-relative" style="overflow-x: auto;">
             <div id="action-movie" class=" slider-track d-flex transition gap-3">
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/9Ufx3qJHKEl83bVrHRjpuhocO3J.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
-                <div class="slider-item position-relative">
-                    <img src="https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg" class="rounded" />
-                </div>
+                <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
+                    <div class="slider-item position-relative">
+                        <img src="${actionMovie.getPosterPath()}" class="rounded" />
+                    </div>
+                </c:forEach>
+            </div>
+            <!-- Nút điều hướng -->
+            <button class="carousel-control-prev scroll-prev" type="button" data-target="action-movie">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next scroll-next" type="button" data-target="action-movie">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
 
+
+    </div>
+    <br>
+    <div class="container-fluid bg-black text-white py-4">
+        <h2 class="mb-4 fw-bold ps-5">Coming Soon !</h2>
+
+        <div class="slider-container position-relative" style="overflow-x: auto;">
+            <div id="comingsoon-movie" class=" slider-track d-flex transition gap-3">
+                <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
+                    <div class="slider-item position-relative">
+                        <img src="${actionMovie.getPosterPath()}" class="rounded" />
+                    </div>
+                </c:forEach>
             </div>
             <!-- Nút điều hướng -->
             <button class="carousel-control-prev scroll-prev" type="button" data-target="action-movie">

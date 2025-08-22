@@ -1,8 +1,9 @@
 package com.example.webmovie.controller;
 
 import com.example.webmovie.entity.Account;
-import com.example.webmovie.service.AccountService;
-import com.example.webmovie.service.IAccountService;
+import com.example.webmovie.entity.Genre;
+import com.example.webmovie.entity.Movie;
+import com.example.webmovie.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,21 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "homeController", value = "/Home")
 public class HomeController extends HttpServlet {
-    private IAccountService accountService = new AccountService();
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        Account account = (session != null) ? (Account) session.getAttribute("account") : null;
+    private static IAccountService accountService = new AccountService();
+    private static IGenreService genreService = new GenreService();
+    private static IMovieService movieService= new MovieService();
 
-        // Không redirect nữa mà forward thẳng
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loadPage(request, response);
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       loadPage(request, response);
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -41,7 +45,7 @@ public class HomeController extends HttpServlet {
                     session.setAttribute("account", account);
                     response.sendRedirect(request.getContextPath() + "/Home");
                 } else {
-                    request.setAttribute("errorLogin", "Tên đăng nhập hoặc mật khẩu sai!");
+                    request.setAttribute("errorLogin", "Incorrect username or password!");
                     request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 }
                 break;
@@ -53,19 +57,29 @@ public class HomeController extends HttpServlet {
                 boolean success = accountService.signUp(usernameSignUp,
                         passwordSignUp1, passwordSignUp2, request);
                 if (success) {
-                    request.setAttribute("success", "Đăng ký thành công");
+                    request.setAttribute("success", "Registration successful");
                     response.sendRedirect(request.getContextPath() + "view/home.jsp");
                 } else {
                     request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 }
-
                 break;
             case "subscribe":
                 break;
             default:
 
         }
+    }
+    private static void loadPage(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession(false);
+        Account account = (session != null) ? (Account) session.getAttribute("account") : null;
 
-
+        List<Genre> genreList = genreService.getAll();
+        request.setAttribute("GenreList", genreList);
+        List<Movie> romanceMovie = movieService.getMoviesByGenre("Romance");
+        request.setAttribute("RomanceMovieList", romanceMovie);
+        List<Movie> actionMovie = movieService.getMoviesByGenre("Action");
+        request.setAttribute("ActionMovieList", actionMovie);
+        List<Movie> trendingMovie = movieService.getMoviesByGenre("");
+        request.setAttribute("trendingMovieList", trendingMovie);
     }
 }

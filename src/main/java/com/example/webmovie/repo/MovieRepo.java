@@ -2,72 +2,68 @@ package com.example.webmovie.repo;
 
 import com.example.webmovie.entity.Movie;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieRepo implements IMovieRepo {
     private static List<Movie> movieList = new ArrayList<>();
-    static{
-        movieList.add(new Movie(1,"Movie1","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(2,"Movie2","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(3,"Movie3","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(4,"Movie4","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(5,"Movie5","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(6,"Movie6","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(7,"Movie7","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(8,"Movie8","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(9,"Movie9","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(10,"Movie10","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(11,"Movie11","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(12,"Movie12","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-        movieList.add(new Movie(13,"Movie13","https://image.tmdb.org/t/p/original/zP96avPSR22s8Hhvj0qimQKKDMj.jpg"));
-    }
+    private final String FIND_BY_TITLE_AND_GENRE ="SELECT m.* FROM Movie m JOIN MovieGenre mg ON m.Id = mg.MovieId " +
+            "JOIN Genre g ON g.Id = mg.GenreId "  +
+            "WHERE g.GenreName LIKE ? " +
+            "and m.Name Like ? " +
+            "limit ? offset ? ";
+    private final String COUNT_BY_TITLE_AND_GENRE ="SELECT COUNT(DISTINCT m.Id)" +
+            "FROM Movie m " +
+            "JOIN MovieGenre mg ON m.Id = mg.MovieId " +
+            "JOIN Genre g ON g.Id = mg.GenreId " +
+            "WHERE g.GenreName LIKE ? " +
+            "AND m.Name LIKE ?; ";
 
     @Override
-    public int countAll() {
-        return movieList.size();
-    }
+    public List<Movie> getByTitleAndGenre(String title, String genre, int pageSize,int page ) {
+        List<Movie> movieList = new ArrayList<>();
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement ps = connection.prepareStatement(FIND_BY_TITLE_AND_GENRE)) {
+            int offset = (page - 1) * pageSize;
+            ps.setString(1,"%"+ genre +"%");
+            ps.setString(2,"%"+ title +"%");
+            ps.setInt(3, pageSize);
+            ps.setInt(4, offset);
+            ResultSet rs = ps.executeQuery();
 
-    @Override
-    public int countByTitle(String title) {
-        return movieList.size();
+            while (rs.next()) {
+                int id =rs.getInt("Id");
+                String name =rs.getString("Name");
+                int memberTypeId = rs.getInt("MemberTypeId");
+                String posterPath = rs.getString("PosterPath");
+                String bannerPath = rs.getString("BannerPath");
+                Movie movie = new Movie(id,name,memberTypeId,posterPath,bannerPath);
+                movieList.add(movie);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movieList;
     }
-
-    @Override
-    public int countByGenre(String genre) {
-        return movieList.size();
-    }
-
     @Override
     public int countByTitleAndGenre(String title, String genre) {
-        return movieList.size();
-    }
+        int count = 0;
+        try (Connection connection = BaseRepository.getConnectDB();) {
+            PreparedStatement ps = connection.prepareStatement(COUNT_BY_TITLE_AND_GENRE);
+            ps.setString(1,"%"+ genre +"%");
+            ps.setString(2,"%"+ title +"%");
+            ResultSet rs = ps.executeQuery();
 
-    @Override
-    public List<Movie> getAll(int page,int pageSize) {
-        int startIndex = (page - 1) * pageSize;
-        if (startIndex >= movieList.size()) {
-            return new ArrayList<>(); // Không có dữ liệu
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        int endIndex = Math.min(startIndex + pageSize, movieList.size());
-        return movieList.subList(startIndex, endIndex);
+        return count;
     }
-
-
-    @Override
-    public List<Movie> getByTitle(String title, int page,int pageSize) {
-        return movieList;
-    }
-    @Override
-    public List<Movie> getByGenre(String genre, int page,int pageSize) {
-        return movieList;
-    }
-
-    @Override
-    public List<Movie> getByTitleAndGenre(String title, String genre, int page, int pageSize) {
-        return movieList;
-    }
-
-
 }
