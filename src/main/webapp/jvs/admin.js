@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // private String address;
 // private String phoneNumber;
 // private int accountId;
-// '${subscriber.name}', '${subscriber.gender}', '${subscriber.birthday}', '${subscriber.gender}', '${subscriber.phoneNumber}'
+// '${user.name}', '${user.gender}', '${user.birthday}', '${user.gender}', '${user.phoneNumber}'
 
-function deleteSubscriber(id) {
-    document.getElementById("idSubscriberDelete").value = id;
+function deleteUser(id) {
+    document.getElementById("idUserDelete").value = id;
 }
