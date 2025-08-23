@@ -14,6 +14,10 @@ public class UserRepository implements IUserRepository {
     List<User> userList = new ArrayList<>();
     private final String SELECT_ALL = "select * from user LIMIT ? OFFSET ?;";
     private final String FIND_BY_ID = "select * from user WHERE id = ?;";
+    private final String UPDATE_USER = "UPDATE User SET Name = ?, Gender = ?, Birthday = ?, Address = ?, PhoneNumber = ? WHERE Id = ?";
+    private final String DELETE_USER = "DELETE FROM user WHERE id = ?;";
+    private final String DELETE_RATING_BY_USER = "DELETE FROM rating WHERE UserId = ?";
+    private final String DELETE_WATCHLIST_BY_USER = "DELETE FROM watchlist WHERE UserId = ?";
 
     @Override
     public List<User> getAll(int page, int pageSize) {
@@ -78,11 +82,68 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public boolean updateUser(User user) {
-        return false;
+        boolean rowUpdated = false;
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER)) {
+
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setBoolean(2, user.isGender());
+            preparedStatement.setDate(3, user.getBirthday());
+            preparedStatement.setString(4, user.getAddress());
+            preparedStatement.setString(5, user.getPhoneNumber());
+            preparedStatement.setInt(6, user.getId());
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
     }
+
 
     @Override
     public boolean deleteUser(int id) {
-        return false;
+        try (Connection connection = BaseRepository.getConnectDB()) {
+            connection.setAutoCommit(false); // bắt đầu transaction
+            boolean result = false;
+
+            try (
+                    PreparedStatement ps1 = connection.prepareStatement(DELETE_RATING_BY_USER);
+                    PreparedStatement ps2 = connection.prepareStatement(DELETE_WATCHLIST_BY_USER);
+                    PreparedStatement ps3 = connection.prepareStatement(DELETE_USER);
+            ) {
+                // Xóa rating trước
+                ps1.setInt(1, id);
+                ps1.executeUpdate();
+
+                // Sau đó xóa user
+                ps2.setInt(1, id);
+                ps2.executeUpdate();
+
+                ps3.setInt(1, id);
+                int rowsDeleted = ps3.executeUpdate();
+
+                if (rowsDeleted > 0) {
+                    result = true;
+                }
+
+                // Nếu tất cả OK thì commit
+                connection.commit();
+
+            } catch (SQLException e) {
+                // Nếu có lỗi, rollback để dữ liệu không bị sai
+                connection.rollback();
+                throw e;
+            } finally {
+                connection.setAutoCommit(true); // bật lại auto-commit
+            }
+
+            return result;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 }

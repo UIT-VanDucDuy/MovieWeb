@@ -5,7 +5,7 @@ import com.example.webmovie.repo.UserRepository;
 
 import java.util.List;
 
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     UserRepository userRepository = new UserRepository();
 
     @Override
@@ -25,11 +25,11 @@ public class UserService implements IUserService{
 
     @Override
     public boolean updateUser(User user) {
-        return false;
+        return userRepository.updateUser(user);
     }
 
     @Override
     public boolean deleteUser(int id) {
-        return false;
+        return userRepository.deleteUser(id);
     }
 }
