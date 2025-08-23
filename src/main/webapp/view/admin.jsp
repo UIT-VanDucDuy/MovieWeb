@@ -18,9 +18,9 @@
     <script src="../jvs/admin.js"></script>
 </head>
 <body>
-<c:if test="${sessionScope.account.memberTypeId != 0}">
-    <c:redirect url="/Home"></c:redirect>
-</c:if>
+<%--<c:if test="${sessionScope.account.memberTypeId != 0}">--%>
+<%--    <c:redirect url="/Home"></c:redirect>--%>
+<%--</c:if>--%>
 <c:import url="/layout/navbar.jsp"></c:import>
 <div class="main mt-4 ">
     <h1 class="title">Quản lý trang web</h1>
@@ -55,15 +55,17 @@
                         <td>${subscriber.phoneNumber}</td>
                         <td>${subscriber.address}</td>
                         <td>
-                            <form action="/Admin?action=editSubscriber" method="post">
-                                <input type="hidden" id="subscriberId" value="${subscriber.id}">
-                                <button type="submit" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editSubscriberModal">
-                                    Edit
-                                </button>
-                            </form>
-                            <form>
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            <div class="d-flex gap-3">
+                                <form action="/Admin?action=editSubscriber" method="post" >
+                                    <input type="hidden" id="subscriberId" value="${subscriber.id}">
+                                    <button type="submit" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editSubscriberModal">
+                                        Edit
+                                    </button>
+                                </form>
+                                <form >
+                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>

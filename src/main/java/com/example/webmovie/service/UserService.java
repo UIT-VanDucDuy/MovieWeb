@@ -15,7 +15,7 @@ public class UserService implements IUserService{
 
     @Override
     public User findById(int id) {
-        return null;
+        return userRepository.findById(id);
     }
 
     @Override
