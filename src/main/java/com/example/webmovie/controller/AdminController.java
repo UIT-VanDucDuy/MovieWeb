@@ -44,12 +44,11 @@ public class AdminController extends HttpServlet {
                 request.setAttribute("openAddSubscriberModal", true);
                 break;
             case "showEditForm":
-                String idParam = request.getParameter("id");
-                System.out.println("DEBUG >>> id = " + idParam);
                 request.setAttribute("userInformation", userService.findById(Integer.parseInt(request.getParameter("id"))));
                 userList = userService.getAll(1, 10);
                 request.setAttribute("openEditModal", true);
                 request.setAttribute("genderList", genderList);
+//                request.setAttribute("memberTypeList", memberTypeList);
                 break;
         }
         userList = userService.getAll(1, 10);

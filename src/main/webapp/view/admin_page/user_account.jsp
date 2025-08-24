@@ -16,61 +16,6 @@
     <script src="../jvs/admin.js"></script>
 </head>
 <body>
-<!-- editUserModal -->
-<%--<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel"--%>
-<%--     aria-hidden="true">--%>
-<%--    <div class="modal-dialog">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h1 class="modal-title fs-5" id="editUserModalLabel">Update User</h1>--%>
-<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--            </div>--%>
-
-<%--            <form action="/Admin?action=updateUser" method="post">--%>
-<%--                <div class="modal-body">--%>
-<%--                    <div class="mb-3">--%>
-<%--                        <input hidden="hidden" name="id" id="inputUserId">--%>
-<%--                        <input hidden="hidden" name="accountId" id="inputUserAccountId">--%>
-<%--                        <label class="form-label">Full Name</label>--%>
-<%--                        <input type="text" class="form-control" id="inputUserName" name="name">--%>
-<%--                    </div>--%>
-<%--                    <div class="mb-3">--%>
-<%--                        <label class="form-label">Gender</label>--%>
-<%--                        <select id="inputUserGender" name="gender" class="form-select">--%>
-<%--                            <c:forEach var="g" items="${genderList}">--%>
-<%--                                <option value="${g}"--%>
-<%--                                        <c:if test="${(userInformation.gender and g == 'Nam') or (not userInformation.gender and g == 'Nữ')}">--%>
-<%--                                            selected--%>
-<%--                                        </c:if>>--%>
-<%--                                        ${g}--%>
-<%--                                </option>--%>
-<%--                            </c:forEach>--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
-<%--                    <div class="mb-3">--%>
-<%--                        <label class="form-label">Birthday</label>--%>
-<%--                        <input type="date" class="form-control" id="inputUserBirthday" name="birthday">--%>
-<%--                    </div>--%>
-<%--                    <div class="mb-3">--%>
-<%--                        <label class="form-label">Phone Number</label>--%>
-<%--                        <input type="text" class="form-control" id="inputUserPhoneNumber" name="phoneNumber">--%>
-<%--                    </div>--%>
-<%--                    <div class="mb-3">--%>
-<%--                        <label class="form-label">Address</label>--%>
-<%--                        <input type="text" class="form-control" id="inputUserAddress" name="address">--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--                    <button type="submit" class="btn btn-primary">Save changes</button>--%>
-<%--                </div>--%>
-<%--            </form>--%>
-
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-
 <!-- addUserModal -->
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel"
      aria-hidden="true">
@@ -296,13 +241,14 @@
         document.getElementById("editUserPhoneNumber").value = "${userInformation.phoneNumber}";
         document.getElementById("editUserAddress").value = "${userInformation.address}";
         document.getElementById("editUserPassword").value = "${userInformation.password}";
+        <%--document.getElementById("editUserMemberType").value = "${userInformation.memberType}";--%>
 
         <c:choose>
         <c:when test="${userInformation.gender}">
-        document.getElementById("editUserGender").value = "Male";
+        document.getElementById("editUserGender").value = "true";
         </c:when>
         <c:otherwise>
-        document.getElementById("editUserGender").value = "Female";
+        document.getElementById("editUserGender").value = "false";
         </c:otherwise>
         </c:choose>
 
