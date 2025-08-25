@@ -1,11 +1,9 @@
 package com.example.webmovie.controller;
 
 import com.example.webmovie.entity.Account;
-import com.example.webmovie.entity.DTO_entity.UserDTO;
+import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.MemberType;
 import com.example.webmovie.entity.User;
-import com.example.webmovie.repo.IUserRepository;
-import com.example.webmovie.repo.UserRepository;
 import com.example.webmovie.service.IUserService;
 import com.example.webmovie.service.UserService;
 
