@@ -172,13 +172,16 @@
 <div class="content">
     <div class="row">
         <div class="col-lg-3">
-            <ul class="list-group">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
-            </ul>
+            <form action="/Search" method="Post" class="search-form">
+                <input type="text" name="search" class="search" placeholder="Search..."/>
+            </form>
+<%--            <ul class="list-group">--%>
+<%--                <li class="list-group-item">An item</li>--%>
+<%--                <li class="list-group-item">A second item</li>--%>
+<%--                <li class="list-group-item">A third item</li>--%>
+<%--                <li class="list-group-item">A fourth item</li>--%>
+<%--                <li class="list-group-item">And a fifth one</li>--%>
+<%--            </ul>--%>
         </div>
         <div class="col-lg-9">
             <div class="search-list  d-flex">
@@ -194,7 +197,7 @@
                 </c:forEach>
 
             </div>
-            <c:if test="${totalPages}>1">
+            <c:if test="${totalPages>1}">
                 <div>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
