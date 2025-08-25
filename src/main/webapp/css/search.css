@@ -52,6 +52,30 @@
     background-color: white;
     border-radius: 30px;
 }
+.genre-search{
+    width: fit-content;
+    border: 1px solid #666;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.genre-search input{ display: none; }
+.genre-search label{
+    font-family: sans-serif;
+    padding: 10px 16px;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.genre-search label:last-of-type{ border-right: 0; }
+.genre-search label:hover{
+    background: #eee;
+}
+.genre-search input:checked + label{
+    background: #becbff;
+}
+
 @media (max-width: 740px){
     .card{
         width: 17vh;

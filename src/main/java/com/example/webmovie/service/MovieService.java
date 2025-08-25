@@ -1,5 +1,6 @@
 package com.example.webmovie.service;
 
+import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.entity.Movie;
 import com.example.webmovie.dto.MoviePage;
 import com.example.webmovie.repo.IMovieRepo;
@@ -12,7 +13,7 @@ public class MovieService implements IMovieService {
 
     @Override
     public MoviePage getMovies(String title, String genre, int pageSize, int page) {
-        List<Movie> movieList;
+        List<MovieDto> movieList;
         int totalMovies;
         if (title == null) {
             title = "";
@@ -37,7 +38,7 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public List<Movie> getMoviesByGenre(String genre) {
+    public List<MovieDto> getMoviesByGenre(String genre) {
         return movieRepo.getByTitleAndGenre("",genre,10, 1);
     }
 }

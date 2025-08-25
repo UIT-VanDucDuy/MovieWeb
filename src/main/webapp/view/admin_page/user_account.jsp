@@ -163,9 +163,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="me-3 mb-1">Member Type: </label>
-                        <select id="editUserMemberType" name="memberTypeId" class="form-select">
+                        <select id="editUserMemberType" name="memberTypeId" class="form-select" >
                             <c:forEach var="type" items="${memberTypeList}">
-                                <option value="${type.id}">
+                                <option value="${type.id}"
+                                 ${not empty userInformation and not empty userInformation.memberTypeId
+                                    and type.id == userInformation.memberTypeId ? 'selected' : ''}>
                                         ${type.name}
                                 </option>
                             </c:forEach>

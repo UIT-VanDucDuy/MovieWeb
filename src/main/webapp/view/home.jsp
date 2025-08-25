@@ -9,9 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../css/home.css">
+<%--    <link rel="stylesheet" href="/css/home.css">--%>
+    <link rel="stylesheet" href="/css/memtype.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <script src="jvs/home.js"></script>
+
 </head>
 <body>
 <c:import url="/layout/navbar.jsp"></c:import>
@@ -223,7 +225,10 @@
             <div id="romance-movie" class="slider-track d-flex transition gap-3">
                 <c:forEach var="romanceMovie" items="${RomanceMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
-                        <img src="${romanceMovie.getPosterPath()}" class="rounded" />
+                        <span class="movie-type">${romanceMovie.getMemberType()}</span>
+                        <a href="/Movie">
+                            <img src="${romanceMovie.getPosterPath()}" class="rounded" />
+                        </a>
                     </div>
                 </c:forEach>
             </div>
@@ -246,7 +251,10 @@
             <div id="action-movie" class=" slider-track d-flex transition gap-3">
                 <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
-                        <img src="${actionMovie.getPosterPath()}" class="rounded" />
+                        <span class="movie-type">${actionMovie.getMemberType()}</span>
+                        <div onclick="checkMemberType(${sessionScope.account.memberTypeId},${actionMovie.getMemberTypeId()})">
+                            <img src="${actionMovie.getPosterPath()}" class="rounded" />
+                        </div>
                     </div>
                 </c:forEach>
             </div>
@@ -269,7 +277,10 @@
             <div id="comingsoon-movie" class=" slider-track d-flex transition gap-3">
                 <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
-                        <img src="${actionMovie.getPosterPath()}" class="rounded" />
+                        <span class="movie-type">${actionMovie.getMemberType()}</span>
+                        <a href="/Movie">
+                            <img src="${actionMovie.getPosterPath()}" class="rounded" />
+                        </a>
                     </div>
                 </c:forEach>
             </div>
@@ -292,4 +303,27 @@
 </body>
 </html>
 
+<script>
+    function checkMemberType(memberTypeId, movieTypeId) {
+        // Nếu memberTypeId = 0 thì cho xem phim luôn
+        if (memberTypeId === null || memberTypeId === undefined) {
+            alert("Vui lòng đăng nhập để xem phim!");
+            return;
 
+        }
+
+        if (memberTypeId === 0) {
+            window.location.href = "/Movie";
+            return;
+        }
+
+        // Nếu memberTypeId trùng movieTypeId thì cho xem phim
+        if (memberTypeId === movieTypeId) {
+            window.location.href = "/Movie";
+        } else {
+            alert("Vui lòng đăng nhập để xem phim!");
+            return;
+
+        }
+    }
+</script>

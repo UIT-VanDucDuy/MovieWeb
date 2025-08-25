@@ -1,5 +1,6 @@
 package com.example.webmovie.repo;
 
+import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.entity.Movie;
 
 import java.sql.Connection;
@@ -11,8 +12,10 @@ import java.util.List;
 
 public class MovieRepo implements IMovieRepo {
     private static List<Movie> movieList = new ArrayList<>();
-    private final String FIND_BY_TITLE_AND_GENRE ="SELECT DISTINCT m.* FROM Movie m JOIN MovieGenre mg ON m.Id = mg.MovieId " +
-            "JOIN Genre g ON g.Id = mg.GenreId "  +
+    private final String FIND_BY_TITLE_AND_GENRE ="SELECT DISTINCT m.*,mt.MemberTypeName FROM Movie m " +
+            "JOIN MovieGenre mg ON m.Id = mg.MovieId " +
+            "JOIN Genre g ON g.Id = mg.GenreId " +
+            "Join membertype mt on mt.Id = m.MemberTypeId "  +
             "WHERE g.GenreName LIKE ? " +
             "and m.Name Like ? " +
             "limit ? offset ? ";
@@ -24,8 +27,8 @@ public class MovieRepo implements IMovieRepo {
             "AND m.Name LIKE ?; ";
 
     @Override
-    public List<Movie> getByTitleAndGenre(String title, String genre, int pageSize,int page ) {
-        List<Movie> movieList = new ArrayList<>();
+    public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize,int page ) {
+        List<MovieDto> movieList = new ArrayList<>();
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement ps = connection.prepareStatement(FIND_BY_TITLE_AND_GENRE)) {
             int offset = (page - 1) * pageSize;
@@ -39,10 +42,10 @@ public class MovieRepo implements IMovieRepo {
                 int id =rs.getInt("Id");
                 String name =rs.getString("Name");
                 int memberTypeId = rs.getInt("MemberTypeId");
+                String memberTypeName = rs.getString("MemberTypeName");
                 String posterPath = rs.getString("PosterPath");
                 String bannerPath = rs.getString("BannerPath");
-                Movie movie = new Movie(id,name,memberTypeId,posterPath,bannerPath);
-                movieList.add(movie);
+                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath);movieList.add(movie);
             }
         } catch (SQLException e) {
             e.printStackTrace();

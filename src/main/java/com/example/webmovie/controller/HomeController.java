@@ -1,5 +1,6 @@
 package com.example.webmovie.controller;
 
+import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.entity.Genre;
 import com.example.webmovie.entity.Movie;
@@ -75,11 +76,11 @@ public class HomeController extends HttpServlet {
 
         List<Genre> genreList = genreService.getAll();
         request.setAttribute("GenreList", genreList);
-        List<Movie> romanceMovie = movieService.getMoviesByGenre("Romance");
+        List<MovieDto> romanceMovie = movieService.getMoviesByGenre("Romance");
         request.setAttribute("RomanceMovieList", romanceMovie);
-        List<Movie> actionMovie = movieService.getMoviesByGenre("Action");
+        List<MovieDto> actionMovie = movieService.getMoviesByGenre("Action");
         request.setAttribute("ActionMovieList", actionMovie);
-        List<Movie> trendingMovie = movieService.getMoviesByGenre("");
+        List<MovieDto> trendingMovie = movieService.getMoviesByGenre("");
         request.setAttribute("trendingMovieList", trendingMovie);
     }
 }
