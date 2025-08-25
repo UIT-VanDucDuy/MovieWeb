@@ -1,13 +1,18 @@
 package com.example.webmovie.repo;
 
+import com.example.webmovie.entity.DTO_entity.UserDTO;
 import com.example.webmovie.entity.User;
 
 import java.util.List;
 
 public interface IUserRepository {
-    public List<User> getAll(int page, int pageSize);
-    public User findById(int id);
-    public boolean addUser(User user);
+    public List<UserDTO> getAll(int page, int pageSize);
+
+    public UserDTO findById(int id);
+
+    public boolean addUser(UserDTO user);
+
     public boolean updateUser(User user);
+
     public boolean deleteUser(int id);
 }

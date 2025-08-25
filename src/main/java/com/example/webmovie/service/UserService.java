@@ -1,35 +1,41 @@
 package com.example.webmovie.service;
 
+import com.example.webmovie.entity.DTO_entity.UserDTO;
+import com.example.webmovie.entity.MemberType;
 import com.example.webmovie.entity.User;
 import com.example.webmovie.repo.UserRepository;
 
 import java.util.List;
 
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     UserRepository userRepository = new UserRepository();
 
     @Override
-    public List<User> getAll(int page, int pageSize) {
+    public List<UserDTO> getAll(int page, int pageSize) {
         return userRepository.getAll(page, pageSize);
     }
 
     @Override
-    public User findById(int id) {
-        return null;
+    public UserDTO findById(int id) {
+        return userRepository.findById(id);
     }
 
     @Override
-    public boolean addUser(User user) {
-        return false;
+    public boolean addUser(UserDTO user) {
+        return userRepository.addUser(user);
     }
 
     @Override
     public boolean updateUser(User user) {
-        return false;
+        return userRepository.updateUser(user);
     }
 
     @Override
     public boolean deleteUser(int id) {
-        return false;
+        return userRepository.deleteUser(id);
+    }
+
+    public List<MemberType> getAllMemberType() {
+        return userRepository.getAllMemberType();
     }
 }

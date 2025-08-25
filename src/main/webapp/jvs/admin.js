@@ -24,12 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // private String address;
 // private String phoneNumber;
 // private int accountId;
-// '${subscriber.name}', '${subscriber.gender}', '${subscriber.birthday}', '${subscriber.gender}', '${subscriber.phoneNumber}'
+// '${user.name}', '${user.gender}', '${user.birthday}', '${user.gender}', '${user.phoneNumber}'
 
-function updateSubscriber(id) {
-    document.getElementById("inputSubscriberName").value = name;
-    document.getElementById("inputSubscriberGender").value = gender;
-    document.getElementById("inputSubscriberBirthday").value = birthday;
-    document.getElementById("inputSubscriberAddress").value = address;
-    document.getElementById("inputSubscriberPhoneNumber").value = phoneNumber;
+function deleteUser(id) {
+    document.getElementById("idUserDelete").value = id;
 }
