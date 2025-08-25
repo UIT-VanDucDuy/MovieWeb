@@ -9,8 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<%--    <link rel="stylesheet" href="/css/home.css">--%>
-    <link rel="stylesheet" href="/css/memtype.css">
+    <link rel="stylesheet" href="/css/home1.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <script src="jvs/home.js"></script>
 
@@ -226,7 +225,10 @@
                 <c:forEach var="romanceMovie" items="${RomanceMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
                         <span class="movie-type">${romanceMovie.getMemberType()}</span>
-                        <a href="/Movie">
+                        <c:url var="movieUrl" value="/Movie">
+                            <c:param name="movieTypeId" value="${romanceMovie.getMemberTypeId()}" />
+                        </c:url>
+                        <a href="${movieUrl}">
                             <img src="${romanceMovie.getPosterPath()}" class="rounded" />
                         </a>
                     </div>
@@ -252,9 +254,12 @@
                 <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
                         <span class="movie-type">${actionMovie.getMemberType()}</span>
-                        <div onclick="checkMemberType(${sessionScope.account.memberTypeId},${actionMovie.getMemberTypeId()})">
+                        <c:url var="movieUrl" value="/Movie">
+                            <c:param name="movieTypeId" value="${actionMovie.getMemberTypeId()}" />
+                        </c:url>
+                        <a href="${movieUrl}">
                             <img src="${actionMovie.getPosterPath()}" class="rounded" />
-                        </div>
+                        </a>
                     </div>
                 </c:forEach>
             </div>
@@ -278,7 +283,10 @@
                 <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
                         <span class="movie-type">${actionMovie.getMemberType()}</span>
-                        <a href="/Movie">
+                        <c:url var="movieUrl" value="/Movie">
+                            <c:param name="movieTypeId" value="${actionMovie.getMemberTypeId()}" />
+                        </c:url>
+                        <a href="${movieUrl}">
                             <img src="${actionMovie.getPosterPath()}" class="rounded" />
                         </a>
                     </div>
@@ -302,28 +310,3 @@
 
 </body>
 </html>
-
-<script>
-    function checkMemberType(memberTypeId, movieTypeId) {
-        // Nếu memberTypeId = 0 thì cho xem phim luôn
-        if (memberTypeId === null || memberTypeId === undefined) {
-            alert("Vui lòng đăng nhập để xem phim!");
-            return;
-
-        }
-
-        if (memberTypeId === 0) {
-            window.location.href = "/Movie";
-            return;
-        }
-
-        // Nếu memberTypeId trùng movieTypeId thì cho xem phim
-        if (memberTypeId === movieTypeId) {
-            window.location.href = "/Movie";
-        } else {
-            alert("Vui lòng đăng nhập để xem phim!");
-            return;
-
-        }
-    }
-</script>

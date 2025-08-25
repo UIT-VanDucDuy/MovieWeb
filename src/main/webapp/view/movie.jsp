@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/movie.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="/css/home1.css">
     <link rel="stylesheet" href="../css/navbar.css">
 
 </head>

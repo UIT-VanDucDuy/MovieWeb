@@ -26,7 +26,16 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loadPage(request, response);
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        String errorLogin = request.getParameter("errorLogin");
+        String noPermission = request.getParameter("noPermission");
+        if ("1".equals(errorLogin)) {
+            request.setAttribute("errorLogin", "You are not logged in");
+        }
+        if ("1".equals(noPermission)) {
+            request.setAttribute("noPermission", "You don't have permission to watch this movie");
+        }
+
+            request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

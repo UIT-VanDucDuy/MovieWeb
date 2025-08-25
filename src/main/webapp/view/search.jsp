@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jvs/home.js"></script>
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="/css/home1.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/search.css">
     <style>
@@ -189,7 +189,7 @@
             <div class="search-list  d-flex">
                 <c:forEach var="movie" items="${movieList}" varStatus="status">
                     <div class="card">
-                        <a href="/Movie">
+                        <a >
                             <img src="${movie.getPosterPath()}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
