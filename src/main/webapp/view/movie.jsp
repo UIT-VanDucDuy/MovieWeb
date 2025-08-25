@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/movie.css">
     <link rel="stylesheet" href="/css/home1.css">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/navbar1.css">
 
 </head>
 <body>

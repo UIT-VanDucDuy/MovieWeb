@@ -32,7 +32,7 @@ public class HomeController extends HttpServlet {
             request.setAttribute("errorLogin", "You are not logged in");
         }
         if ("1".equals(noPermission)) {
-            request.setAttribute("noPermission", "You don't have permission to watch this movie");
+            request.setAttribute("noPermission", "Let's subscribe to watch this movie");
         }
 
             request.getRequestDispatcher("view/home.jsp").forward(request, response);

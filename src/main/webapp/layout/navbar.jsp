@@ -167,17 +167,23 @@
             </div>
             <div class="modal-body justify-content-center align-items-center d-flex  ">
                 <form action="/Home?action=subscribe" class="form" method="post">
-                    <img src="image/momo-qr.jpg" class="qr"/>
-                    <div class="radio-input">
-                        <label class="label">
-                            <input type="radio" id="value-2" checked="" name="value-radio" value="value-2" />
-                            <p class="text">Silver Member</p>
-                        </label>
-                        <label class="label">
-                            <input type="radio" id="value-3" name="value-radio" value="value-3" />
-                            <p class="text">Gold Member</p>
-                        </label>
-                    </div>
+                    <p id="subscribeMessage"></p>
+                    <nav class="subscribe-input row">
+                        <div class="box">
+                            <input type="radio" id="sliver" checked="" name="subscribe" value="2" >
+                            <label for="sliver" class="subject">
+                                <span>Sliver Member</span>
+                                <span>100$/year</span>
+                            </label>
+                        </div>
+                        <div class="box">
+                            <input type="radio" id="gold" name="subscribe" value="3">
+                            <label for="gold" class="subject">
+                                <span>Gold Member</span>
+                                <span>200$/year</span>
+                            </label>
+                        </div>
+                    </nav>
                     <input class="submit" type="submit" value="Subscribe now!" />
                 </form>
             </div>
@@ -212,3 +218,11 @@
 </c:if>
 
 
+<c:if test="${not empty noPermission}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("subscribeMessage").innerText = "${noPermission}";
+            new bootstrap.Modal(document.getElementById('subscribeModal')).show();
+        });
+    </script>
+</c:if>

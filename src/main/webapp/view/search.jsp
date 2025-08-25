@@ -12,11 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jvs/home.js"></script>
     <link rel="stylesheet" href="/css/home1.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/search.css">
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="../css/navbar1.css">
+    <link rel="stylesheet" href="../css/search1.css">
 </head>
 
 <body>
