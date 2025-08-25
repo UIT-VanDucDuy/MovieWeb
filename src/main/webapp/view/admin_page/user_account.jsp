@@ -80,10 +80,7 @@
                         <label class="me-3 mb-1">Member Type: </label>
                         <select id="addUserMemberType" name="memberTypeId" class="form-select">
                             <c:forEach var="type" items="${memberTypeList}">
-                                <option value="${type.id}"
-                                        <c:if test="${not empty userInformation and type.id eq userInformation.memberType.id}">
-                                            selected
-                                        </c:if>>
+                                <option value="${type.id}">
                                         ${type.name}
                                 </option>
                             </c:forEach>
@@ -168,13 +165,11 @@
                         <label class="me-3 mb-1">Member Type: </label>
                         <select id="editUserMemberType" name="memberTypeId" class="form-select">
                             <c:forEach var="type" items="${memberTypeList}">
-                                <option value="${type.id}"
-                                        <c:if test="${not empty userInformation and type.id eq userInformation.memberType.id}">
-                                            selected
-                                        </c:if>>
+                                <option value="${type.id}">
                                         ${type.name}
                                 </option>
                             </c:forEach>
+
                         </select>
                     </div>
                 </div>
@@ -222,7 +217,7 @@
 
         // MemberType dropdown
         var memberTypeSelect = document.getElementById("addUserMemberType");
-        memberTypeSelect.value = "${userInformation.memberType}";
+        memberTypeSelect.value = "${userInformation.memberTypeId}";
 
         // Mở modal
         var myModal = new bootstrap.Modal(document.getElementById('addUserModal'));
@@ -241,7 +236,7 @@
         document.getElementById("editUserPhoneNumber").value = "${userInformation.phoneNumber}";
         document.getElementById("editUserAddress").value = "${userInformation.address}";
         document.getElementById("editUserPassword").value = "${userInformation.password}";
-        <%--document.getElementById("editUserMemberType").value = "${userInformation.memberType}";--%>
+        <%--document.getElementById("editUserMemberType").value = "${userInformation.memberTypeId}";--%>
 
         <c:choose>
         <c:when test="${userInformation.gender}">
