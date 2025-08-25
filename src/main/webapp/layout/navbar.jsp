@@ -88,9 +88,9 @@
                         <p> Hello, ${sessionScope.account.username}</p>
                         <p> MemType: ${sessionScope.account.memberTypeId}</p>
                     </div>
-                    <div class="d-none d-lg-flex">
+                    <a href="/LogOut">
                         <button class="btn btn-warning">Log Out</button>
-                    </div>
+                    </a>
                 </c:otherwise>
             </c:choose>
         </div>
