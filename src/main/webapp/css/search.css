@@ -43,6 +43,15 @@
 .list-group{
     margin-bottom:5% ;
 }
+
+.search-form .search{
+    width: 100%;
+    opacity: 1;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 30px;
+}
 @media (max-width: 740px){
     .card{
         width: 17vh;

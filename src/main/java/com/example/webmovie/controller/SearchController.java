@@ -60,8 +60,7 @@ public class SearchController extends HttpServlet {
         }
 
         int pageSize = 12;
-        MoviePage moviePage = movieService.getMovies(
-                request.getParameter("title"),request.getParameter("genre"),pageSize,page );
+        MoviePage moviePage = movieService.getMovies(request.getParameter("title"),request.getParameter("genre"),pageSize,page );
 
         request.setAttribute("movieList", moviePage.getMovies());
         request.setAttribute("currentPage", moviePage.getCurrentPage());

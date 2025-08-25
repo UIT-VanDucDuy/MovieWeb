@@ -14,7 +14,12 @@ public class MovieService implements IMovieService {
     public MoviePage getMovies(String title, String genre, int pageSize, int page) {
         List<Movie> movieList;
         int totalMovies;
-
+        if (title == null) {
+            title = "";
+        }
+        if (genre == null) {
+            genre = "";
+        }
         totalMovies = movieRepo.countByTitleAndGenre(title, genre);
         movieList= movieRepo.getByTitleAndGenre(title,genre,pageSize, page);
 

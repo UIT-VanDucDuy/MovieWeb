@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MovieRepo implements IMovieRepo {
     private static List<Movie> movieList = new ArrayList<>();
-    private final String FIND_BY_TITLE_AND_GENRE ="SELECT m.* FROM Movie m JOIN MovieGenre mg ON m.Id = mg.MovieId " +
+    private final String FIND_BY_TITLE_AND_GENRE ="SELECT DISTINCT m.* FROM Movie m JOIN MovieGenre mg ON m.Id = mg.MovieId " +
             "JOIN Genre g ON g.Id = mg.GenreId "  +
             "WHERE g.GenreName LIKE ? " +
             "and m.Name Like ? " +
