@@ -1,6 +1,6 @@
 package com.example.webmovie.repo;
 
-import com.example.webmovie.entity.DTO_entity.UserDTO;
+import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.User;
 
 import java.util.List;

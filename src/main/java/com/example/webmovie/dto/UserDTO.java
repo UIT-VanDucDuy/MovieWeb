@@ -1,4 +1,4 @@
-package com.example.webmovie.entity.DTO_entity;
+package com.example.webmovie.dto;
 
 import java.sql.Date;
 
