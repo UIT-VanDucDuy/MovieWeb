@@ -165,7 +165,10 @@
                         <label class="me-3 mb-1">Member Type: </label>
                         <select id="editUserMemberType" name="memberTypeId" class="form-select">
                             <c:forEach var="type" items="${memberTypeList}">
-                                <option value="${type.id}">
+                                <option value="${type.id}"
+                                        <c:if test="${type.id eq userInformation.memberTypeId}">
+                                            selected
+                                        </c:if>>
                                         ${type.name}
                                 </option>
                             </c:forEach>

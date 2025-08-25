@@ -3,8 +3,11 @@ package com.example.webmovie.controller;
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.MemberType;
+import com.example.webmovie.entity.Movie;
 import com.example.webmovie.entity.User;
+import com.example.webmovie.service.IMovieService;
 import com.example.webmovie.service.IUserService;
+import com.example.webmovie.service.MovieService;
 import com.example.webmovie.service.UserService;
 
 import javax.servlet.ServletException;
@@ -22,6 +25,7 @@ import java.sql.Date;
 @WebServlet(name = "AdminController", value = "/Admin")
 public class AdminController extends HttpServlet {
     IUserService userService = new UserService();
+    IMovieService movieService = new MovieService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -30,6 +34,7 @@ public class AdminController extends HttpServlet {
         List<String> genderList = Arrays.asList("Male", "Female");
         List<MemberType> memberTypeList = userService.getAllMemberType();
         List<UserDTO> userList;
+        List<Movie> movieList = movieService.getAll();
 
         if (action == null) {
             action = "";
@@ -52,6 +57,7 @@ public class AdminController extends HttpServlet {
         }
         userList = userService.getAll(1, 10);
         request.setAttribute("userList", userList);
+//        request.setAttribute("movieList", movieList);
         request.getRequestDispatcher("view/admin.jsp").forward(request, response);
     }
 

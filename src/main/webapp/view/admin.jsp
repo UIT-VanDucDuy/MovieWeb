@@ -46,7 +46,8 @@
             </ul>
         </div>
         <div class="col-lg-10">
-            <table id="table1" class="table  table-striped table-dark">
+
+            <table id="userAccountTable" class="table  table-striped table-dark">
                 <thead>
                 <tr>
                     <th scope="col">No.</th>
@@ -85,66 +86,50 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <table id="table2" class="table table-striped table-dark d-none">
+
+<%--            Bảng quản lý danh sách phim--%>
+            <table id="movieManagementTable" class="table table-striped table-dark d-none">
                 <thead>
                 <tr>
-                    <th scope="col">Account</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>@social</td>
-                </tr>
-                </tbody>
-            </table>
-            <table id="table3" class="table table-striped table-dark d-none">
-                <thead>
-                <tr>
+                    <th scope="col">No.</th>
                     <th scope="col">Movie</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Main Actors</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>@social</td>
-                </tr>
+                <c:forEach var="movie" items="${movieList}" varStatus="loop">
+                    <tr>
+                        <td>${loop.count}</td>
+                        <td>${movie.name}</td>
+                        <td>${movie.author}</td>
+                        <td>${movie.mainActor}</td>
+                        <td>${movie.description}</td>
+                        <td>
+                            <div class="d-flex gap-3 align-items-start">
+                                <form action="/Admin" method="get">
+                                    <input hidden="hidden" name="action" value="showEditMovieForm">
+                                    <input type="hidden" name="id" value="${movie.id}">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        Edit
+                                    </button>
+                                </form>
+                                <button onclick="deleteMovie(${movie.id})" type="button"
+                                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
+
+
+
             <table id="movieTypeTable" class="table  table-striped table-dark d-none">
                 <thead>
                 <tr>

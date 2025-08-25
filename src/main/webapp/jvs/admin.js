@@ -29,3 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function deleteUser(id) {
     document.getElementById("idUserDelete").value = id;
 }
+
+function deleteMovie(id) {
+    document.getElementById("idMovieDelete").value = id;
+}
