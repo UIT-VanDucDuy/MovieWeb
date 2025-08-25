@@ -17,3 +17,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+// private String name;
+// private boolean gender;
+// private Date birthday;
+// private String address;
+// private String phoneNumber;
+// private int accountId;
+// '${user.name}', '${user.gender}', '${user.birthday}', '${user.gender}', '${user.phoneNumber}'
+
+function deleteUser(id) {
+    document.getElementById("idUserDelete").value = id;
+}

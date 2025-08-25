@@ -27,7 +27,7 @@ public class AccountRepo implements IAccountRepo {
             }
 
         } catch (SQLException e) {
-            System.out.println("lỗi querry");
+            System.out.println("lỗi query");
         }
         return account;
     }
