@@ -1,4 +1,4 @@
-package com.example.webmovie.controller;
+package com.example.webmovie.controller.admin_page;
 
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.dto.UserDTO;
@@ -58,7 +58,7 @@ public class AdminController extends HttpServlet {
         userList = userService.getAll(1, 10);
         request.setAttribute("userList", userList);
 //        request.setAttribute("movieList", movieList);
-        request.getRequestDispatcher("view/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("view/admin_page/admin.jsp").forward(request, response);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class AdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Update failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("view/admin_page/admin.jsp").forward(req, resp);
                 break;
             case "deleteUser":
                 String idStr = req.getParameter("id");
@@ -112,7 +112,7 @@ public class AdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Delete failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("view/admin_page/admin.jsp").forward(req, resp);
                 break;
             case "addUser":
                 boolean isAddSuccess = addUser(req, resp);
@@ -125,7 +125,7 @@ public class AdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Added failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("view/admin_page/admin.jsp").forward(req, resp);
                 break;
             default:
                 resp.sendRedirect(req.getContextPath() + "/Admin");

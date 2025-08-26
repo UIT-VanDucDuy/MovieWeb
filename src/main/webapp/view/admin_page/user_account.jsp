@@ -26,7 +26,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="/Admin?action=addUser" method="post">
+            <form action="${pageContext.request.contextPath}/Admin?action=addUser" method="post">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col">
@@ -109,12 +109,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="/Admin/?action=updateUser" method="post">
+            <form action="${pageContext.request.contextPath}/Admin?action=updateUser" method="post">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col">
                             <div class="mb-3">
                                 <input hidden="hidden" name="id" id="editUserId">
+                                <input hidden="hidden" name="accountId" id="editAccountId">
                                 <input hidden="hidden" name="action" value="updateUser">
                                 <label class="me-3 mb-1">Full Name: </label>
                                 <input type="text" class="form-control" placeholder="Full name"
@@ -197,7 +198,7 @@
                 <h1 class="modal-title fs-5" id="deleteUserModalLabel">Delete User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/Admin?action=deleteUser" method="post">
+            <form action="${pageContext.request.contextPath}/Admin?action=deleteUser" method="post">
                 <div class="modal-body">
                     <p>Are you sure you want to delete this user?</p>
                     <input type="hidden" name="id" id="idUserDelete">
@@ -239,6 +240,7 @@
         document.getElementById("editUserPhoneNumber").value = "${userInformation.phoneNumber}";
         document.getElementById("editUserAddress").value = "${userInformation.address}";
         document.getElementById("editUserPassword").value = "${userInformation.password}";
+        document.getElementById("editAccountId").value = "${userInformation.accountId}";
         <%--document.getElementById("editUserMemberType").value = "${userInformation.memberTypeId}";--%>
 
         <c:choose>
@@ -271,7 +273,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var toastEl = document.getElementById('liveToast');
-            var toast = new bootstrap.Toast(toastEl, {delay: 3000}); // 3s
+            var toast = new bootstrap.Toast(toastEl, {delay: 3000});
             toast.show();
         });
     </script>
