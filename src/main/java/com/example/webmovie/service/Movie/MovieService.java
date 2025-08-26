@@ -1,10 +1,9 @@
-package com.example.webmovie.service;
+package com.example.webmovie.service.Movie;
 
 import com.example.webmovie.dto.MovieDto;
-import com.example.webmovie.entity.Movie;
 import com.example.webmovie.dto.MoviePage;
-import com.example.webmovie.repo.IMovieRepo;
-import com.example.webmovie.repo.MovieRepo;
+import com.example.webmovie.repo.Movie.IMovieRepo;
+import com.example.webmovie.repo.Movie.MovieRepo;
 
 import java.util.List;
 

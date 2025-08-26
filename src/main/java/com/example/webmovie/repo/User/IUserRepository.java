@@ -1,12 +1,11 @@
-package com.example.webmovie.service;
+package com.example.webmovie.repo.User;
 
 import com.example.webmovie.dto.UserDTO;
-import com.example.webmovie.entity.MemberType;
 import com.example.webmovie.entity.User;
 
 import java.util.List;
 
-public interface IUserService {
+public interface IUserRepository {
     public List<UserDTO> getAll(int page, int pageSize);
 
     public UserDTO findById(int id);
@@ -17,5 +16,6 @@ public interface IUserService {
 
     public boolean deleteUser(int id);
 
-    public List<MemberType> getAllMemberType();
+    UserDTO findUserByAccountId(int id);
 }
+

@@ -1,7 +1,6 @@
-package com.example.webmovie.repo;
+package com.example.webmovie.repo.Movie;
 
 import com.example.webmovie.dto.MovieDto;
-import com.example.webmovie.entity.Movie;
 
 import java.util.List;
 

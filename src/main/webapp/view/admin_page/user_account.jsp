@@ -25,7 +25,6 @@
                 <h1 class="modal-title fs-5" id="addUserModalLabel">Add User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <form action="/Admin?action=addUser" method="post">
                 <div class="modal-body">
                     <div class="row g-3">

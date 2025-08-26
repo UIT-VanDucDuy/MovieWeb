@@ -1,4 +1,4 @@
-package com.example.webmovie.repo;
+package com.example.webmovie.repo.Genre;
 
 import com.example.webmovie.entity.Genre;
 

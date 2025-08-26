@@ -1,4 +1,4 @@
-package com.example.webmovie.service;
+package com.example.webmovie.service.Movie;
 
 import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.dto.MoviePage;

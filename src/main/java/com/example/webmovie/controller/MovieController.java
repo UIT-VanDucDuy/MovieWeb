@@ -2,9 +2,8 @@ package com.example.webmovie.controller;
 
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.entity.Genre;
-import com.example.webmovie.repo.IGenreRepo;
-import com.example.webmovie.service.GenreService;
-import com.example.webmovie.service.IGenreService;
+import com.example.webmovie.service.Genre.GenreService;
+import com.example.webmovie.service.Genre.IGenreService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

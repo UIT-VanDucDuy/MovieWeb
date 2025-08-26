@@ -1,9 +1,9 @@
-package com.example.webmovie.service;
+package com.example.webmovie.service.User;
 
 import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.MemberType;
 import com.example.webmovie.entity.User;
-import com.example.webmovie.repo.UserRepository;
+import com.example.webmovie.repo.User.UserRepository;
 
 import java.util.List;
 
@@ -37,5 +37,10 @@ public class UserService implements IUserService {
 
     public List<MemberType> getAllMemberType() {
         return userRepository.getAllMemberType();
+    }
+
+    @Override
+    public UserDTO findUserByAccountId(int accId) {
+        return userRepository.findUserByAccountId(accId);
     }
 }

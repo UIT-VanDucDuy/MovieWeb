@@ -4,8 +4,8 @@ import com.example.webmovie.entity.Account;
 import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.MemberType;
 import com.example.webmovie.entity.User;
-import com.example.webmovie.service.IUserService;
-import com.example.webmovie.service.UserService;
+import com.example.webmovie.service.User.IUserService;
+import com.example.webmovie.service.User.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

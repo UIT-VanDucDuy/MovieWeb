@@ -51,10 +51,10 @@
                 </c:if>
                 <c:if test="${sessionScope.account == null}">
                     <li class="nav-item d-sm-none">
-                        <a class="nav-link " data-bs-toggle="modal" data-bs-target="#loginModal" >Subcsribe</a>
+                        <a class="nav-link " data-bs-toggle="modal" data-bs-target="#loginModal" >Login</a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.account != null}">
+                <c:if test="${sessionScope.account != null && sessionScope.account.memberTypeId != 0 }">
                     <li class="nav-item d-sm-none">
                         <a class="nav-link " data-bs-toggle="modal" data-bs-target="#subscribeModal" >Subcsribe</a>
                     </li>
@@ -79,13 +79,20 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <div class="subscribe-btn d-none d-lg-flex">
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#subscribeModal">
-                            <i class="fa-solid fa-wallet"></i>  Subscribe
-                        </button>
-                    </div>
+                    <c:if test="${sessionScope.account.memberTypeId != 0 }">
+                        <div class="subscribe-btn d-none d-lg-flex">
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#subscribeModal">
+                                <i class="fa-solid fa-wallet"></i>  Subscribe
+                            </button>
+                        </div>
+                    </c:if>
                     <div class="account-info d-none d-lg-flex ">
-                        <p> Hello, ${sessionScope.account.username}</p>
+                        <c:if test="${not empty User.name}">
+                            <p> Hello, ${User.name}</p>
+                        </c:if>
+                        <c:if test="${empty User.name && not empty sessionScope.account.username}">
+                            <p> Hello, ${sessionScope.account.username}</p>
+                        </c:if>
                         <p> MemType: ${sessionScope.account.memberTypeId}</p>
                     </div>
                     <a href="/LogOut">
@@ -139,8 +146,10 @@
             <div class="modal-body justify-content-center align-items-center d-flex  ">
                 <form action="/Home?action=signUp" class="form" method="post" >
                     <span class="input-span">
-                        <label for="usernameSignUp" class="label">Email</label>
+                        <label for="usernameSignUp" class="label">Username</label>
                         <input type="text" name="username" id="usernameSignUp"/>
+                        <label for="email" class="label">Email</label>
+                        <input type="text" name="email" id="email"/>
                         <label for="password1" class="label">Password</label>
                         <input type="password" name="password1" id="password1"/>
                         <label for="password2" class="label">Confirm Password</label>
@@ -180,7 +189,7 @@
                             <input type="radio" id="gold" name="subscribe" value="3">
                             <label for="gold" class="subject">
                                 <span>Gold Member</span>
-                                <span>200$/year</span>
+                                <span>300$/year</span>
                             </label>
                         </div>
                     </nav>

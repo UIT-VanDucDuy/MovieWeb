@@ -1,8 +1,9 @@
-package com.example.webmovie.repo;
+package com.example.webmovie.repo.User;
 
 import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.MemberType;
 import com.example.webmovie.entity.User;
+import com.example.webmovie.repo.BaseRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,7 @@ public class UserRepository implements IUserRepository {
     private final String ADD_ACCOUNT = "INSERT INTO account (Username, Password, Email, MemberTypeId) VALUES (?, ?, ?,?);";
     private final String ADD_USER = "INSERT INTO user (Name, Gender, Birthday, PhoneNumber, Address, AccountID) VALUES (?, ?, ?, ?, ?, ?);";
     private final String GET_DISTINCT_MEMBER_TYPES = "SELECT DISTINCT * FROM membertype";
+    private final String FIND_BY_ACCOUNT_ID = "SELECT u.Id, u.Name, u.Gender, u.Birthday, u.PhoneNumber, u.Address, u.AccountID, a.Username, a.Email, a.MemberTypeId, a.CreatedAt FROM user u JOIN account a ON u.AccountID = a.Id WHERE a.Id = ?;";
 
     @Override
     public List<UserDTO> getAll(int page, int pageSize) {
@@ -258,6 +260,33 @@ public class UserRepository implements IUserRepository {
         }
     }
 
+    @Override
+    public UserDTO findUserByAccountId(int accId) {
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ACCOUNT_ID)) {
+            preparedStatement.setInt(1, accId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("Name");
+                boolean gender = rs.getBoolean("Gender");
+                Date birthday = rs.getDate("Birthday");
+                String address = rs.getString("Address");
+                String phoneNumber = rs.getString("PhoneNumber");
+                int accountId = rs.getInt("AccountID");
+                String username = rs.getString("Username");
+                String email = rs.getString("Email");
+                int memberTypeId = rs.getInt("MemberTypeId");
+
+                UserDTO user = new UserDTO(id, name, email, birthday, phoneNumber, address, gender, username, accountId, memberTypeId);
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<MemberType> getAllMemberType() {
         List<MemberType> memberTypeList = new ArrayList<>();
         try (Connection connection = BaseRepository.getConnectDB();
@@ -274,4 +303,6 @@ public class UserRepository implements IUserRepository {
         }
         return memberTypeList;
     }
+
+
 }

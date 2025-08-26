@@ -1,7 +1,8 @@
-package com.example.webmovie.repo;
+package com.example.webmovie.repo.Movie;
 
 import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.entity.Movie;
+import com.example.webmovie.repo.BaseRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
