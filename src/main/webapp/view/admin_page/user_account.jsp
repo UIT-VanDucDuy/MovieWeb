@@ -2,20 +2,54 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <script src="../jvs/admin.js"></script>
-</head>
-<body>
+<div class="mb-3 text-end">
+    <form action="/Admin" method="get">
+        <input type="hidden" name="action" value="showAddForm">
+        <button type="submit" class="btn btn-primary btn-md" data-bs-toggle="modal"
+                data-bs-target="#addUserModal">
+            + Create User
+        </button>
+    </form>
+</div>
+
+<table id="userAccountTable" class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>User Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="user" items="${userList}" varStatus="loop">
+        <tr>
+            <td>${loop.count}</td>
+            <td>${user.name}</td>
+            <td>${user.username}</td>
+            <td>${user.phoneNumber}</td>
+            <td>${user.email}</td>
+            <td>
+                <div class="d-flex gap-3 align-items-start">
+                    <form action="/Admin" method="get">
+                        <input hidden="hidden" name="action" value="showEditForm">
+                        <input type="hidden" name="id" value="${user.id}">
+                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                    </form>
+                    <button onclick="deleteUser(${user.id})" type="button"
+                            class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#deleteUserModal">
+                        Delete
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
 <!-- addUserModal -->
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel"
      aria-hidden="true">
@@ -278,8 +312,4 @@
         });
     </script>
 </c:if>
-
-
-</body>
-</html>
 

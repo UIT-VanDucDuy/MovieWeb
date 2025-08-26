@@ -20,143 +20,31 @@
 <%--    <c:redirect url="/Home"></c:redirect>--%>
 <%--</c:if>--%>
 <c:import url="/layout/navbar.jsp"></c:import>
-<c:import url="/view/admin_page/user_account.jsp"></c:import>
+
 <div class="main mt-4 ">
-    <div class="d-flex justify-content-between align-items-center mb-3 mt-2">
-        <div>
-            <h1 class="title">Management Page</h1>
-        </div>
-        <div>
-            <form action="/Admin" method="get">
-                <input type="hidden" name="action" value="showAddForm">
-                <button type="submit" class="btn btn-primary btn-md" data-bs-toggle="modal"
-                        data-bs-target="#addUserModal">
-                    + Create
-                </button>
-            </form>
-        </div>
+    <div class="mb-3 mt-2">
+        <h1 class="title">User Management</h1>
     </div>
+
 
     <div class="row">
         <div class="col-lg-2">
-            <ul class="list-group" id="menu">
-                <li class="list-group-item active" data-table="table1">User Account</li>
-                <li class="list-group-item" data-table="table3">Movies</li>
+            <ul class="list-group pt-5" id="menu">
+                <li class="list-group-item active" data-table="userAccountTable">User Account</li>
+                <li class="list-group-item" data-table="movieManagementTable">Movies</li>
                 <li class="list-group-item" data-table="movieTypeTable">Movie Types</li>
             </ul>
         </div>
         <div class="col-lg-10">
-
-            <table id="userAccountTable" class="table  table-striped table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="user" items="${userList}" varStatus="loop">
-                    <tr>
-                        <td>${loop.count}</td>
-                        <td>${user.name}</td>
-                        <td>${user.username}</td>
-                        <td>${user.phoneNumber}</td>
-                        <td>${user.email}</td>
-                        <td>
-                            <div class="d-flex gap-3 align-items-start">
-                                <form action="/Admin" method="get">
-                                    <input hidden="hidden" name="action" value="showEditForm">
-                                    <input type="hidden" name="id" value="${user.id}">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        Edit
-                                    </button>
-                                </form>
-                                <button onclick="deleteUser(${user.id})" type="button"
-                                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deleteUserModal">
-                                    Delete
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-
-            <%--            Bảng quản lý danh sách phim--%>
-            <table id="movieManagementTable" class="table table-striped table-dark d-none">
-                <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Movie</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Main Actors</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="movie" items="${movieList}" varStatus="loop">
-                    <tr>
-                        <td>${loop.count}</td>
-                        <td>${movie.name}</td>
-                        <td>${movie.author}</td>
-                        <td>${movie.mainActor}</td>
-                        <td>${movie.description}</td>
-                        <td>
-                            <div class="d-flex gap-3 align-items-start">
-                                <form action="/Admin" method="get">
-                                    <input hidden="hidden" name="action" value="showEditMovieForm">
-                                    <input type="hidden" name="id" value="${movie.id}">
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        Edit
-                                    </button>
-                                </form>
-                                <button onclick="deleteMovie(${movie.id})" type="button"
-                                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deleteUserModal">
-                                    Delete
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-
-
-            <table id="movieTypeTable" class="table  table-striped table-dark d-none">
-                <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Movie Types</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Action Film</td>
-
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Adventure</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Comedy</td>
-                </tr>
-                </tbody>
-            </table>
+            <c:import url="/view/admin_page/user_account.jsp"></c:import>
+            <c:import url="/view/admin_page/movie_management.jsp"></c:import>
+            <%--            <c:import url="/view/admin_page/movie_type.jsp"></c:import>--%>
         </div>
     </div>
 </div>
 
 
+<%--<c:import url="/layout/footer.jsp"></c:import>--%>
 </body>
 </html>
 

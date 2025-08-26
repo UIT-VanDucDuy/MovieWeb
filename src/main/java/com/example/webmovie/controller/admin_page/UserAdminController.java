@@ -23,9 +23,8 @@ import java.util.List;
 import java.sql.Date;
 
 @WebServlet(name = "AdminController", value = "/Admin")
-public class AdminController extends HttpServlet {
+public class UserAdminController extends HttpServlet {
     IUserService userService = new UserService();
-    IMovieService movieService = new MovieService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -34,7 +33,6 @@ public class AdminController extends HttpServlet {
         List<String> genderList = Arrays.asList("Male", "Female");
         List<MemberType> memberTypeList = userService.getAllMemberType();
         List<UserDTO> userList;
-        List<Movie> movieList = movieService.getAll();
 
         if (action == null) {
             action = "";
@@ -57,7 +55,6 @@ public class AdminController extends HttpServlet {
         }
         userList = userService.getAll(1, 10);
         request.setAttribute("userList", userList);
-//        request.setAttribute("movieList", movieList);
         request.getRequestDispatcher("view/admin_page/admin.jsp").forward(request, response);
     }
 
