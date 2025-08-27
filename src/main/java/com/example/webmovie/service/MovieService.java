@@ -40,4 +40,9 @@ public class MovieService implements IMovieService {
     public List<Movie> getMoviesByGenre(String genre) {
         return movieRepo.getByTitleAndGenre("",genre,10, 1);
     }
+
+    @Override
+    public List<Movie> getAll() {
+        return movieRepo.getAll();
+    }
 }

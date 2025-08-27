@@ -8,4 +8,5 @@ import java.util.List;
 public interface IMovieService {
     MoviePage getMovies(String title,String genre,int pageSize, int page);
     List<Movie> getMoviesByGenre(String genre);
+    List<Movie> getAll();
 }
