@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.sql.Date;
 
-@WebServlet(name = "AdminController", value = "/Admin")
+@WebServlet(name = "AdminController", value = "/admin/users")
 public class UserAdminController extends HttpServlet {
     IUserService userService = new UserService();
 
@@ -55,7 +55,7 @@ public class UserAdminController extends HttpServlet {
         }
         userList = userService.getAll(1, 10);
         request.setAttribute("userList", userList);
-        request.getRequestDispatcher("view/admin_page/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(request, response);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class UserAdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Update failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin_page/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
             case "deleteUser":
                 String idStr = req.getParameter("id");
@@ -109,7 +109,7 @@ public class UserAdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Delete failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin_page/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
             case "addUser":
                 boolean isAddSuccess = addUser(req, resp);
@@ -122,7 +122,7 @@ public class UserAdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Added failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin_page/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
             default:
                 resp.sendRedirect(req.getContextPath() + "/Admin");

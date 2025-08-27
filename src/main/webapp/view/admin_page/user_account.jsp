@@ -1,54 +1,84 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<c:set var="cpath" value="${pageContext.request.contextPath}" />
+<c:set var="uri" value="${pageContext.request.requestURI}" />
 
-<div class="mb-3 text-end">
-    <form action="/Admin" method="get">
-        <input type="hidden" name="action" value="showAddForm">
-        <button type="submit" class="btn btn-primary btn-md" data-bs-toggle="modal"
-                data-bs-target="#addUserModal">
-            + Create User
-        </button>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="${cpath}/css/home.css">
+    <link rel="stylesheet" href="${cpath}/css/admin.css">
+    <link rel="stylesheet" href="${cpath}/css/navbar.css">
+    <script src="${cpath}/jvs/admin.js"></script>
+</head>
+<body>
+<c:import url="/layout/navbar.jsp"></c:import>
+
+<div class="main mt-4">
+    <div class="mb-3 mt-2">
+        <h1 class="title">User Management</h1>
+    </div>
+
+    <div class="row">
+        <c:import url="admin.jsp"></c:import>
+
+        <div class="col-lg-10">
+            <div class="mb-3 text-end">
+                <form action="/admin/users" method="get">
+                    <input type="hidden" name="action" value="showAddForm">
+                    <button type="submit" class="btn btn-primary btn-md" >
+                        + Create User
+                    </button>
+                </form>
+            </div>
+
+            <table id="userAccountTable" class="table table-striped table-dark">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>User Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="user" items="${userList}" varStatus="loop">
+                    <tr>
+                        <td>${loop.count}</td>
+                        <td>${user.name}</td>
+                        <td>${user.username}</td>
+                        <td>${user.phoneNumber}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <div class="d-flex gap-3 align-items-start">
+                                <form action="/admin/users" method="get">
+                                    <input hidden="hidden" name="action" value="showEditForm">
+                                    <input type="hidden" name="id" value="${user.id}">
+                                    <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                </form>
+                                <button onclick="deleteUser(${user.id})" type="button"
+                                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<table id="userAccountTable" class="table table-striped table-dark">
-    <thead>
-    <tr>
-        <th>No.</th>
-        <th>Name</th>
-        <th>User Name</th>
-        <th>Phone Number</th>
-        <th>Email</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="user" items="${userList}" varStatus="loop">
-        <tr>
-            <td>${loop.count}</td>
-            <td>${user.name}</td>
-            <td>${user.username}</td>
-            <td>${user.phoneNumber}</td>
-            <td>${user.email}</td>
-            <td>
-                <div class="d-flex gap-3 align-items-start">
-                    <form action="/Admin" method="get">
-                        <input hidden="hidden" name="action" value="showEditForm">
-                        <input type="hidden" name="id" value="${user.id}">
-                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                    </form>
-                    <button onclick="deleteUser(${user.id})" type="button"
-                            class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#deleteUserModal">
-                        Delete
-                    </button>
-                </div>
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
 
 <!-- addUserModal -->
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel"
@@ -60,7 +90,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="${pageContext.request.contextPath}/Admin?action=addUser" method="post">
+            <form action="${pageContext.request.contextPath}/admin/users?action=addUser" method="post">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col">
@@ -143,7 +173,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="${pageContext.request.contextPath}/Admin?action=updateUser" method="post">
+            <form action="${pageContext.request.contextPath}/admin/users?action=updateUser" method="post">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col">
@@ -232,7 +262,7 @@
                 <h1 class="modal-title fs-5" id="deleteUserModalLabel">Delete User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="${pageContext.request.contextPath}/Admin?action=deleteUser" method="post">
+            <form action="${pageContext.request.contextPath}/admin/users?action=deleteUser" method="post">
                 <div class="modal-body">
                     <p>Are you sure you want to delete this user?</p>
                     <input type="hidden" name="id" id="idUserDelete">
@@ -312,4 +342,5 @@
         });
     </script>
 </c:if>
-
+</body>
+</html>

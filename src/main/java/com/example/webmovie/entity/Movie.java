@@ -53,5 +53,77 @@ public class Movie {
     public String getName() {
         return name;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMainActor() {
+        return mainActor;
+    }
+
+    public void setMainActor(String mainActor) {
+        this.mainActor = mainActor;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public boolean isSeries() {
+        return isSeries;
+    }
+
+    public void setSeries(boolean series) {
+        isSeries = series;
+    }
+
+    public int getMemberTypeId() {
+        return memberTypeId;
+    }
+
+    public void setMemberTypeId(int memberTypeId) {
+        this.memberTypeId = memberTypeId;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
+    public String getBannerPath() {
+        return bannerPath;
+    }
+
+    public void setBannerPath(String bannerPath) {
+        this.bannerPath = bannerPath;
+    }
 }
 
