@@ -2,6 +2,7 @@ package com.example.webmovie.service.Movie;
 
 import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.dto.MoviePage;
+import com.example.webmovie.entity.Movie;
 import com.example.webmovie.repo.Movie.IMovieRepo;
 import com.example.webmovie.repo.Movie.MovieRepo;
 
@@ -43,6 +44,6 @@ public class MovieService implements IMovieService {
 
     @Override
     public List<Movie> getAll() {
-        return movieRepo.getAll();
+        return List.of();
     }
 }

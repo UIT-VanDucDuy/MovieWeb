@@ -27,6 +27,7 @@ public class UserDTO {
         this.memberTypeId = memberTypeId;
     }
 
+
     public UserDTO(int id, String name, String email, Date birthday, String phoneNumber, String address, boolean gender, String username, int memberTypeId) {
         this.id = id;
         this.name = name;
