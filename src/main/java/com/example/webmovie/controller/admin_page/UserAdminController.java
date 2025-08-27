@@ -1,9 +1,14 @@
-package com.example.webmovie.controller;
+package com.example.webmovie.controller.admin_page;
 
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.MemberType;
+import com.example.webmovie.entity.Movie;
 import com.example.webmovie.entity.User;
+import com.example.webmovie.service.IMovieService;
+import com.example.webmovie.service.IUserService;
+import com.example.webmovie.service.MovieService;
+import com.example.webmovie.service.UserService;
 import com.example.webmovie.service.User.IUserService;
 import com.example.webmovie.service.User.UserService;
 
@@ -52,7 +57,7 @@ public class AdminController extends HttpServlet {
         }
         userList = userService.getAll(1, 10);
         request.setAttribute("userList", userList);
-        request.getRequestDispatcher("view/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(request, response);
     }
 
     @Override
@@ -91,7 +96,7 @@ public class AdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Update failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
             case "deleteUser":
                 String idStr = req.getParameter("id");
@@ -106,7 +111,7 @@ public class AdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Delete failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
             case "addUser":
                 boolean isAddSuccess = addUser(req, resp);
@@ -119,7 +124,7 @@ public class AdminController extends HttpServlet {
                     req.setAttribute("toastMessage", "Added failed! User not found or invalid ID.");
                     req.setAttribute("toastType", "error");
                 }
-                req.getRequestDispatcher("view/admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
             default:
                 resp.sendRedirect(req.getContextPath() + "/Admin");
@@ -154,8 +159,9 @@ public class AdminController extends HttpServlet {
         String userAddress = req.getParameter("address");
         boolean userGender = Boolean.parseBoolean(req.getParameter("gender"));
         String userUsername = req.getParameter("username");
+        String userPassword = req.getParameter("password");
         int userMemberTypeId = Integer.parseInt(req.getParameter("memberTypeId"));
-        UserDTO userDTO = new UserDTO(userName, userEmail, userBirthday, userPhoneNumber, userAddress, userGender, userUsername, userMemberTypeId);
+        UserDTO userDTO = new UserDTO(userName, userEmail, userBirthday, userPhoneNumber, userAddress, userGender, userUsername, userPassword, userMemberTypeId);
         return userService.addUser(userDTO);
     }
 

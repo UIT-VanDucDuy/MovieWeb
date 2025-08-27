@@ -1,4 +1,4 @@
-package com.example.webmovie.repo.Movie;
+package com.example.webmovie.repo;
 
 import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.entity.Movie;
