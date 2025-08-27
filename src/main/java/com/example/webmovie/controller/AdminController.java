@@ -154,9 +154,8 @@ public class AdminController extends HttpServlet {
         String userAddress = req.getParameter("address");
         boolean userGender = Boolean.parseBoolean(req.getParameter("gender"));
         String userUsername = req.getParameter("username");
-        String userPassword = req.getParameter("password");
         int userMemberTypeId = Integer.parseInt(req.getParameter("memberTypeId"));
-        UserDTO userDTO = new UserDTO(userName, userEmail, userBirthday, userPhoneNumber, userAddress, userGender, userUsername, userPassword, userMemberTypeId);
+        UserDTO userDTO = new UserDTO(userName, userEmail, userBirthday, userPhoneNumber, userAddress, userGender, userUsername, userMemberTypeId);
         return userService.addUser(userDTO);
     }
 

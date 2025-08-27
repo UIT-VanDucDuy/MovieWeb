@@ -336,3 +336,27 @@ body{
     text-shadow: 1px 1px 4px black;
     background: red;
 }
+
+.radio-input{
+    width: fit-content;
+    border: 1px solid #666;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.radio-input  input{ display: none; }
+.radio-input  label{
+    font-family: sans-serif;
+    padding: 10px 16px;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.radio-input label:last-of-type{ border-right: 0; }
+.radio-input label:hover{
+    background: #eee;
+}
+.radio-input input:checked + label{
+    background: #becbff;
+}

@@ -88,10 +88,11 @@
                     </c:if>
                     <div class="account-info d-none d-lg-flex ">
                         <c:if test="${not empty User.name}">
-                            <p> Hello, ${User.name}</p>
+                            <p> Hello,<a href="/User">${User.name}</a> </p>
                         </c:if>
                         <c:if test="${empty User.name && not empty sessionScope.account.username}">
-                            <p> Hello, ${sessionScope.account.username}</p>
+                            <p> Hello, <a href="/User">${sessionScope.account.username}</a> </p>
+
                         </c:if>
                         <p> MemType: ${sessionScope.account.memberTypeId}</p>
                     </div>

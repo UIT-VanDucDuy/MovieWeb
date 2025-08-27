@@ -24,7 +24,11 @@ public class UserRepository implements IUserRepository {
     private final String ADD_ACCOUNT = "INSERT INTO account (Username, Password, Email, MemberTypeId) VALUES (?, ?, ?,?);";
     private final String ADD_USER = "INSERT INTO user (Name, Gender, Birthday, PhoneNumber, Address, AccountID) VALUES (?, ?, ?, ?, ?, ?);";
     private final String GET_DISTINCT_MEMBER_TYPES = "SELECT DISTINCT * FROM membertype";
-    private final String FIND_BY_ACCOUNT_ID = "SELECT u.Id, u.Name, u.Gender, u.Birthday, u.PhoneNumber, u.Address, u.AccountID, a.Username, a.Email, a.MemberTypeId, a.CreatedAt FROM user u JOIN account a ON u.AccountID = a.Id WHERE a.Id = ?;";
+    private final String FIND_BY_ACCOUNT_ID = "SELECT u.Id, u.Name, u.Gender, u.Birthday, u.PhoneNumber, u.Address, u.AccountID, a.Username, a.Email, a.MemberTypeId, a.CreatedAt, w.money " +
+            "FROM user u " +
+            "JOIN account a ON u.AccountID = a.Id " +
+            "Join wallet w on u.WalletId = w.id " +
+            "WHERE a.Id = ?;";
 
     @Override
     public List<UserDTO> getAll(int page, int pageSize) {
@@ -100,7 +104,6 @@ public class UserRepository implements IUserRepository {
             int accountId = -1;
             try (PreparedStatement psAccount = connection.prepareStatement(ADD_ACCOUNT, java.sql.Statement.RETURN_GENERATED_KEYS)) {
                 psAccount.setString(1, user.getUsername());
-                psAccount.setString(2, user.getPassword());
                 psAccount.setString(3, user.getEmail());
                 psAccount.setInt(4, user.getMemberTypeId());
 
@@ -277,8 +280,9 @@ public class UserRepository implements IUserRepository {
                 String username = rs.getString("Username");
                 String email = rs.getString("Email");
                 int memberTypeId = rs.getInt("MemberTypeId");
+                double money = rs.getDouble("Money");
 
-                UserDTO user = new UserDTO(id, name, email, birthday, phoneNumber, address, gender, username, accountId, memberTypeId);
+                UserDTO user = new UserDTO(id, name, email, birthday, phoneNumber, address, gender, username, accountId, memberTypeId,money);
                 return user;
             }
         } catch (SQLException e) {

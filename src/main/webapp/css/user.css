@@ -1,0 +1,82 @@
+
+.profile-img {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/*.profile-img .change-photo {*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*    text-align: center;*/
+/*    background: rgba(0,0,0,0.6);*/
+/*    color: #fff;*/
+/*    font-size: 14px;*/
+/*    padding: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+.nav-tabs .nav-link.active {
+    border-bottom: 2px solid #DAA520;
+    font-weight: bold;
+}
+.side-info h6 {
+    font-weight: bold;
+    margin-top: 20px;
+}
+.side-info ul {
+    list-style: none;
+    padding-left: 0;
+}
+.side-info ul li {
+    margin: 8px 0;
+    color: #DAA520;
+    cursor: pointer;
+}
+
+.container.main{
+    padding-top: 5%;
+    padding-left: 2%;
+    border-left: 3px ;
+    border-right: 3px ;
+    background-color: black;
+    min-width: 100%;
+    height: 87vh;
+}
+.container{
+    width: 100%;
+}
+.main-content{
+    width: 100%;
+}
+
+
+.movie-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.movie-img {
+    width: 6em;
+    height: 7.5em;
+    border-radius: 6px;
+    background: #e5e5e5;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+.movie-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+.movie-author {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+}
