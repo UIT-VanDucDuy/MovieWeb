@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="/Home">
-            <img src="file/image/Covencinema.png" alt="Spooky Movie" class="logo">
+            <img src="https://firebasestorage.googleapis.com/v0/b/nt208-28e2a.appspot.com/o/image%2FCovencinema1.png?alt=media&token=ea465101-0093-4d73-ac07-d8e4472e6f2a" alt="Conven Cinema" class="logo">
         </a>
 
         <!-- Toggle button cho mobile -->
@@ -46,7 +46,7 @@
 
                 <c:if test="${sessionScope.account.memberTypeId == 0}">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Admin">Admin</a>
+                        <a class="nav-link" href="/admin/movies">Admin</a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.account == null}">

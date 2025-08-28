@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <c:set var="cpath" value="${pageContext.request.contextPath}" />
@@ -11,9 +12,9 @@
     <title>User Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="${cpath}/css/home.css">
+    <link rel="stylesheet" href="${cpath}/css/home1.css">
     <link rel="stylesheet" href="${cpath}/css/admin.css">
-    <link rel="stylesheet" href="${cpath}/css/navbar.css">
+    <link rel="stylesheet" href="${cpath}/css/navbar1.css">
     <script src="${cpath}/jvs/admin.js"></script>
 </head>
 <body>
@@ -302,7 +303,6 @@
         document.getElementById("editUserUsername").value = "${userInformation.username}";
         document.getElementById("editUserPhoneNumber").value = "${userInformation.phoneNumber}";
         document.getElementById("editUserAddress").value = "${userInformation.address}";
-        document.getElementById("editUserPassword").value = "${userInformation.password}";
         document.getElementById("editAccountId").value = "${userInformation.accountId}";
         <%--document.getElementById("editUserMemberType").value = "${userInformation.memberTypeId}";--%>
 
