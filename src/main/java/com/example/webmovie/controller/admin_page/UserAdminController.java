@@ -3,12 +3,10 @@ package com.example.webmovie.controller.admin_page;
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.MemberType;
-import com.example.webmovie.entity.Movie;
 import com.example.webmovie.entity.User;
-import com.example.webmovie.service.IMovieService;
-import com.example.webmovie.service.IUserService;
-import com.example.webmovie.service.MovieService;
-import com.example.webmovie.service.UserService;
+import com.example.webmovie.service.User.IUserService;
+import com.example.webmovie.service.User.UserService;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +22,7 @@ import java.sql.Date;
 
 @WebServlet(name = "AdminController", value = "/admin/users")
 public class UserAdminController extends HttpServlet {
-    IUserService userService = new UserService();
+    private IUserService userService = new UserService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -157,9 +155,8 @@ public class UserAdminController extends HttpServlet {
         String userAddress = req.getParameter("address");
         boolean userGender = Boolean.parseBoolean(req.getParameter("gender"));
         String userUsername = req.getParameter("username");
-        String userPassword = req.getParameter("password");
         int userMemberTypeId = Integer.parseInt(req.getParameter("memberTypeId"));
-        UserDTO userDTO = new UserDTO(userName, userEmail, userBirthday, userPhoneNumber, userAddress, userGender, userUsername, userPassword, userMemberTypeId);
+        UserDTO userDTO = new UserDTO(userName, userEmail, userBirthday, userPhoneNumber, userAddress, userGender, userUsername, userMemberTypeId);
         return userService.addUser(userDTO);
     }
 

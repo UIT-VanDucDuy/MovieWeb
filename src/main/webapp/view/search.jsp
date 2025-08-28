@@ -11,10 +11,9 @@
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jvs/home.js"></script>
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/search.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-
+    <link rel="stylesheet" href="/css/home1.css">
+    <link rel="stylesheet" href="../css/navbar1.css">
+    <link rel="stylesheet" href="../css/search1.css">
 </head>
 
 <body>
@@ -171,23 +170,23 @@
 </div>
 <div class="content">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-3 ">
             <form action="/Search" method="Post" class="search-form">
-                <input type="text" name="search" class="search" placeholder="Search..."/>
+                <input type="text" name="title" class="search" placeholder="Search..."/>
+
+                <div class="genre-search row bg-white">
+                    <c:forEach var="genre" items="${GenreList}" varStatus="status">
+                        <input type="radio" id="${genre.genreName}" name="genre" value="${genre.genreName}"/>
+                        <label for="${genre.genreName}">${genre.genreName}</label>
+                    </c:forEach>
+                </div>
             </form>
-<%--            <ul class="list-group">--%>
-<%--                <li class="list-group-item">An item</li>--%>
-<%--                <li class="list-group-item">A second item</li>--%>
-<%--                <li class="list-group-item">A third item</li>--%>
-<%--                <li class="list-group-item">A fourth item</li>--%>
-<%--                <li class="list-group-item">And a fifth one</li>--%>
-<%--            </ul>--%>
         </div>
         <div class="col-lg-9">
             <div class="search-list  d-flex">
                 <c:forEach var="movie" items="${movieList}" varStatus="status">
                     <div class="card">
-                        <a href="/Movie">
+                        <a >
                             <img src="${movie.getPosterPath()}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">

@@ -18,6 +18,12 @@ public class Account {
         this.password = password;
         this.memberTypeId = memberTypeId;
     }
+    public Account( String username,String email, String password, int memberTypeId) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.memberTypeId = memberTypeId;
+    }
 
     public String getUsername() {
         return username;
@@ -33,5 +39,12 @@ public class Account {
 
     public int getMemberTypeId() {
         return memberTypeId;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setMemberTypeId(int memberTypeId) {
+        this.memberTypeId = memberTypeId;
     }
 }

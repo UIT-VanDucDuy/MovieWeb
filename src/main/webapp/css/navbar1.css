@@ -218,3 +218,41 @@
 /*    max-width: 100%;*/
 /*    max-height: 100%;*/
 /*}*/
+.subscribe-input{
+    width: fit-content;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.subscribe-input input{
+    display: none; }
+.subscribe-input label{
+    background: #eee;
+    font-family: sans-serif;
+    padding: 10px 16px;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.subscribe-input label:last-of-type{ border-right: 0; }
+.subscribe-input label:hover{
+    background: #bababa;
+}
+.subscribe-input input:checked + label{
+    background: #ffc52e;
+}
+.subject{
+    border: 1px solid #666;
+    border-radius: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.subject span{
+    font-weight: bold;
+    color: #111111;
+}
+.box {
+    margin-top: 10px;
+    padding: 0;
+}

@@ -1,7 +1,7 @@
-package com.example.webmovie.repo;
+package com.example.webmovie.repo.Genre;
 
 import com.example.webmovie.entity.Genre;
-import com.example.webmovie.entity.Movie;
+import com.example.webmovie.repo.BaseRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenreRepo implements  IGenreRepo {
+public class GenreRepo implements IGenreRepo {
     private final String GET_ALL_GENRE = "Select * From Genre";
     @Override
     public List<Genre> getAll() {

@@ -1,8 +1,8 @@
-package com.example.webmovie.service;
+package com.example.webmovie.service.Genre;
 
 import com.example.webmovie.entity.Genre;
-import com.example.webmovie.repo.GenreRepo;
-import com.example.webmovie.repo.IGenreRepo;
+import com.example.webmovie.repo.Genre.GenreRepo;
+import com.example.webmovie.repo.Genre.IGenreRepo;
 
 import java.util.List;
 

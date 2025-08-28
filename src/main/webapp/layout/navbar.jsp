@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="/Home">
-            <img src="file/image/Covencinema.png" alt="Spooky Movie" class="logo">
+            <img src="https://firebasestorage.googleapis.com/v0/b/nt208-28e2a.appspot.com/o/image%2FCovencinema1.png?alt=media&token=ea465101-0093-4d73-ac07-d8e4472e6f2a" alt="Conven Cinema" class="logo">
         </a>
 
         <!-- Toggle button cho mobile -->
@@ -46,15 +46,15 @@
 
                 <c:if test="${sessionScope.account.memberTypeId == 0}">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Admin">Admin</a>
+                        <a class="nav-link" href="/admin/movies">Admin</a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.account == null}">
                     <li class="nav-item d-sm-none">
-                        <a class="nav-link " data-bs-toggle="modal" data-bs-target="#loginModal" >Subcsribe</a>
+                        <a class="nav-link " data-bs-toggle="modal" data-bs-target="#loginModal" >Login</a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.account != null}">
+                <c:if test="${sessionScope.account != null && sessionScope.account.memberTypeId != 0 }">
                     <li class="nav-item d-sm-none">
                         <a class="nav-link " data-bs-toggle="modal" data-bs-target="#subscribeModal" >Subcsribe</a>
                     </li>
@@ -63,7 +63,7 @@
                 <li class="nav-item search-container">
                     <a class="nav-link search-button" href="#">Search</a>
                     <form action="/Search" method="Post">
-                        <input type="text" name="search" class="search-input" placeholder="Search..."/>
+                        <input type="text" name="title" class="search-input" placeholder="Search..."/>
                     </form>
                 </li>
             </ul>
@@ -79,18 +79,26 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <div class="subscribe-btn d-none d-lg-flex">
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#subscribeModal">
-                            <i class="fa-solid fa-wallet"></i>  Subscribe
-                        </button>
-                    </div>
+                    <c:if test="${sessionScope.account.memberTypeId != 0 }">
+                        <div class="subscribe-btn d-none d-lg-flex">
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#subscribeModal">
+                                <i class="fa-solid fa-wallet"></i>  Subscribe
+                            </button>
+                        </div>
+                    </c:if>
                     <div class="account-info d-none d-lg-flex ">
-                        <p> Hello, ${sessionScope.account.username}</p>
+                        <c:if test="${not empty User.name}">
+                            <p> Hello,<a href="/User">${User.name}</a> </p>
+                        </c:if>
+                        <c:if test="${empty User.name && not empty sessionScope.account.username}">
+                            <p> Hello, <a href="/User">${sessionScope.account.username}</a> </p>
+
+                        </c:if>
                         <p> MemType: ${sessionScope.account.memberTypeId}</p>
                     </div>
-                    <div class="d-none d-lg-flex">
+                    <a href="/LogOut">
                         <button class="btn btn-warning">Log Out</button>
-                    </div>
+                    </a>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -139,8 +147,10 @@
             <div class="modal-body justify-content-center align-items-center d-flex  ">
                 <form action="/Home?action=signUp" class="form" method="post" >
                     <span class="input-span">
-                        <label for="usernameSignUp" class="label">Email</label>
+                        <label for="usernameSignUp" class="label">Username</label>
                         <input type="text" name="username" id="usernameSignUp"/>
+                        <label for="email" class="label">Email</label>
+                        <input type="text" name="email" id="email"/>
                         <label for="password1" class="label">Password</label>
                         <input type="password" name="password1" id="password1"/>
                         <label for="password2" class="label">Confirm Password</label>
@@ -167,17 +177,23 @@
             </div>
             <div class="modal-body justify-content-center align-items-center d-flex  ">
                 <form action="/Home?action=subscribe" class="form" method="post">
-                    <img src="image/momo-qr.jpg" class="qr"/>
-                    <div class="radio-input">
-                        <label class="label">
-                            <input type="radio" id="value-2" checked="" name="value-radio" value="value-2" />
-                            <p class="text">Silver Member</p>
-                        </label>
-                        <label class="label">
-                            <input type="radio" id="value-3" name="value-radio" value="value-3" />
-                            <p class="text">Gold Member</p>
-                        </label>
-                    </div>
+                    <p id="subscribeMessage"></p>
+                    <nav class="subscribe-input row">
+                        <div class="box">
+                            <input type="radio" id="sliver" checked="" name="subscribe" value="2" >
+                            <label for="sliver" class="subject">
+                                <span>Sliver Member</span>
+                                <span>100$/year</span>
+                            </label>
+                        </div>
+                        <div class="box">
+                            <input type="radio" id="gold" name="subscribe" value="3">
+                            <label for="gold" class="subject">
+                                <span>Gold Member</span>
+                                <span>300$/year</span>
+                            </label>
+                        </div>
+                    </nav>
                     <input class="submit" type="submit" value="Subscribe now!" />
                 </form>
             </div>
@@ -212,3 +228,11 @@
 </c:if>
 
 
+<c:if test="${not empty noPermission}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("subscribeMessage").innerText = "${noPermission}";
+            new bootstrap.Modal(document.getElementById('subscribeModal')).show();
+        });
+    </script>
+</c:if>

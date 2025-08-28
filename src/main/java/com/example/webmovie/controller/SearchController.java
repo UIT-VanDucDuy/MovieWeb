@@ -3,11 +3,10 @@ package com.example.webmovie.controller;
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.entity.Genre;
 import com.example.webmovie.dto.MoviePage;
-import com.example.webmovie.entity.Movie;
-import com.example.webmovie.service.GenreService;
-import com.example.webmovie.service.IGenreService;
-import com.example.webmovie.service.IMovieService;
-import com.example.webmovie.service.MovieService;
+import com.example.webmovie.service.Genre.GenreService;
+import com.example.webmovie.service.Genre.IGenreService;
+import com.example.webmovie.service.Movie.IMovieService;
+import com.example.webmovie.service.Movie.MovieService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

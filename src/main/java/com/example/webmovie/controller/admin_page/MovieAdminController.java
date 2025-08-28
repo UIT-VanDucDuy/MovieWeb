@@ -2,10 +2,11 @@ package com.example.webmovie.controller.admin_page;
 
 import com.example.webmovie.entity.Genre;
 import com.example.webmovie.entity.Movie;
-import com.example.webmovie.service.GenreService;
-import com.example.webmovie.service.IGenreService;
-import com.example.webmovie.service.IMovieService;
-import com.example.webmovie.service.MovieService;
+import com.example.webmovie.service.Genre.GenreService;
+import com.example.webmovie.service.Genre.IGenreService;
+import com.example.webmovie.service.Movie.IMovieService;
+import com.example.webmovie.service.Movie.MovieService;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +19,8 @@ import java.util.List;
 
 @WebServlet(name="movieAdminController",value ="/admin/movies")
 public class MovieAdminController extends HttpServlet {
-    IMovieService movieService = new MovieService();
-    IGenreService genreService = new GenreService();
+    private IMovieService movieService = new MovieService();
+    private IGenreService genreService = new GenreService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

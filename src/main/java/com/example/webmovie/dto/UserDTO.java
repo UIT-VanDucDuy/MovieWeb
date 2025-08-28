@@ -11,14 +11,12 @@ public class UserDTO {
     private String address;
     private boolean gender;
     private String username;
-    private String password;
     private int accountId;
     private int memberTypeId;
+    private double money;
 
-    public UserDTO() {
-    }
 
-    public UserDTO(String name, String email, Date birthday, String phoneNumber, String address, boolean gender, String username, String password, int memberTypeId) {
+    public UserDTO(String name, String email, Date birthday, String phoneNumber, String address, boolean gender, String username, int memberTypeId) {
         this.name = name;
         this.email = email;
         this.birthday = birthday;
@@ -26,11 +24,11 @@ public class UserDTO {
         this.address = address;
         this.gender = gender;
         this.username = username;
-        this.password = password;
         this.memberTypeId = memberTypeId;
     }
 
-    public UserDTO(int id, String name, String email, Date birthday, String phoneNumber, String address, boolean gender, String username, String password, int memberTypeId) {
+
+    public UserDTO(int id, String name, String email, Date birthday, String phoneNumber, String address, boolean gender, String username, int memberTypeId) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -39,10 +37,22 @@ public class UserDTO {
         this.address = address;
         this.gender = gender;
         this.username = username;
-        this.password = password;
         this.memberTypeId = memberTypeId;
     }
 
+    public UserDTO(int id, String name, String email, Date birthday, String phoneNumber, String address, boolean gender, String username, int accountId, int memberTypeId, double money) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.gender = gender;
+        this.username = username;
+        this.accountId = accountId;
+        this.memberTypeId = memberTypeId;
+        this.money = money;
+    }
     public UserDTO(int id, String name, String email, Date birthday, String phoneNumber, String address, boolean gender, String username, int accountId, int memberTypeId) {
         this.id = id;
         this.name = name;
@@ -120,14 +130,6 @@ public class UserDTO {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public int getAccountId() {
         return accountId;
     }
@@ -142,5 +144,9 @@ public class UserDTO {
 
     public void setMemberTypeId(int memberTypeId) {
         this.memberTypeId = memberTypeId;
+    }
+
+    public double getMoney() {
+        return money;
     }
 }
