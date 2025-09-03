@@ -22,4 +22,68 @@ public class Episode {
         this.trailerPath = trailerPath;
         this.moviePath = moviePath;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
+    public int getEpisodeNumber() {
+        return episodeNumber;
+    }
+
+    public void setEpisodeNumber(int episodeNumber) {
+        this.episodeNumber = episodeNumber;
+    }
+
+    public String getEpisodeTitle() {
+        return episodeTitle;
+    }
+
+    public void setEpisodeTitle(String episodeTitle) {
+        this.episodeTitle = episodeTitle;
+    }
+
+    public int getDuration() {
+        return Duration;
+    }
+
+    public void setDuration(int duration) {
+        Duration = duration;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getTrailerPath() {
+        return trailerPath;
+    }
+
+    public void setTrailerPath(String trailerPath) {
+        this.trailerPath = trailerPath;
+    }
+
+    public String getMoviePath() {
+        return moviePath;
+    }
+
+    public void setMoviePath(String moviePath) {
+        this.moviePath = moviePath;
+    }
 }

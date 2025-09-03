@@ -4,10 +4,7 @@ import com.example.webmovie.dto.MovieDto;
 import com.example.webmovie.entity.Movie;
 import com.example.webmovie.repo.BaseRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +22,9 @@ public class MovieRepo implements IMovieRepo {
             "JOIN Genre g ON g.Id = mg.GenreId " +
             "WHERE g.GenreName LIKE ? " +
             "AND m.Name LIKE ?; ";
-    private final String SELECT_ALL = "SELECT * FROM Movie";
-
+    private final String SELECT_ALL = "SELECT * FROM Movie ORDER BY Id DESC";
+    private final String ADD_MOVIE = "INSERT INTO movie (Name, MainActor, Author, Description, ReleaseDate, IsSeries, MemberTypeId, PosterPath, BannerPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private final String ADD_EPISODE = "INSERT INTO episode (MovieId, EpisodeNumber, EpisodeTitle, Duration, TrailerPath, MoviePath, ReleaseDate) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
     @Override
     public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize,int page ) {
@@ -54,6 +52,82 @@ public class MovieRepo implements IMovieRepo {
         }
         return movieList;
     }
+
+    @Override
+    public boolean addMovie(MovieDto movie) {
+        boolean success = false;
+
+        try (Connection connection = BaseRepository.getConnectDB()) {
+            connection.setAutoCommit(false);
+
+            try (
+                    PreparedStatement psMovie = connection.prepareStatement(
+                            ADD_MOVIE, Statement.RETURN_GENERATED_KEYS);
+                    PreparedStatement psEpisode = connection.prepareStatement(
+                            ADD_EPISODE)
+            ) {
+                // 1. Insert Movie
+                psMovie.setString(1, movie.getName());
+                psMovie.setString(2, movie.getMainActor());
+                psMovie.setString(3, movie.getAuthor());
+                psMovie.setString(4, movie.getDescription());
+                psMovie.setDate(5, java.sql.Date.valueOf(movie.getReleaseDate())); // releaseDate "yyyy-MM-dd"
+                psMovie.setBoolean(6, movie.isSeries());
+                psMovie.setInt(7, movie.getMemberTypeId());
+                psMovie.setString(8, movie.getPosterPath());
+                psMovie.setString(9, movie.getBannerPath());
+
+                int affectedRows = psMovie.executeUpdate();
+                if (affectedRows == 0) {
+                    throw new SQLException("Insert movie failed, no rows affected.");
+                }
+
+                // 2. Get MovieId
+                int movieId;
+                try (ResultSet generatedKeys = psMovie.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        movieId = generatedKeys.getInt(1);
+                    } else {
+                        throw new SQLException("Insert movie failed, no ID obtained.");
+                    }
+                }
+
+
+                psEpisode.setInt(1, movieId);
+                psEpisode.setInt(2, 1);
+                psEpisode.setString(3, movie.getName());
+                psEpisode.setDouble(4, movie.getDuration());
+                psEpisode.setString(5, movie.getTrailerPath());
+                psEpisode.setString(6, movie.getMoviePath());
+                psEpisode.setDate(7, java.sql.Date.valueOf(movie.getReleaseDate()));
+                psEpisode.addBatch();
+
+                connection.commit();
+                success = true;
+
+            } catch (Exception e) {
+                connection.rollback();
+                throw e;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
+
+
+    @Override
+    public boolean updateMovie(MovieDto movie) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteMovie(int id) {
+        return false;
+    }
+
     @Override
     public int countByTitleAndGenre(String title, String genre) {
         int count = 0;

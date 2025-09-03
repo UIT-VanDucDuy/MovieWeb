@@ -11,4 +11,7 @@ public interface IMovieService {
     MoviePage getMovies(String title,String genre,int pageSize, int page);
     List<MovieDto> getMoviesByGenre(String genre);
     List<Movie> getAll();
+    boolean addMovie(MovieDto movie);
+    boolean updateMovie(MovieDto movie);
+    boolean deleteMovie(int id);
 }

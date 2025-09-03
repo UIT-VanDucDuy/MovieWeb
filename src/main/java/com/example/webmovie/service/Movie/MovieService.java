@@ -44,6 +44,21 @@ public class MovieService implements IMovieService {
 
     @Override
     public List<Movie> getAll() {
-        return List.of();
+        return movieRepo.getAll();
+    }
+
+    @Override
+    public boolean addMovie(MovieDto movie) {
+        return movieRepo.addMovie(movie);
+    }
+
+    @Override
+    public boolean updateMovie(MovieDto movie) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteMovie(int id) {
+        return false;
     }
 }
