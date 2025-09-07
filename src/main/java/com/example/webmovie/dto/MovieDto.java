@@ -17,7 +17,7 @@ public class MovieDto {
     private double duration;
 
 
-    public MovieDto(int id, String name,int memberTypeId,String memberType,String posterPath,String bannerPath) {
+    public MovieDto(int id, String name, int memberTypeId, String memberType, String posterPath, String bannerPath) {
         this.id = id;
         this.name = name;
         this.memberTypeId = memberTypeId;
@@ -34,6 +34,23 @@ public class MovieDto {
         this.releaseDate = releaseDate;
         this.isSeries = isSeries;
         this.memberTypeId = memberTypeId;
+        this.posterPath = posterPath;
+        this.bannerPath = bannerPath;
+        this.trailerPath = trailerPath;
+        this.moviePath = moviePath;
+        this.duration = duration;
+    }
+
+    public MovieDto(int id, String name, String mainActor, String author, String description, String releaseDate, boolean isSeries, int memberTypeId, String memberType, String posterPath, String bannerPath, String trailerPath, String moviePath, double duration) {
+        this.id = id;
+        this.name = name;
+        this.mainActor = mainActor;
+        this.author = author;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.isSeries = isSeries;
+        this.memberTypeId = memberTypeId;
+        this.memberType = memberType;
         this.posterPath = posterPath;
         this.bannerPath = bannerPath;
         this.trailerPath = trailerPath;

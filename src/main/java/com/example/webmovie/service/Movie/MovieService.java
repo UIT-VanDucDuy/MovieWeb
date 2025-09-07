@@ -61,4 +61,9 @@ public class MovieService implements IMovieService {
     public boolean deleteMovie(int id) {
         return movieRepo.deleteMovie(id);
     }
+
+    @Override
+    public MovieDto getById(int id) {
+        return movieRepo.getById(id);
+    }
 }

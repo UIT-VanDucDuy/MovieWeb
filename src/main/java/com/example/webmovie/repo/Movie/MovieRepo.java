@@ -26,6 +26,7 @@ public class MovieRepo implements IMovieRepo {
     private final String ADD_MOVIE = "INSERT INTO movie (Name, MainActor, Author, Description, ReleaseDate, IsSeries, MemberTypeId, PosterPath, BannerPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private final String ADD_EPISODE = "INSERT INTO episode (MovieId, EpisodeNumber, EpisodeTitle, Duration, TrailerPath, MoviePath, ReleaseDate) VALUES (?, ?, ?, ?, ?, ?, ?);";
     private final String DELETE_MOVIE = "DELETE FROM movie WHERE Id = ?;";
+    private final String FIND_BY_ID = "SELECT m.*, e.Duration, e.TrailerPath, e.MoviePath, mb.MemberTypeName FROM movie m LEFT JOIN episode e ON (m.Id = e.MovieId) LEFT JOIN membertype mb ON (m.MemberTypeId = mb.Id) WHERE m.Id = ?;";
 
     @Override
     public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize, int page) {
@@ -138,6 +139,38 @@ public class MovieRepo implements IMovieRepo {
             e.printStackTrace();
         }
         return success;
+    }
+
+    @Override
+    public MovieDto getById(int id) {
+        MovieDto movie = null;
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                int movieId = rs.getInt("Id");
+                String name = rs.getString("Name");
+                String mainActor = rs.getString("MainActor");
+                String author = rs.getString("Author");
+                String description = rs.getString("Description");
+                String releaseDate = rs.getString("ReleaseDate");
+                boolean isSeries = rs.getBoolean("IsSeries");
+                int memberTypeId = rs.getInt("MemberTypeId");
+                String memberTypeName = rs.getString("MemberTypeName");
+                String posterPath = rs.getString("PosterPath");
+                String bannerPath = rs.getString("BannerPath");
+                String trailerPath = rs.getString("TrailerPath");
+                String moviePath = rs.getString("MoviePath");
+                double duration = rs.getDouble("Duration");
+                movie = new MovieDto(movieId, name, mainActor, author, description, releaseDate, isSeries, memberTypeId, memberTypeName, posterPath, bannerPath, trailerPath, moviePath, duration);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return movie;
     }
 
     @Override

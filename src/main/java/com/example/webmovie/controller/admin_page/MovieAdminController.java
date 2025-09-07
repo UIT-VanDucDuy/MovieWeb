@@ -45,6 +45,12 @@ public class MovieAdminController extends HttpServlet {
                 req.setAttribute("genres", genres);
                 req.setAttribute("openAddMovieModal", true);
                 break;
+            case "editMovieForm":
+                int movieId = Integer.parseInt(req.getParameter("id"));
+                req.setAttribute("movie", movieService.getById(movieId));
+                req.setAttribute("genres", genres);
+                req.setAttribute("openEditMovieModal", true);
+                break;
         }
         req.setAttribute("movieList", movieList);
         req.setAttribute("memberTypeList", memberTypeList);
@@ -108,10 +114,10 @@ public class MovieAdminController extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("deleteMovieId"));
         boolean isSuccess = movieService.deleteMovie(id);
         if (isSuccess) {
-            req.setAttribute("toastMessage", "Add movie successful");
+            req.setAttribute("toastMessage", "Delete movie successful");
             req.setAttribute("toastType", "success");
         } else {
-            req.setAttribute("toastMessage", "Add movie failed");
+            req.setAttribute("toastMessage", "Delete movie failed");
             req.setAttribute("toastType", "danger");
         }
         req.setAttribute("movieList", movieService.getAll());
@@ -119,7 +125,7 @@ public class MovieAdminController extends HttpServlet {
         try {
             req.getRequestDispatcher("/view/admin_page/movie_management.jsp").forward(req, resp);
         } catch (Exception e) {
-            req.setAttribute("toastMessage", "Add movie failed");
+            req.setAttribute("toastMessage", "Delete movie failed");
             req.setAttribute("toastType", "danger");
         }
     }

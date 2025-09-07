@@ -58,8 +58,8 @@
                         <td class="description-col">${movie.description}</td>
                         <td>
                             <div class="d-flex gap-3 align-items-start">
-                                <form action="/Admin" method="get">
-                                    <input type="hidden" name="action" value="showEditMovieForm">
+                                <form action="/admin/movies" method="get">
+                                    <input type="hidden" name="action" value="editMovieForm">
                                     <input type="hidden" name="id" value="${movie.id}">
                                     <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                 </form>
@@ -173,6 +173,102 @@
     </div>
 </div>
 
+<!-- editMovieModal -->
+<div class="modal fade" id="editMovieModal" tabindex="-1" aria-labelledby="editMovieModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editMovieModalLabel">Edit Movie</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="${pageContext.request.contextPath}/admin/movies?action=editMovie" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col gx-3">
+
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Movie Path: </label>
+                                <input type="text" class="form-control" placeholder="Enter Movie Path"
+                                       aria-label="Post Path" name="moviePath" id="editMoviePath">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Trailer Path: </label>
+                                <input type="text" class="form-control" placeholder="Enter Trailer Path"
+                                       aria-label="Post Path" name="trailerPath" id="editTrailerPath">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Poster Path: </label>
+                                <input type="text" class="form-control" placeholder="Enter Poster Path"
+                                       aria-label="Poster Path" name="posterPath" id="editPosterPath">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Banner Path: </label>
+                                <input type="text" class="form-control" placeholder="Enter Banner Path"
+                                       aria-label="Post Path" name="bannerPath" id="editBannerPath">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Series: </label>
+                                <select name="isSeries" class="form-select" id="isSeries">
+                                    <%--                                    <option value="true">Yes</option>--%>
+                                    <option value="false" selected>No</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Release Date: </label>
+                                <input type="date" class="form-control" placeholder="Select Release Date"
+                                       aria-label="Release Date" name="releaseDate" id="editReleaseDate">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Movie Name: </label>
+                                <input type="text" class="form-control" placeholder="Enter Movie Name"
+                                       aria-label="Movie name" name="name" id="editMovieName">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Main Actor: </label>
+                                <input type="text" class="form-control" placeholder="Enter Main Actor"
+                                       aria-label="Main Actor" name="mainActor" id="editMainActor">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Author: </label>
+                                <input type="text" class="form-control" placeholder="Enter Author"
+                                       aria-label="Author" name="author" id="editMovieAuthor">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Member Type: </label>
+                                <select name="memberTypeId" id="editMemberTypeId" class="form-select">
+                                    <c:forEach var="memberType" items="${memberTypeList}">
+                                        <option value="${memberType.id}">${memberType.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Duration: </label>
+                                <input type="number" class="form-control" placeholder="Enter Duration" name="duration"
+                                       id="editDuration">
+                            </div>
+                            <div class="mb-3">
+                                <label class="me-3 mb-1">Description: </label>
+                                <input type="text" class="form-control" placeholder="Enter Description"
+                                       name="description" id="editDescription">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
 <!-- deleteMovieModal -->
 <div class="modal fade" id="deleteMovieModal" tabindex="-1" aria-labelledby="deleteMovieModalLabel"
      aria-hidden="true">
@@ -204,6 +300,25 @@
 <c:if test="${not empty openAddMovieModal}">
     <script>
         var myModal = new bootstrap.Modal(document.getElementById('addMovieModal'));
+        myModal.show();
+    </script>
+</c:if>
+
+<c:if test="${not empty openEditMovieModal}">
+    <script>
+        document.getElementById("editMoviePath").value = "${movie.moviePath}";
+        document.getElementById("editTrailerPath").value = "${movie.trailerPath}";
+        document.getElementById("editPosterPath").value = "${movie.posterPath}";
+        document.getElementById("editBannerPath").value = "${movie.bannerPath}";
+        document.getElementById("isSeries").value = "${movie.isSeries}";
+        document.getElementById("editReleaseDate").value = "${movie.releaseDate}";
+        document.getElementById("editMovieName").value = "${movie.name}";
+        document.getElementById("editMovieAuthor").value = "${movie.author}";
+        document.getElementById("editMemberTypeId").value = "${movie.memberTypeId}";
+        document.getElementById("editDuration").value = "${movie.duration}";
+        document.getElementById("editDescription").value = "${movie.description}";
+
+        var myModal = new bootstrap.Modal(document.getElementById('editMovieModal'));
         myModal.show();
     </script>
 </c:if>
