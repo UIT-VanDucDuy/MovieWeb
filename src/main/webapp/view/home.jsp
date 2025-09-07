@@ -9,8 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="/css/home1.css">
-    <link rel="stylesheet" href="/css/navbar1.css">
+    <link rel="stylesheet" href="/css/home4.css">
+    <link rel="stylesheet" href="/css/navbar.css">
     <script src="jvs/home.js"></script>
 </head>
 <body>
@@ -172,6 +172,7 @@
                     <div class="slider-item position-relative">
                         <span class="number-overlay">${status.count}</span>
                         <a href="/Movie"><img src="${trendingMovie.getPosterPath()}" class="rounded" /> </a>
+                        <span class="movie-type">${trendingMovie.getMemberType()}</span>
                     </div>
                 </c:forEach>
 
@@ -226,10 +227,16 @@
                         <span class="movie-type">${romanceMovie.getMemberType()}</span>
                         <c:url var="movieUrl" value="/Movie">
                             <c:param name="movieTypeId" value="${romanceMovie.getMemberTypeId()}" />
+                            <c:param name="movieId" value="${romanceMovie.getId()}" />
                         </c:url>
                         <a href="${movieUrl}">
                             <img src="${romanceMovie.getPosterPath()}" class="rounded" />
                         </a>
+                        <button title="Watch Trailer" class="round-button trailer"
+                                data-trailer="${romanceMovie.getTrailerPath()}"
+                                data-bs-toggle="modal" data-bs-target="#trailerModal">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
                     </div>
                 </c:forEach>
             </div>
@@ -252,13 +259,19 @@
             <div id="action-movie" class=" slider-track d-flex transition gap-3">
                 <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
-                        <span class="movie-type">${actionMovie.getMemberType()}</span>
                         <c:url var="movieUrl" value="/Movie">
                             <c:param name="movieTypeId" value="${actionMovie.getMemberTypeId()}" />
+                            <c:param name="movieId" value="${actionMovie.getId()}" />
                         </c:url>
                         <a href="${movieUrl}">
                             <img src="${actionMovie.getPosterPath()}" class="rounded" />
                         </a>
+                        <span class="movie-type">${actionMovie.getMemberType()}</span>
+                        <button title="Watch Trailer" class="round-button trailer"
+                                data-trailer="${actionMovie.getTrailerPath()}"
+                                data-bs-toggle="modal" data-bs-target="#trailerModal">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
                     </div>
                 </c:forEach>
             </div>
@@ -270,7 +283,6 @@
                 <span class="carousel-control-next-icon"></span>
             </button>
         </div>
-
 
     </div>
     <br>
@@ -284,10 +296,16 @@
                         <span class="movie-type">${actionMovie.getMemberType()}</span>
                         <c:url var="movieUrl" value="/Movie">
                             <c:param name="movieTypeId" value="${actionMovie.getMemberTypeId()}" />
+                            <c:param name="movieId" value="${actionMovie.getId()}" />
                         </c:url>
                         <a href="${movieUrl}">
                             <img src="${actionMovie.getPosterPath()}" class="rounded" />
                         </a>
+                        <button title="Watch Trailer" class="round-button trailer"
+                                data-trailer="${actionMovie.getTrailerPath()}"
+                                data-bs-toggle="modal" data-bs-target="#trailerModal">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
                     </div>
                 </c:forEach>
             </div>
@@ -299,8 +317,6 @@
                 <span class="carousel-control-next-icon"></span>
             </button>
         </div>
-
-
     </div>
     <br>
 </div>
@@ -308,4 +324,5 @@
 <c:import url="/layout/footer.jsp"></c:import>
 
 </body>
+
 </html>

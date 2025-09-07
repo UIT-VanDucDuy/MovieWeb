@@ -8,4 +8,5 @@ public interface IAccountRepo {
     Boolean subcribe(Account account, int memberType);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
+    Boolean changePassword(String newPassword, int id);
 }

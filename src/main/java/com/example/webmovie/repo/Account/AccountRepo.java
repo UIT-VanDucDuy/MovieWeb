@@ -11,7 +11,6 @@ import java.sql.SQLException;
 public class AccountRepo implements IAccountRepo {
     private final String LOGIN_SQL = "SELECT * FROM Account WHERE Username = ? AND Password = ?";
     private final String SIGN_UP_SQL = "insert into Account(Username,Email,Password,MemberTypeId) values(?,?,?,?);";
-    private final String GET_MONEY_SQL = "SELECT * FROM Account WHERE Username = ? AND Password = ?";
     private final String SUBSCRIBE_SQL = "UPDATE Wallet " +
             " SET Money = Money - ? " +
             " WHERE Id = (SELECT WalletId FROM User u join account a on u.AccountID = a.id WHERE a.Id = ?) " +
@@ -19,6 +18,7 @@ public class AccountRepo implements IAccountRepo {
     private final String ADD_MONEY_ADMIN_SQL = "UPDATE Wallet " +
             "SET Money = Money + ? " +
             "WHERE Id = 1;";
+    private  final String CHANGE_PASSWORD = "Update Account set Password = ? Where Id= ? ;";
 
     @Override
     public Account login(String username, String password) {
@@ -146,6 +146,20 @@ public class AccountRepo implements IAccountRepo {
             System.out.println("lỗi querry");
         }
         return exists;
+    }
+
+    @Override
+    public Boolean changePassword(String newPassword,int id) {
+        try( Connection connection = BaseRepository.getConnectDB();) {
+            PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_PASSWORD);
+            preparedStatement.setString(1,newPassword);
+            preparedStatement.setInt(2,id);
+            int effectRow = preparedStatement.executeUpdate();
+            return effectRow==1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

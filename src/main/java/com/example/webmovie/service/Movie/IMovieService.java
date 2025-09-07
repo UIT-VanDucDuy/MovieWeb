@@ -11,4 +11,5 @@ public interface IMovieService {
     MoviePage getMovies(String title,String genre,int pageSize, int page);
     List<MovieDto> getMoviesByGenre(String genre);
     List<Movie> getAll();
+    List<MovieDto> getSameMovie(int id);
 }

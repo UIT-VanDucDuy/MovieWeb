@@ -167,6 +167,38 @@
         </div>
     </div>
 </div>
+<!-- Modal Forgot password  -->
+<div class="modal fade" id="forgotPWModal" tabindex="-1" aria-labelledby="forgotPWModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="forgotPWModalLabel">Change Password</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body justify-content-center align-items-center d-flex  ">
+                <form action="/Home?action=signUp" class="form" method="post" >
+                    <span class="input-span">
+                        <label for="usernameForgot" class="label">Username</label>
+                        <input type="text" name="usernameForgot" id="usernameForgot"/>
+                        <label for="emailForgot" class="label">Email</label>
+                        <input type="text" name="emailForgot" id="emailForgot"/>
+                        <label for="passwordForgot1" class="label">Password</label>
+                        <input type="password" name="passwordForgot1" id="passwordForgot1"/>
+                        <label for="passwordForgot2" class="label">Confirm Password</label>
+                        <input type="password" name="passwordForgot2" id="passwordForgot2"/>
+                    </span>
+                    <p id="forgotMessage"></p>
+                    <br>
+                    <input class="submit" type="submit" value="Sign Up Now"/>
+                    <span class="span">You already have an account!
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal Subcsribe -->
 <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
@@ -200,6 +232,68 @@
         </div>
     </div>
 </div>
+<!-- Modal Alert -->
+<div class="modal" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Notification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="alertMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Trailer -->
+<div class="modal fade" id="trailerModal" tabindex="-1" aria-labelledby="trailerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-black text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="trailerModalLabel">trailer</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body justify-content-center align-items-center d-flex  ">
+                <iframe src="" title="YouTube video player" id="trailerFrame"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Change Password -->
+<div class="modal fade" id="changePWModal" tabindex="-1" aria-labelledby="changePWModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePWModalLabel">Change Password</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body justify-content-center align-items-center d-flex  ">
+                <form action="/User?action=changePassword" class="form" method="post" >
+                    <span class="input-span">
+                        <label for="oldPassword" class="label">Old Password</label>
+                        <input type="password" name="oldPassword" id="oldPassword"/>
+                        <label for="newPassword1" class="label">New Password</label>
+                        <input type="password" name="newPassword1" id="newPassword1"/>
+                        <label for="newPassword2" class="label">Confirm new Password</label>
+                        <input type="password" name="newPassword2" id="newPassword2"/>
+                    </span>
+                    <p id="changeMessage"></p>
+                    <br>
+                    <input class="submit" type="submit" value="Change Now"/>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <c:if test="${not empty errorSignup}">
     <script>
@@ -227,7 +321,6 @@
     </script>
 </c:if>
 
-
 <c:if test="${not empty noPermission}">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -236,3 +329,46 @@
         });
     </script>
 </c:if>
+
+<c:if test="${not empty subscribeFail}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("subscribeMessage").innerText = "${subscribeFail}";
+            new bootstrap.Modal(document.getElementById('subscribeModal')).show();
+        });
+    </script>
+</c:if>
+<c:if test="${not empty alertMessage}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("alertMessage").innerText = "${alertMessage}";
+            new bootstrap.Modal(document.getElementById('alertModal')).show();
+        });
+    </script>
+</c:if>
+<c:if test="${not empty errorChangePassword}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("changeMessage").innerText = "${errorChangePassword}";
+            new bootstrap.Modal(document.getElementById('changePWModal')).show();
+        });
+    </script>
+</c:if>
+
+
+<script>
+    const trailerModal = document.getElementById('trailerModal');
+    const trailerFrame = document.getElementById('trailerFrame');
+
+    // Khi mở modal -> gán src cho iframe
+    trailerModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget; // button đã click
+        const trailerPath = button.getAttribute('data-trailer');
+        trailerFrame.src = trailerPath;
+    });
+
+    // Khi đóng modal -> xóa src để tắt video
+    trailerModal.addEventListener('hidden.bs.modal', function () {
+        trailerFrame.src = "";
+    });
+</script>

@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieRepo implements IMovieRepo {
-    private final String FIND_BY_TITLE_AND_GENRE ="SELECT DISTINCT m.*,mt.MemberTypeName FROM Movie m " +
-            "JOIN MovieGenre mg ON m.Id = mg.MovieId " +
-            "JOIN Genre g ON g.Id = mg.GenreId " +
-            "Join membertype mt on mt.Id = m.MemberTypeId "  +
-            "WHERE g.GenreName LIKE ? " +
-            "and m.Name Like ? " +
-            "limit ? offset ? ";
+    private final String FIND_BY_TITLE_AND_GENRE ="SELECT DISTINCT m.*,mt.MemberTypeName,ep.TrailerPath FROM Movie m " +
+            "            JOIN MovieGenre mg ON m.Id = mg.MovieId " +
+            "            JOIN Genre g ON g.Id = mg.GenreId " +
+            "            Join membertype mt on mt.Id = m.MemberTypeId " +
+            "            join episode ep on m.Id = ep.MovieId" +
+            "            WHERE g.GenreName LIKE ? " +
+            "            and m.Name Like ? " +
+            " limit ? offset ? ";
+
     private final String COUNT_BY_TITLE_AND_GENRE ="SELECT COUNT(DISTINCT m.Id)" +
             "FROM Movie m " +
             "JOIN MovieGenre mg ON m.Id = mg.MovieId " +
@@ -26,7 +28,19 @@ public class MovieRepo implements IMovieRepo {
             "WHERE g.GenreName LIKE ? " +
             "AND m.Name LIKE ?; ";
     private final String SELECT_ALL = "SELECT * FROM Movie";
-
+    private final String FIND_SAME_MOVIE = "SELECT m.*,mt.MemberTypeName, COUNT(*) AS CommonGenres " +
+            "FROM MovieGenre mg1 " +
+            "JOIN MovieGenre mg2 " +
+            "    ON mg1.GenreId = mg2.GenreId " +
+            "   AND mg2.MovieId <> 1 " +
+            "JOIN Movie m " +
+            "    ON mg2.MovieId = m.Id " +
+            "Join membertype mt on mt.Id = m.MemberTypeId " +
+            "WHERE mg1.MovieId = ? " +
+            "  AND mg2.MovieId <> ? " +
+            "GROUP BY mg2.MovieId, m.Name " +
+            "HAVING COUNT(*) >= 2 " +
+            "limit 5;";
 
     @Override
     public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize,int page ) {
@@ -47,13 +61,40 @@ public class MovieRepo implements IMovieRepo {
                 String memberTypeName = rs.getString("MemberTypeName");
                 String posterPath = rs.getString("PosterPath");
                 String bannerPath = rs.getString("BannerPath");
-                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath);movieList.add(movie);
+                String trailerPath = rs.getString("TrailerPath");
+                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath,trailerPath);movieList.add(movie);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return movieList;
     }
+
+    @Override
+    public List<MovieDto> getSameMovie(int idMovie) {
+        List<MovieDto> movieList = new ArrayList<>();
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement ps = connection.prepareStatement(FIND_SAME_MOVIE)) {
+            ps.setInt(1,idMovie );
+            ps.setInt(2,idMovie );
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id =rs.getInt("Id");
+                String name =rs.getString("Name");
+                int memberTypeId = rs.getInt("MemberTypeId");
+                String memberTypeName = rs.getString("MemberTypeName");
+                String posterPath = rs.getString("PosterPath");
+                String bannerPath = rs.getString("BannerPath");
+                String trailerPath = rs.getString("TrailerPath");
+                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath,trailerPath);movieList.add(movie);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movieList;
+    }
+
     @Override
     public int countByTitleAndGenre(String title, String genre) {
         int count = 0;

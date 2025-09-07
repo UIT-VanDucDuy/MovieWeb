@@ -29,6 +29,10 @@ public class UserRepository implements IUserRepository {
             "JOIN account a ON u.AccountID = a.Id " +
             "Join wallet w on u.WalletId = w.id " +
             "WHERE a.Id = ?;";
+    private final String UPDATE_USER_BY_ACCOUNT_ID = "UPDATE User SET Name = ?, Gender = ?, Birthday = ?, Address = ?, PhoneNumber = ? " +
+            "WHERE AccountId = ? ";
+
+
 
     @Override
     public List<UserDTO> getAll(int page, int pageSize) {
@@ -289,6 +293,27 @@ public class UserRepository implements IUserRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean updateUserByAccountId(User user) {
+        boolean rowUpdated = false;
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_BY_ACCOUNT_ID)) {
+
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setBoolean(2, user.isGender());
+            preparedStatement.setDate(3, user.getBirthday());
+            preparedStatement.setString(4, user.getAddress());
+            preparedStatement.setString(5, user.getPhoneNumber());
+            preparedStatement.setInt(6, user.getAccountId());
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
     }
 
     public List<MemberType> getAllMemberType() {

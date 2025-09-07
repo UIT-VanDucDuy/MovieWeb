@@ -20,4 +20,6 @@ public interface IUserService {
     public List<MemberType> getAllMemberType();
 
     UserDTO findUserByAccountId(int accId);
+
+    boolean updateUserByAccountId(User user);
 }

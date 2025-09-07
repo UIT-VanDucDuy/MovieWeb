@@ -46,5 +46,24 @@ public class AccountService implements IAccountService {
 
     }
 
-
+    @Override
+    public boolean changePassword(Account account,String oldPassword,String newPassword1,String newPassword2, HttpServletRequest request) {
+        if(!account.getPassword().equals(oldPassword)){
+            request.setAttribute("errorChangePassword", "Incorrect password");
+            return false;
+        }
+        if (account.getPassword().equals(newPassword1)) {
+            request.setAttribute("errorChangePassword", "New password must be different");
+            return false;
+        }
+        if(!newPassword1.equals(newPassword2)) {
+            request.setAttribute("errorChangePassword", "Passwords do not match!");
+            return false;
+        }
+        if(!accountRepo.changePassword(newPassword1,account.getId())) {
+            request.setAttribute("errorChangePassword", "Change password failed!");
+            return false;
+        }
+        return accountRepo.changePassword(newPassword1, account.getId());
+    }
 }

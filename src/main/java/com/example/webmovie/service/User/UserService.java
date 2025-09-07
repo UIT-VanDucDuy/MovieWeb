@@ -43,4 +43,9 @@ public class UserService implements IUserService {
     public UserDTO findUserByAccountId(int accId) {
         return userRepository.findUserByAccountId(accId);
     }
+
+    @Override
+    public boolean updateUserByAccountId(User user) {
+        return userRepository.updateUserByAccountId(user);
+    }
 }
