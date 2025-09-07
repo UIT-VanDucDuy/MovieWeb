@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<c:set var="cpath" value="${pageContext.request.contextPath}" />
-<c:set var="uri" value="${pageContext.request.requestURI}" />
+<c:set var="cpath" value="${pageContext.request.contextPath}"/>
+<c:set var="uri" value="${pageContext.request.requestURI}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="${cpath}/css/home1.css">
     <link rel="stylesheet" href="${cpath}/css/admin.css">
     <link rel="stylesheet" href="${cpath}/css/navbar1.css">
-    <script src="${cpath}/jvs/admin.js"></script>
 </head>
 <body>
 <c:import url="/layout/navbar.jsp"></c:import>
@@ -32,7 +31,7 @@
             <div class="mb-3 text-end">
                 <form action="/admin/movies" method="get">
                     <input type="hidden" name="action" value="showAddForm">
-                    <button type="submit" class="btn btn-primary btn-md" >
+                    <button type="submit" class="btn btn-primary btn-md">
                         + Create Movie
                     </button>
                 </form>
@@ -64,10 +63,8 @@
                                     <input type="hidden" name="id" value="${movie.id}">
                                     <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                 </form>
-                                <button onclick="deleteMovie(${movie.id})"
-                                        class="btn btn-danger btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#deleteUserModal">
+                                <button type="button" onclick="deleteMovie(${movie.id})"
+                                        class="btn btn-danger btn-sm">
                                     Delete
                                 </button>
                             </div>
@@ -159,7 +156,8 @@
                             </div>
                             <div class="mb-3">
                                 <label class="me-3 mb-1">Description: </label>
-                                <input type="text" class="form-control" placeholder="Enter Description" name="description">
+                                <input type="text" class="form-control" placeholder="Enter Description"
+                                       name="description">
                             </div>
                         </div>
                     </div>
@@ -175,17 +173,36 @@
     </div>
 </div>
 
+<!-- deleteMovieModal -->
+<div class="modal fade" id="deleteMovieModal" tabindex="-1" aria-labelledby="deleteMovieModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteMovieModalLabel">Delete Movie</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="${pageContext.request.contextPath}/admin/movies?action=deleteMovie" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" name="deleteMovieId" id="deleteMovieId">
+                        <p>Are you sure that you want to delete that movie?</p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
 <c:if test="${not empty openAddMovieModal}">
     <script>
-        <%--// Gender dropdown--%>
-        <%--var genderSelect = document.getElementById("addUserGender");--%>
-        <%--genderSelect.value = "${userInformation.gender ? 'Male' : 'Female'}";--%>
-
-        <%--// MemberType dropdown--%>
-        <%--var memberTypeSelect = document.getElementById("addUserMemberType");--%>
-        <%--memberTypeSelect.value = "${userInformation.memberTypeId}";--%>
-
-        // Mở modal
         var myModal = new bootstrap.Modal(document.getElementById('addMovieModal'));
         myModal.show();
     </script>
@@ -212,4 +229,5 @@
     </script>
 </c:if>
 </body>
+<script src="${cpath}/jvs/admin.js"></script>
 </html>

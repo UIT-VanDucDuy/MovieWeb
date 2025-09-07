@@ -9,7 +9,7 @@ import com.example.webmovie.repo.Movie.MovieRepo;
 import java.util.List;
 
 public class MovieService implements IMovieService {
-    private IMovieRepo movieRepo= new MovieRepo();
+    private IMovieRepo movieRepo = new MovieRepo();
 
     @Override
     public MoviePage getMovies(String title, String genre, int pageSize, int page) {
@@ -22,7 +22,7 @@ public class MovieService implements IMovieService {
             genre = "";
         }
         totalMovies = movieRepo.countByTitleAndGenre(title, genre);
-        movieList= movieRepo.getByTitleAndGenre(title,genre,pageSize, page);
+        movieList = movieRepo.getByTitleAndGenre(title, genre, pageSize, page);
 
 
         int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
@@ -39,7 +39,7 @@ public class MovieService implements IMovieService {
 
     @Override
     public List<MovieDto> getMoviesByGenre(String genre) {
-        return movieRepo.getByTitleAndGenre("",genre,10, 1);
+        return movieRepo.getByTitleAndGenre("", genre, 10, 1);
     }
 
     @Override
@@ -59,6 +59,6 @@ public class MovieService implements IMovieService {
 
     @Override
     public boolean deleteMovie(int id) {
-        return false;
+        return movieRepo.deleteMovie(id);
     }
 }

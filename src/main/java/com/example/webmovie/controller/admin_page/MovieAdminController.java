@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name="movieAdminController",value ="/admin/movies")
+@WebServlet(name = "movieAdminController", value = "/admin/movies")
 public class MovieAdminController extends HttpServlet {
     private IMovieService movieService = new MovieService();
     private IGenreService genreService = new GenreService();
@@ -54,7 +54,6 @@ public class MovieAdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        List<Movie> movieList = movieService.getAll();
 
         if (action == null) {
             action = "";
@@ -62,32 +61,67 @@ public class MovieAdminController extends HttpServlet {
 
         switch (action) {
             case "addMovie":
-                String name = req.getParameter("name");
-                String mainActor = req.getParameter("mainActor");
-                String author = req.getParameter("author");
-                String description = req.getParameter("description");
-                String releaseDate =req.getParameter("releaseDate");
-                boolean isSeries = Boolean.parseBoolean(req.getParameter("isSeries"));
-                int memberTypeId = Integer.parseInt(req.getParameter("memberTypeId"));
-                String posterPath =req.getParameter("posterPath");
-                String bannerPath =req.getParameter("bannerPath");
-                String trailerPath =req.getParameter("trailerPath");
-                String moviePath =req.getParameter("moviePath");
-                double duration =req.getParameter("duration") == null ? 0 : Double.parseDouble(req.getParameter("duration"));
-
-                MovieDto movieDto = new MovieDto(name, mainActor, author, description, releaseDate, isSeries,memberTypeId, posterPath, bannerPath, trailerPath, moviePath, duration);
-                boolean isSuccess = movieService.addMovie(movieDto);
-
-                if (isSuccess) {
-                    req.setAttribute("toastMessage", "Add movie successful");
-                    req.setAttribute("toastType", "success");
-                } else {
-                    req.setAttribute("toastMessage", "Add movie failed");
-                    req.setAttribute("toastType", "danger");
-                }
-                req.setAttribute("movieList", movieList);
-                req.getRequestDispatcher("/view/admin_page/movie_management.jsp").forward(req, resp);
+                addMovie(req, resp);
+                break;
+            case "deleteMovie":
+                deleteMovie(req, resp);
                 break;
         }
     }
+
+    public void addMovie(HttpServletRequest req, HttpServletResponse resp) {
+        String name = req.getParameter("name");
+        String mainActor = req.getParameter("mainActor");
+        String author = req.getParameter("author");
+        String description = req.getParameter("description");
+        String releaseDate = req.getParameter("releaseDate");
+        boolean isSeries = Boolean.parseBoolean(req.getParameter("isSeries"));
+        int memberTypeId = Integer.parseInt(req.getParameter("memberTypeId"));
+        String posterPath = req.getParameter("posterPath");
+        String bannerPath = req.getParameter("bannerPath");
+        String trailerPath = req.getParameter("trailerPath");
+        String moviePath = req.getParameter("moviePath");
+        double duration = req.getParameter("duration") == null ? 0 : Double.parseDouble(req.getParameter("duration"));
+
+        MovieDto movieDto = new MovieDto(name, mainActor, author, description, releaseDate, isSeries, memberTypeId, posterPath, bannerPath, trailerPath, moviePath, duration);
+        boolean isSuccess = movieService.addMovie(movieDto);
+
+        if (isSuccess) {
+            req.setAttribute("toastMessage", "Add movie successful");
+            req.setAttribute("toastType", "success");
+        } else {
+            req.setAttribute("toastMessage", "Add movie failed");
+            req.setAttribute("toastType", "danger");
+        }
+        req.setAttribute("movieList", movieService.getAll());
+
+        try {
+            req.getRequestDispatcher("/view/admin_page/movie_management.jsp").forward(req, resp);
+        } catch (Exception e) {
+            req.setAttribute("toastMessage", "Add movie failed");
+            req.setAttribute("toastType", "danger");
+        }
+    }
+
+    public void deleteMovie(HttpServletRequest req, HttpServletResponse resp) {
+
+        int id = Integer.parseInt(req.getParameter("deleteMovieId"));
+        boolean isSuccess = movieService.deleteMovie(id);
+        if (isSuccess) {
+            req.setAttribute("toastMessage", "Add movie successful");
+            req.setAttribute("toastType", "success");
+        } else {
+            req.setAttribute("toastMessage", "Add movie failed");
+            req.setAttribute("toastType", "danger");
+        }
+        req.setAttribute("movieList", movieService.getAll());
+
+        try {
+            req.getRequestDispatcher("/view/admin_page/movie_management.jsp").forward(req, resp);
+        } catch (Exception e) {
+            req.setAttribute("toastMessage", "Add movie failed");
+            req.setAttribute("toastType", "danger");
+        }
+    }
+
 }

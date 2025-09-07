@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieRepo implements IMovieRepo {
-    private final String FIND_BY_TITLE_AND_GENRE ="SELECT DISTINCT m.*,mt.MemberTypeName FROM Movie m " +
+    private final String FIND_BY_TITLE_AND_GENRE = "SELECT DISTINCT m.*,mt.MemberTypeName FROM Movie m " +
             "JOIN MovieGenre mg ON m.Id = mg.MovieId " +
             "JOIN Genre g ON g.Id = mg.GenreId " +
-            "Join membertype mt on mt.Id = m.MemberTypeId "  +
+            "Join membertype mt on mt.Id = m.MemberTypeId " +
             "WHERE g.GenreName LIKE ? " +
             "and m.Name Like ? " +
             "limit ? offset ? ";
-    private final String COUNT_BY_TITLE_AND_GENRE ="SELECT COUNT(DISTINCT m.Id)" +
+    private final String COUNT_BY_TITLE_AND_GENRE = "SELECT COUNT(DISTINCT m.Id)" +
             "FROM Movie m " +
             "JOIN MovieGenre mg ON m.Id = mg.MovieId " +
             "JOIN Genre g ON g.Id = mg.GenreId " +
@@ -25,27 +25,29 @@ public class MovieRepo implements IMovieRepo {
     private final String SELECT_ALL = "SELECT * FROM Movie ORDER BY Id DESC";
     private final String ADD_MOVIE = "INSERT INTO movie (Name, MainActor, Author, Description, ReleaseDate, IsSeries, MemberTypeId, PosterPath, BannerPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private final String ADD_EPISODE = "INSERT INTO episode (MovieId, EpisodeNumber, EpisodeTitle, Duration, TrailerPath, MoviePath, ReleaseDate) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private final String DELETE_MOVIE = "DELETE FROM movie WHERE Id = ?;";
 
     @Override
-    public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize,int page ) {
+    public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize, int page) {
         List<MovieDto> movieList = new ArrayList<>();
         try (Connection connection = BaseRepository.getConnectDB();
              PreparedStatement ps = connection.prepareStatement(FIND_BY_TITLE_AND_GENRE)) {
             int offset = (page - 1) * pageSize;
-            ps.setString(1,"%"+ genre +"%");
-            ps.setString(2,"%"+ title +"%");
+            ps.setString(1, "%" + genre + "%");
+            ps.setString(2, "%" + title + "%");
             ps.setInt(3, pageSize);
             ps.setInt(4, offset);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int id =rs.getInt("Id");
-                String name =rs.getString("Name");
+                int id = rs.getInt("Id");
+                String name = rs.getString("Name");
                 int memberTypeId = rs.getInt("MemberTypeId");
                 String memberTypeName = rs.getString("MemberTypeName");
                 String posterPath = rs.getString("PosterPath");
                 String bannerPath = rs.getString("BannerPath");
-                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath);movieList.add(movie);
+                MovieDto movie = new MovieDto(id, name, memberTypeId, memberTypeName, posterPath, bannerPath);
+                movieList.add(movie);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,7 +119,6 @@ public class MovieRepo implements IMovieRepo {
     }
 
 
-
     @Override
     public boolean updateMovie(MovieDto movie) {
         return false;
@@ -125,7 +126,18 @@ public class MovieRepo implements IMovieRepo {
 
     @Override
     public boolean deleteMovie(int id) {
-        return false;
+        boolean success = false;
+        try (Connection connection = BaseRepository.getConnectDB()) {
+            PreparedStatement ps = connection.prepareStatement(DELETE_MOVIE);
+            ps.setInt(1, id);
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows >= 1) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
     }
 
     @Override
@@ -133,8 +145,8 @@ public class MovieRepo implements IMovieRepo {
         int count = 0;
         try (Connection connection = BaseRepository.getConnectDB();) {
             PreparedStatement ps = connection.prepareStatement(COUNT_BY_TITLE_AND_GENRE);
-            ps.setString(1,"%"+ genre +"%");
-            ps.setString(2,"%"+ title +"%");
+            ps.setString(1, "%" + genre + "%");
+            ps.setString(2, "%" + title + "%");
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -145,6 +157,7 @@ public class MovieRepo implements IMovieRepo {
         }
         return count;
     }
+
     @Override
     public List<Movie> getAll() {
         List<Movie> movies = new ArrayList<>();
@@ -165,7 +178,7 @@ public class MovieRepo implements IMovieRepo {
                 String posterPath = rs.getString("PosterPath");
                 String bannerPath = rs.getString("BannerPath");
 
-                Movie movie = new Movie(id, name, mainActor, author,description,releaseDate,isSeries, memberTypeId, posterPath, bannerPath);
+                Movie movie = new Movie(id, name, mainActor, author, description, releaseDate, isSeries, memberTypeId, posterPath, bannerPath);
                 movies.add(movie);
             }
 
