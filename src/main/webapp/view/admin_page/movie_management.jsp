@@ -12,9 +12,9 @@
     <title>User Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="${cpath}/css/home1.css">
+    <link rel="stylesheet" href="${cpath}/css/home4.css">
     <link rel="stylesheet" href="${cpath}/css/admin.css">
-    <link rel="stylesheet" href="${cpath}/css/navbar1.css">
+    <link rel="stylesheet" href="${cpath}/css/navbar.css">
 </head>
 <body>
 <c:import url="/layout/navbar.jsp"></c:import>
@@ -272,7 +272,7 @@
 <!-- deleteMovieModal -->
 <div class="modal fade" id="deleteMovieModal" tabindex="-1" aria-labelledby="deleteMovieModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="deleteMovieModalLabel">Delete Movie</h1>

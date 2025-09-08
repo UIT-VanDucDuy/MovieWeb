@@ -51,6 +51,10 @@ public class MovieRepo implements IMovieRepo {
             "WHERE e.TrailerPath IS NOT NULL " +
             "  AND (e.MoviePath IS NULL OR e.MoviePath = '') " +
             "  limit 10;";
+    private final String DELETE_EPISODE = "DELETE FROM episode WHERE MovieId = ?;";
+    private final String DELETE_MOVIE_GENRE = "DELETE FROM moviegenre WHERE MovieId = ?;";
+    private final String DELETE_RATING = "DELETE FROM rating WHERE MovieId = ?";
+
     @Override
     public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize, int page) {
         List<MovieDto> movieList = new ArrayList<>();
@@ -154,17 +158,44 @@ public class MovieRepo implements IMovieRepo {
     public boolean deleteMovie(int id) {
         boolean success = false;
         try (Connection connection = BaseRepository.getConnectDB()) {
-            PreparedStatement ps = connection.prepareStatement(DELETE_MOVIE);
-            ps.setInt(1, id);
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows >= 1) {
-                success = true;
+            connection.setAutoCommit(false);
+
+            try (
+                    PreparedStatement ps1 = connection.prepareStatement(DELETE_MOVIE_GENRE);
+                    PreparedStatement ps2 = connection.prepareStatement(DELETE_EPISODE);
+                    PreparedStatement ps3 = connection.prepareStatement(DELETE_RATING);
+                    PreparedStatement ps4 = connection.prepareStatement(DELETE_MOVIE)
+            ) {
+                ps1.setInt(1, id);
+                ps1.executeUpdate();
+
+                ps2.setInt(1, id);
+                ps2.executeUpdate();
+
+                ps3.setInt(1, id);
+                ps3.executeUpdate();
+
+                ps4.setInt(1, id);
+                int affectedRows4 = ps4.executeUpdate();
+
+                if (affectedRows4 == 0) {
+                    throw new SQLException("Delete movie failed, no rows affected.");
                 }
+
+                connection.commit();
+                success = true;
+            } catch (SQLException e) {
+                connection.rollback();
+                throw e;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         return success;
+        return success;
     }
+
+
+
     public List<MovieDto> getSameMovie(int idMovie) {
         List<MovieDto> movieList = new ArrayList<>();
         try (Connection connection = BaseRepository.getConnectDB();

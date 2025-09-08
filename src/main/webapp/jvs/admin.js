@@ -31,14 +31,11 @@ function deleteUser(id) {
 }
 
 function deleteMovie(id) {
-    const input = document.getElementById("deleteMovieId");
-    if (!input) {
-        return;
-    }
-    input.value = id;
-
+    console.log('deleteMovie clicked with id=', id);
+    const input = document.getElementById("deleteMovieId").value = id;
     const deleteModal = document.getElementById("deleteMovieModal");
     if (deleteModal && window.bootstrap) {
         bootstrap.Modal.getOrCreateInstance(deleteModal).show();
     }
 }
+
