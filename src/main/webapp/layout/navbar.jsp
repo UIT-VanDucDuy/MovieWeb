@@ -62,7 +62,7 @@
 
                 <li class="nav-item search-container">
                     <a class="nav-link search-button" href="#">Search</a>
-                    <form action="/Search" method="Post">
+                    <form action="/Search" method="post">
                         <input type="text" name="title" class="search-input" placeholder="Search..."/>
                     </form>
                 </li>

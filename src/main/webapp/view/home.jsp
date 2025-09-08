@@ -171,7 +171,13 @@
                 <c:forEach var="trendingMovie" items="${trendingMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
                         <span class="number-overlay">${status.count}</span>
-                        <a href="/Movie"><img src="${trendingMovie.getPosterPath()}" class="rounded" /> </a>
+                        <c:url var="movieUrl" value="/Movie">
+                            <c:param name="movieTypeId" value="${trendingMovie.getMemberTypeId()}" />
+                            <c:param name="movieId" value="${trendingMovie.getId()}" />
+                        </c:url>
+                        <a href="${movieUrl}">
+                            <img src="${trendingMovie.getPosterPath()}" class="rounded" />
+                        </a>
                         <span class="movie-type">${trendingMovie.getMemberType()}</span>
                     </div>
                 </c:forEach>
@@ -298,11 +304,6 @@
                            data-bs-toggle="modal" data-bs-target="#trailerModal">
                             <img src="${comingSoonMovie.getPosterPath()}" class="rounded" />
                         </a>
-                        <button title="Watch Trailer" class="round-button trailer"
-                                data-trailer="${comingSoonMovie.getTrailerPath()}"
-                                data-bs-toggle="modal" data-bs-target="#trailerModal">
-                            <i class="fa-solid fa-play"></i>
-                        </button>
                     </div>
                 </c:forEach>
             </div>

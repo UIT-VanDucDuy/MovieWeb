@@ -167,7 +167,6 @@ public class MovieRepo implements IMovieRepo {
                 Movie movie = new Movie(id, name, mainActor, author,description,releaseDate,isSeries, memberTypeId, posterPath, bannerPath);
                 movies.add(movie);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Lỗi query");
