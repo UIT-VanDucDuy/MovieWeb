@@ -91,6 +91,10 @@ public class MovieDto {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -139,6 +143,10 @@ public class MovieDto {
         isSeries = series;
     }
 
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
     public int getMemberTypeId() {
         return memberTypeId;
     }
@@ -169,33 +177,6 @@ public class MovieDto {
 
     public void setBannerPath(String bannerPath) {
         this.bannerPath = bannerPath;
-
-    public int getId() {
-        return id;
-    }
-
-    public String getMainActor() {
-        return mainActor;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public boolean isSeries() {
-        return isSeries;
-    }
-
-    public String getBannerPath() {
-        return bannerPath;
     }
 
     public String getTrailerPath() {
@@ -221,8 +202,4 @@ public class MovieDto {
     public void setDuration(double duration) {
         this.duration = duration;
     }
-    public double getDuration() {
-        return duration;
-    }
-
 }
