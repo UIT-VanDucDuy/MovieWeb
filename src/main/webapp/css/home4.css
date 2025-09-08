@@ -183,16 +183,6 @@ body{
 .genre-div:hover .genre-img {
     filter: brightness(1.2) blur(2px);
 }
-.movie-type{
-    position: absolute;
-    bottom: 5px;
-    font-weight: bold;
-    font-size: 0.8em;
-    border-radius: 5px;
-    color: white;
-    text-shadow: 1px 1px 4px black;
-    background: red;
-}
 @media (max-width: 740px) {
     .custom-caption .movie-info{
         display: none !important;
@@ -327,16 +317,44 @@ body{
 }
 
 .movie-type{
-    position: absolute;
-    bottom: 5px;
+    position: absolute; /* Vẫn giữ vị trí tuyệt đối */
+    display: inline-block; /* Hiển thị như một khối nội tuyến */
+    top: 3px; /* Khoảng cách từ trên cùng */
+    right: 3px; /* Khoảng cách từ bên phải */
     font-weight: bold;
     font-size: 0.8em;
     border-radius: 5px;
     color: white;
     text-shadow: 1px 1px 4px black;
     background: red;
+    padding: 3px 5px; /* Khoảng đệm bên trong */
+    height: auto; /* Đảm bảo chiều cao tự động */
+    line-height: normal; /* Đặt line-height hợp lý */
+    white-space: nowrap; /* Ngăn nội dung xuống dòng */
+    z-index: 10; /* Đảm bảo thẻ nằm trên các phần tử khác */
 }
-
+.trailer{
+    position: absolute;
+    left: 3px;
+    bottom: 5px;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+.round-button {
+    width: 2em;
+    height: 2em; /* Đường kính của nút */
+    border: none; /* Không có viền */
+    border-radius: 50%; /* Bo tròn hoàn toàn */
+    background-color: #131313; /* Màu nền */
+    color: white; /* Màu chữ */
+    font-size: 1em; /* Kích thước chữ */
+    cursor: pointer; /* Hiển thị con trỏ tay */
+    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+}
 .radio-input{
     width: fit-content;
     border: 1px solid #666;
@@ -359,4 +377,14 @@ body{
 }
 .radio-input input:checked + label{
     background: #becbff;
+}
+.modal-body{
+    margin: 0;
+    padding: 0;
+}
+
+.modal-body iframe {
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
 }

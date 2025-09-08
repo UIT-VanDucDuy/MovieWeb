@@ -14,6 +14,7 @@ public interface IMovieService {
 
     List<Movie> getAll();
 
+
     boolean addMovie(MovieDto movie);
 
     boolean updateMovie(MovieDto movie);
@@ -21,4 +22,6 @@ public interface IMovieService {
     boolean deleteMovie(int id);
 
     MovieDto getById(int id);
+    List<MovieDto> getSameMovie(int id);
+    List<MovieDto> getMovieComingSoon();
 }

@@ -12,6 +12,7 @@ public interface IMovieRepo {
 
     List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize, int page);
 
+
     boolean addMovie(MovieDto movie);
 
     boolean updateMovie(MovieDto movie);
@@ -19,4 +20,8 @@ public interface IMovieRepo {
     boolean deleteMovie(int id);
 
     MovieDto getById(int id);
+
+    List<MovieDto> getSameMovie(int id);
+    List<MovieDto> getMovieComingSoon();
+  
 }

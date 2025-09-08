@@ -5,7 +5,7 @@
         <div class="row">
             <!-- Logo và chứng nhận -->
             <div class="col-md-3 mb-4">
-                <img src="file/image/Covencinema.png" alt="Spooky Movie" width="300">
+                <img src="https://firebasestorage.googleapis.com/v0/b/nt208-28e2a.appspot.com/o/image%2FCovencinema1.png?alt=media&token=ea465101-0093-4d73-ac07-d8e4472e6f2a" alt="Conven Cinema" WIDTH="300PX">
             </div>
 
             <!-- Cột: Về Coven Cinema -->

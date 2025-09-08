@@ -21,6 +21,15 @@ public class User {
         this.accountId = accountId;
     }
 
+    public User(String name, boolean gender, Date birthday, String address, String phoneNumber, int accountId) {
+        this.name = name;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.accountId = accountId;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

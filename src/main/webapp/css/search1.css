@@ -19,7 +19,11 @@
     font-size: 1em;
     font-weight: bold;
     color: #DAA520;
-}
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* giới hạn 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;}
 .pagination{
     padding-top: 3%;
 
@@ -52,28 +56,30 @@
     background-color: white;
     border-radius: 30px;
 }
-.genre-search{
-    width: fit-content;
-    border: 1px solid #666;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
+.filter-btn {
+    border: 1px solid #ddd;
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.2s ease-in-out;
 }
-.genre-search input{ display: none; }
-.genre-search label{
-    font-family: sans-serif;
-    padding: 10px 16px;
-    border-right: 1px solid #ccc;
-    cursor: pointer;
-    transition: all 0.3s;
+.filter-btn:hover {
+    background: #e9ecef;
+    color: #000;
 }
-.genre-search label:last-of-type{ border-right: 0; }
-.genre-search label:hover{
-    background: #eee;
+.filter-btn.active {
+    background: #DAA520;
+    color: #fff;
+    border-color: #DAA520;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
-.genre-search input:checked + label{
-    background: #becbff;
+.filter-container {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 @media (max-width: 740px){
