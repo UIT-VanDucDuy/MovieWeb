@@ -1,5 +1,6 @@
 package com.example.webmovie.controller;
 
+import com.example.webmovie.dto.UserDTO;
 import com.example.webmovie.entity.Account;
 import com.example.webmovie.entity.Genre;
 import com.example.webmovie.dto.MoviePage;
@@ -7,6 +8,8 @@ import com.example.webmovie.service.Genre.GenreService;
 import com.example.webmovie.service.Genre.IGenreService;
 import com.example.webmovie.service.Movie.IMovieService;
 import com.example.webmovie.service.Movie.MovieService;
+import com.example.webmovie.service.User.IUserService;
+import com.example.webmovie.service.User.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +25,7 @@ public class SearchController extends HttpServlet {
     //hello
     private static IMovieService movieService= new MovieService();
     private static IGenreService genreService= new GenreService();
+    private static IUserService userService= new UserService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        loadPage(request, response);
@@ -59,7 +63,9 @@ public class SearchController extends HttpServlet {
         }
 
         int pageSize = 12;
-        MoviePage moviePage = movieService.getMovies(request.getParameter("title"),request.getParameter("genre"),pageSize,page );
+        String title = request.getParameter("title");
+        String genre = request.getParameter("genre");
+        MoviePage moviePage = movieService.getMovies(title,genre,pageSize,page );
 
         request.setAttribute("movieList", moviePage.getMovies());
         request.setAttribute("currentPage", moviePage.getCurrentPage());
@@ -71,7 +77,10 @@ public class SearchController extends HttpServlet {
     private static void loadPage(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession(false);
         Account account = (session != null) ? (Account) session.getAttribute("account") : null;
-
+        if(account != null){
+            UserDTO UserDTO = userService.findUserByAccountId(account.getId());
+            request.setAttribute("User", UserDTO);
+        }
         List<Genre> genreList = genreService.getAll();
         request.setAttribute("GenreList", genreList);
     }

@@ -9,4 +9,6 @@ public interface IMovieRepo {
     List<Movie> getAll();
     int countByTitleAndGenre(String title, String genre);
     List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize, int page);
+    List<MovieDto> getSameMovie(int id);
+    List<MovieDto> getMovieComingSoon();
 }

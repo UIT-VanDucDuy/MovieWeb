@@ -87,10 +87,10 @@ public class HomeController extends HttpServlet {
                 Account account = (session != null) ? (Account) session.getAttribute("account") : null;
                 boolean issuccess = accountService.subscribe(account, newMemberType,request);
                 if (issuccess) {
-                    request.setAttribute("subscribeSuccess", "Subscribe successful");
+                    request.setAttribute("alertMessage", "Subscribe successful");
                     request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("subscribeFail", "Insufficient balance to subscribe to this plan");
+                    request.setAttribute("alertMessage", "Insufficient balance to subscribe to this plan");
                     request.getRequestDispatcher("view/home.jsp").forward(request, response);
                 }
                 break;
@@ -113,5 +113,7 @@ public class HomeController extends HttpServlet {
         request.setAttribute("ActionMovieList", actionMovie);
         List<MovieDto> trendingMovie = movieService.getMoviesByGenre("");
         request.setAttribute("trendingMovieList", trendingMovie);
+        List<MovieDto> comingSoonMovie = movieService.getMovieComingSoon();
+        request.setAttribute("comingSoonMovieList", comingSoonMovie);
     }
 }

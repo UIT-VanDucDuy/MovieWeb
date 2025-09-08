@@ -11,8 +11,8 @@
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jvs/home.js"></script>
-    <link rel="stylesheet" href="/css/home1.css">
-    <link rel="stylesheet" href="../css/navbar1.css">
+    <link rel="stylesheet" href="/css/home4.css">
+    <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/search1.css">
 </head>
 
@@ -171,26 +171,38 @@
 <div class="content">
     <div class="row">
         <div class="col-lg-3 ">
-            <form action="/Search" method="Post" class="search-form">
+            <form action="/Search" method="Post" class="search-form form">
                 <input type="text" name="title" class="search" placeholder="Search..."/>
 
-                <div class="genre-search row bg-white">
+                <div class="filter-container d-flex flex-wrap gap-2 bg-white">
+                    <button type="button" class="btn filter-btn active" data-filter="">All Genre</button>
                     <c:forEach var="genre" items="${GenreList}" varStatus="status">
-                        <input type="radio" id="${genre.genreName}" name="genre" value="${genre.genreName}"/>
-                        <label for="${genre.genreName}">${genre.genreName}</label>
+                        <button type="button" class="btn filter-btn" data-filter="${genre.genreName}">${genre.genreName}</button>
                     </c:forEach>
+                    <input type="hidden" name="genre" id="genre" value="" >
                 </div>
+                <input class="submit" type="submit" value="Search Now!" />
             </form>
         </div>
         <div class="col-lg-9">
             <div class="search-list  d-flex">
                 <c:forEach var="movie" items="${movieList}" varStatus="status">
                     <div class="card">
-                        <a >
+                        <span class="movie-type">${movie.getMemberType()}</span>
+                        <c:url var="movieUrl" value="/Movie">
+                            <c:param name="movieTypeId" value="${movie.getMemberTypeId()}" />
+                            <c:param name="movieId" value="${movie.getId()}" />
+                        </c:url>
+                        <a href="${movieUrl}">
                             <img src="${movie.getPosterPath()}" class="card-img-top" alt="...">
                         </a>
-                        <div class="card-body">
-                            <h5 class="card-title">${movie.getName()}</h5>
+                        <div class="card-body row">
+                            <h5 class="card-title col-md-9">${movie.getName()}</h5>
+                            <button title="Watch Trailer" class="round-button col-md-3"
+                                    data-trailer="${movie.getTrailerPath()}"
+                                    data-bs-toggle="modal" data-bs-target="#trailerModal">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
                         </div>
                     </div>
                 </c:forEach>
@@ -228,6 +240,18 @@
 
 <c:import url="/layout/footer.jsp"></c:import>
 </body>
+<script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const hiddenInput = document.getElementById('genre');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            hiddenInput.value = btn.dataset.filter;
+        });
+    });
+</script>
 </html>
 
 

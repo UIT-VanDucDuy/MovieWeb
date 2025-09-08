@@ -17,5 +17,7 @@ public interface IUserRepository {
     public boolean deleteUser(int id);
 
     UserDTO findUserByAccountId(int id);
+
+    boolean updateUserByAccountId(User user);
 }
 

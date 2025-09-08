@@ -35,11 +35,7 @@ public class MoviePage implements Filter {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/Home");
             return;
         }
-
-        // Quyền truy cập:
-        // - memberTypeId == 0 => xem tất cả
-        // - memberTypeId == movieTypeId => xem được
-        if (memberTypeId == 0 || memberTypeId == movieTypeId) {
+        if (memberTypeId == 0 || memberTypeId >= movieTypeId) {
             chain.doFilter(request, response);
         } else {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/Home?noPermission=1");
