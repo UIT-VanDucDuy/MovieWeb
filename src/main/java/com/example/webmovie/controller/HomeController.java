@@ -113,5 +113,7 @@ public class HomeController extends HttpServlet {
         request.setAttribute("ActionMovieList", actionMovie);
         List<MovieDto> trendingMovie = movieService.getMoviesByGenre("");
         request.setAttribute("trendingMovieList", trendingMovie);
+        List<MovieDto> comingSoonMovie = movieService.getMovieComingSoon();
+        request.setAttribute("comingSoonMovieList", comingSoonMovie);
     }
 }

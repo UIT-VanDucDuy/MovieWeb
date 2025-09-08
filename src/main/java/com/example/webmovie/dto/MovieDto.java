@@ -1,5 +1,9 @@
 package com.example.webmovie.dto;
 
+import com.example.webmovie.entity.Genre;
+
+import java.util.List;
+
 public class MovieDto {
     private int id;
     private String name;
@@ -8,6 +12,7 @@ public class MovieDto {
     private String description;
     private String releaseDate;
     private boolean isSeries;
+    private List<Genre> genres;
     private int memberTypeId;
     private String memberType;
     private String posterPath;
@@ -26,17 +31,23 @@ public class MovieDto {
         this.trailerPath = trailerPath;
     }
 
-    public MovieDto(int id, String name, String mainActor, String author, String description,
-                    String releaseDate, String trailerPath, String moviePath, double duration) {
+    public MovieDto(int id, String name,List<Genre> genres, String mainActor, String author, String description,
+                    String releaseDate,String bannerPath, String trailerPath, String moviePath, double duration) {
         this.id = id;
         this.name = name;
+        this.genres = genres;
         this.mainActor = mainActor;
         this.author = author;
         this.description = description;
         this.releaseDate = releaseDate;
+        this.bannerPath = bannerPath;
         this.trailerPath = trailerPath;
         this.moviePath = moviePath;
         this.duration = duration;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
     }
 
     public String getPosterPath() {

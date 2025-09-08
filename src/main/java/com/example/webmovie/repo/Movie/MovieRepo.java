@@ -28,7 +28,7 @@ public class MovieRepo implements IMovieRepo {
             "WHERE g.GenreName LIKE ? " +
             "AND m.Name LIKE ?; ";
     private final String SELECT_ALL = "SELECT * FROM Movie";
-    private final String FIND_SAME_MOVIE = "SELECT m.*,mt.MemberTypeName, COUNT(*) AS CommonGenres " +
+    private final String FIND_SAME_MOVIE = "SELECT m.*,mt.*,ep.TrailerPath, COUNT(*) AS CommonGenres " +
             "FROM MovieGenre mg1 " +
             "JOIN MovieGenre mg2 " +
             "    ON mg1.GenreId = mg2.GenreId " +
@@ -36,12 +36,19 @@ public class MovieRepo implements IMovieRepo {
             "JOIN Movie m " +
             "    ON mg2.MovieId = m.Id " +
             "Join membertype mt on mt.Id = m.MemberTypeId " +
+            "join episode ep on ep.MovieId = m.Id " +
             "WHERE mg1.MovieId = ? " +
             "  AND mg2.MovieId <> ? " +
             "GROUP BY mg2.MovieId, m.Name " +
             "HAVING COUNT(*) >= 2 " +
             "limit 5;";
-
+    private final String GET_MOVIE_COMING_SOON ="SELECT DISTINCT m.*,mt.MemberTypeName,e.TrailerPath " +
+            "FROM Movie m " +
+            "JOIN Episode e ON m.Id = e.MovieId " +
+            "Join membertype mt on mt.Id = m.MemberTypeId " +
+            "WHERE e.TrailerPath IS NOT NULL " +
+            "  AND (e.MoviePath IS NULL OR e.MoviePath = '') " +
+            "  limit 10;";
     @Override
     public List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize,int page ) {
         List<MovieDto> movieList = new ArrayList<>();
@@ -62,7 +69,8 @@ public class MovieRepo implements IMovieRepo {
                 String posterPath = rs.getString("PosterPath");
                 String bannerPath = rs.getString("BannerPath");
                 String trailerPath = rs.getString("TrailerPath");
-                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath,trailerPath);movieList.add(movie);
+                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath,trailerPath);
+                movieList.add(movie);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,7 +95,31 @@ public class MovieRepo implements IMovieRepo {
                 String posterPath = rs.getString("PosterPath");
                 String bannerPath = rs.getString("BannerPath");
                 String trailerPath = rs.getString("TrailerPath");
-                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath,trailerPath);movieList.add(movie);
+                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath,trailerPath);
+                movieList.add(movie);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movieList;
+    }
+
+    @Override
+    public List<MovieDto> getMovieComingSoon() {
+        List<MovieDto> movieList = new ArrayList<>();
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement ps = connection.prepareStatement(GET_MOVIE_COMING_SOON)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id =rs.getInt("Id");
+                String name =rs.getString("Name");
+                int memberTypeId = rs.getInt("MemberTypeId");
+                String memberTypeName = rs.getString("MemberTypeName");
+                String posterPath = rs.getString("PosterPath");
+                String bannerPath = rs.getString("BannerPath");
+                String trailerPath = rs.getString("TrailerPath");
+                MovieDto movie = new MovieDto(id,name,memberTypeId,memberTypeName,posterPath,bannerPath,trailerPath);
+                movieList.add(movie);
             }
         } catch (SQLException e) {
             e.printStackTrace();

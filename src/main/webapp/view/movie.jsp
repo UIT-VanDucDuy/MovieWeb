@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/d3ee10eebc.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/home4.css">
     <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/movie1.css">
+    <link rel="stylesheet" href="../css/movie3.css">
 
 
 </head>
@@ -23,11 +23,22 @@
 </c:if>
 <c:import url="/layout/navbar.jsp"></c:import>
 
-<div class="container mt-4 main">
-    <video class="video" controls>
-        <source src="${movie.getMoviePath()}" type="video/mp4">
-        Trình duyệt của bạn không hỗ trợ thẻ video.
-    </video></div>
+<div class="container mt-4 main d-flex justify-content-center">
+    <c:choose>
+        <c:when test="${not empty movie.moviePath}">
+            <video class="video" controls>
+                <source src="${movie.getMoviePath()}" type="video/mp4">
+                Trình duyệt của bạn không hỗ trợ thẻ video.
+            </video>
+        </c:when>
+        <c:otherwise>
+            <iframe src="${movie.trailerPath}" title="YouTube video player" id="trailerFrame" class="video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+        </c:otherwise>
+    </c:choose>
+</div>
 <div class="container py-4 text-white">
     <!-- Thông tin phim -->
     <div class="row">
@@ -51,10 +62,11 @@
                 <div class="row g-3">
                     <!-- Tập 1 -->
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="bg-dark rounded p-2">
-                            <div class="position-relative">
-                                <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="img-fluid rounded" />
-                            </div>
+                        <div class="bg-dark rounded p-2 position-relative">
+                            <a class="" data-trailer="${movie.getTrailerPath()}"
+                               data-bs-toggle="modal" data-bs-target="#trailerModal">
+                                <img src="${movie.bannerPath}" class="img-same-movie rounded img-fluid" />
+                            </a>
                             <h6 class="mt-2">Trailer</h6>
                         </div>
                     </div>
@@ -66,7 +78,12 @@
             <ul class="list-unstyled small">
                 <li><strong>Diễn viên:</strong> ${movie.getMainActor()}</li>
                 <li><strong>Đạo diễn:</strong> ${movie.getAuthor()}</li>
-                <li><strong>Thể loại:</strong> Cổ trang, Hành động, Giả tưởng</li>
+                <li>
+                    <strong>Thể loại:</strong>
+                    <c:forEach var="genre" items="${movie.getGenres()}">
+                        ${genre.getGenreName()},
+                    </c:forEach>
+                </li>
             </ul>
         </div>
         <div>
@@ -82,35 +99,42 @@
                                         <c:param name="movieId" value="${sameMovie.id}" />
                                     </c:url>
                                     <a href="${movieUrl}">
-                                        <img src="${sameMovie.posterPath}" class="img-same-movie rounded img-fluid" />
+                                        <img src="${sameMovie.bannerPath}" class="img-same-movie rounded img-fluid" />
                                     </a>
                                     <span class="position-absolute top-0 start-0 badge bg-danger m-2">
                                             ${sameMovie.memberType}
                                     </span>
                                 </div>
-                                <h6 class="mt-2">${sameMovie.name}</h6>
+                                <div class="row">
+                                    <h6 class="mt-2 col-md-10">${sameMovie.name}</h6>
+                                    <button title="Watch Trailer" class="round-button col-md-2"
+                                            data-trailer="${sameMovie.getTrailerPath()}"
+                                            data-bs-toggle="modal" data-bs-target="#trailerModal">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
             </div>
-            <div class="actor">
-                <h4 class="text-white mb-3">Diễn viên</h4>
-                <div class="d-flex gap-4 mb-5">
-                    <div class="text-center">
-                        <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="rounded-circle border border-2" width="100" height="100" />
-                        <p class="mt-2 text-white">Dương Dương</p>
-                    </div>
-                    <div class="text-center">
-                        <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="rounded-circle border border-2" width="100" height="100" />
-                        <p class="mt-2 text-white">Kim Thần</p>
-                    </div>
-                    <div class="text-center">
-                        <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="rounded-circle border border-2" width="100" height="100" />
-                        <p class="mt-2 text-white">Uông Đặc</p>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="actor">--%>
+<%--                <h4 class="text-white mb-3">Diễn viên</h4>--%>
+<%--                <div class="d-flex gap-4 mb-5">--%>
+<%--                    <div class="text-center">--%>
+<%--                        <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="rounded-circle border border-2" width="100" height="100" />--%>
+<%--                        <p class="mt-2 text-white">Dương Dương</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="text-center">--%>
+<%--                        <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="rounded-circle border border-2" width="100" height="100" />--%>
+<%--                        <p class="mt-2 text-white">Kim Thần</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="text-center">--%>
+<%--                        <img src="https://image.tmdb.org/t/p/original/h9q0ozwMWy7CK5U7FSZsMVtbsCQ.jpg" class="rounded-circle border border-2" width="100" height="100" />--%>
+<%--                        <p class="mt-2 text-white">Uông Đặc</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="comment">
                 <div class="text-white my-4">
                     <h4 class="mb-3">Bình luận (25)</h4>

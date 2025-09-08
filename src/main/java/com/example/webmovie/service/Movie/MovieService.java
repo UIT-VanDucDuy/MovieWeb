@@ -51,4 +51,9 @@ public class MovieService implements IMovieService {
     public List<MovieDto> getSameMovie(int id) {
         return movieRepo.getSameMovie(id);
     }
+
+    @Override
+    public List<MovieDto> getMovieComingSoon() {
+        return movieRepo.getMovieComingSoon();
+    }
 }

@@ -291,18 +291,15 @@
 
         <div class="slider-container position-relative" style="overflow-x: auto;">
             <div id="comingsoon-movie" class=" slider-track d-flex transition gap-3">
-                <c:forEach var="actionMovie" items="${ActionMovieList}" varStatus="status">
+                <c:forEach var="comingSoonMovie" items="${comingSoonMovieList}" varStatus="status">
                     <div class="slider-item position-relative">
-                        <span class="movie-type">${actionMovie.getMemberType()}</span>
-                        <c:url var="movieUrl" value="/Movie">
-                            <c:param name="movieTypeId" value="${actionMovie.getMemberTypeId()}" />
-                            <c:param name="movieId" value="${actionMovie.getId()}" />
-                        </c:url>
-                        <a href="${movieUrl}">
-                            <img src="${actionMovie.getPosterPath()}" class="rounded" />
+                        <span class="movie-type">${comingSoonMovie.getMemberType()}</span>
+                        <a class="" data-trailer="${comingSoonMovie.getTrailerPath()}"
+                           data-bs-toggle="modal" data-bs-target="#trailerModal">
+                            <img src="${comingSoonMovie.getPosterPath()}" class="rounded" />
                         </a>
                         <button title="Watch Trailer" class="round-button trailer"
-                                data-trailer="${actionMovie.getTrailerPath()}"
+                                data-trailer="${comingSoonMovie.getTrailerPath()}"
                                 data-bs-toggle="modal" data-bs-target="#trailerModal">
                             <i class="fa-solid fa-play"></i>
                         </button>

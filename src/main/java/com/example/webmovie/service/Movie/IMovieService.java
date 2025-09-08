@@ -12,4 +12,5 @@ public interface IMovieService {
     List<MovieDto> getMoviesByGenre(String genre);
     List<Movie> getAll();
     List<MovieDto> getSameMovie(int id);
+    List<MovieDto> getMovieComingSoon();
 }

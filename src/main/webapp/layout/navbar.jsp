@@ -92,7 +92,6 @@
                         </c:if>
                         <c:if test="${empty User.name && not empty sessionScope.account.username}">
                             <p> Hello, <a href="/User">${sessionScope.account.username}</a> </p>
-
                         </c:if>
                         <p> MemType: ${sessionScope.account.memberTypeId}</p>
                     </div>
