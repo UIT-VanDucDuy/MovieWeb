@@ -7,8 +7,21 @@ import java.util.List;
 
 public interface IMovieRepo {
     List<Movie> getAll();
+
     int countByTitleAndGenre(String title, String genre);
+
     List<MovieDto> getByTitleAndGenre(String title, String genre, int pageSize, int page);
+
+
+    boolean addMovie(MovieDto movie);
+
+    boolean updateMovie(MovieDto movie);
+
+    boolean deleteMovie(int id);
+
+    MovieDto getById(int id);
+
     List<MovieDto> getSameMovie(int id);
     List<MovieDto> getMovieComingSoon();
+  
 }

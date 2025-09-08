@@ -29,3 +29,10 @@
 .main_button {
     color: #DAA520;
 }
+
+.table td.description-col {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -90,7 +90,7 @@ public class UserAdminController extends HttpServlet {
                     req.setAttribute("toastType", "success");
                 } else {
                     req.setAttribute("toastMessage", "Update failed! User not found or invalid ID.");
-                    req.setAttribute("toastType", "error");
+                    req.setAttribute("toastType", "danger");
                 }
                 req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
@@ -105,7 +105,7 @@ public class UserAdminController extends HttpServlet {
                     req.setAttribute("toastType", "success");
                 } else {
                     req.setAttribute("toastMessage", "Delete failed! User not found or invalid ID.");
-                    req.setAttribute("toastType", "error");
+                    req.setAttribute("toastType", "danger");
                 }
                 req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
@@ -118,7 +118,7 @@ public class UserAdminController extends HttpServlet {
                     req.setAttribute("toastType", "success");
                 } else {
                     req.setAttribute("toastMessage", "Added failed! User not found or invalid ID.");
-                    req.setAttribute("toastType", "error");
+                    req.setAttribute("toastType", "danger");
                 }
                 req.getRequestDispatcher("/view/admin_page/user_account.jsp").forward(req, resp);
                 break;
